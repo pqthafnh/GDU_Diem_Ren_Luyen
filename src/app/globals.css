@@ -51,11 +51,12 @@
 body {
   background-color: var(--color-canvas);
   color: var(--color-body);
+  zoom: 0.95; /* Scale down for mobile base */
 }
 
 @media (min-width: 768px) {
   body {
-    zoom: 0.95;
+    zoom: 0.92;
   }
 }
 
