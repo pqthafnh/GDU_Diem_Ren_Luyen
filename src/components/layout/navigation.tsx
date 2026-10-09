@@ -100,7 +100,7 @@ export function AppHeader() {
                 {showNotifications && (
                   <>
                     <div className="fixed inset-0 z-40 md:hidden" onClick={() => setShowNotifications(false)}></div>
-                    <div className="absolute right-0 mt-2 w-[340px] md:w-[400px] bg-surface rounded-[16px] shadow-[0_12px_40px_rgb(0,0,0,0.08)] border border-black/5 z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                    <div className="absolute right-[-20px] sm:right-0 mt-2 w-[300px] sm:w-[340px] md:w-[400px] bg-surface rounded-[16px] shadow-[0_12px_40px_rgb(0,0,0,0.08)] border border-black/5 z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200 max-w-[95vw]">
                       <div className="flex items-center justify-between p-4 border-b border-black/5">
                         <h4 className="font-bold text-ink text-[16px]">Thông báo</h4>
                         <button className="text-[12px] text-muted hover:text-primary transition-colors font-medium">Đánh dấu đã đọc</button>
