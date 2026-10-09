@@ -51,18 +51,18 @@
 body {
   background-color: var(--color-canvas);
   color: var(--color-body);
-  zoom: 0.95; /* Scale down for mobile base */
+  zoom: 0.85; /* Scale down 15% for mobile base (10% smaller than previous) */
 }
 
 @media (min-width: 768px) {
   body {
-    zoom: 0.92;
+    zoom: 0.90; /* Adjusted proportionally */
   }
 }
 
 @media (min-width: 1024px) {
   body {
-    zoom: 0.9;
+    zoom: 0.85; /* Adjusted proportionally, Desktop can also be smaller or keep as is. Actually let's just make mobile smaller and keep desktop 0.85 too */
   }
 }
 
