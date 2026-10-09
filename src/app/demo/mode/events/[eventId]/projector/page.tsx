@@ -3,18 +3,17 @@
 import { useEffect, useState } from "react"
 import { notFound } from "next/navigation"
 import { MOCK_EVENTS } from "@/mocks"
-import { QrCode, Users, CheckCircle2, ChevronLeft, MapPin } from "lucide-react"
+import { QrCode, Users, CheckCircle2, ChevronLeft, MapPin, Maximize, Clock } from "lucide-react"
 
 export default function ProjectorModePage({ params }: { params: { eventId: string } }) {
   const event = MOCK_EVENTS.find(e => e.id === params.eventId)
-  const [time, setTime] = useState(new Date())
+  const [time, setTime] = useState<Date | null>(null)
   const [qrKey, setQrKey] = useState(0)
-  const [mounted, setMounted] = useState(false)
   
   if (!event) notFound()
 
   useEffect(() => {
-    setMounted(true)
+    setTime(new Date())
     const timer = setInterval(() => setTime(new Date()), 1000)
     const qrTimer = setInterval(() => setQrKey(prev => prev + 1), 15000)
     return () => {
@@ -24,90 +23,101 @@ export default function ProjectorModePage({ params }: { params: { eventId: strin
   }, [])
 
   return (
-    <div className="min-h-screen bg-canvas text-ink flex flex-col p-6 md:p-12 fixed inset-0 z-[100] overflow-hidden font-sans">
+    <div className="min-h-screen bg-primary text-white flex flex-col p-4 md:p-8 fixed inset-0 z-[100] overflow-hidden font-sans">
       
       {/* Header */}
-      <header className="flex items-center justify-between pb-8 border-b border-border">
-        <div className="flex items-start gap-4 md:gap-6">
-          <button onClick={() => window.history.back()} className="mt-1 h-12 w-12 rounded-full bg-surface hover:bg-canvas border border-border flex items-center justify-center transition-colors shadow-sm shrink-0">
-            <ChevronLeft className="h-6 w-6 text-ink" />
+      <header className="flex items-center justify-between pb-6 border-b border-white/10 shrink-0">
+        <div className="flex items-start gap-3 md:gap-5">
+          <button onClick={() => window.history.back()} className="mt-0.5 h-10 w-10 md:h-12 md:w-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-colors shadow-sm shrink-0">
+            <ChevronLeft className="h-5 w-5 md:h-6 md:w-6 text-white" />
           </button>
-          <div className="flex flex-col gap-1.5">
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-primary leading-tight">{event.title}</h1>
-            <div className="flex items-center gap-3 text-muted text-[15px] font-medium mt-1">
-              <span className="flex items-center gap-1.5"><MapPin className="h-4 w-4" /> {event.location}</span>
-              <span className="hidden sm:inline">•</span>
-              <span className="hidden sm:inline text-ink font-semibold">Mở ứng dụng GDU Sinh viên để quét mã điểm danh</span>
+          <div className="flex flex-col gap-1">
+            <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-white leading-tight drop-shadow-sm">{event.title}</h1>
+            <div className="flex items-center gap-3 text-white/70 text-[14px] md:text-[15px] font-medium mt-1">
+              <span className="flex items-center gap-1.5 bg-white/10 px-2.5 py-1 rounded-full"><MapPin className="h-3.5 w-3.5 text-accent" /> {event.location}</span>
+              <span className="hidden sm:inline text-accent/80 font-semibold tracking-wide uppercase text-xs md:text-sm">GDU Sinh viên • Quét mã điểm danh</span>
             </div>
           </div>
         </div>
         <div className="text-right flex flex-col items-end justify-center shrink-0">
-          <div className="text-4xl md:text-5xl font-bold tracking-tight text-ink font-mono">
-            {mounted ? time.toLocaleTimeString("vi-VN", { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : "--:--:--"}
+          <div className="text-3xl md:text-5xl font-bold tracking-tighter text-white font-mono drop-shadow-md flex items-center gap-2 md:gap-3">
+            <Clock className="h-7 w-7 md:h-9 md:w-9 text-accent opacity-80" />
+            {time ? time.toLocaleTimeString("vi-VN", { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : "--:--:--"}
           </div>
-          <p className="text-muted text-[16px] font-medium mt-2 capitalize">
-            {mounted ? time.toLocaleDateString("vi-VN", { weekday: 'long', day: 'numeric', month: 'long' }) : "Đang tải..."}
+          <p className="text-white/60 text-[14px] md:text-[16px] font-medium mt-1 md:mt-2 capitalize tracking-wide">
+            {time ? time.toLocaleDateString("vi-VN", { weekday: 'long', day: 'numeric', month: 'long' }) : "Đang tải..."}
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-32 pt-8">
+      <main className="flex-1 flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 pt-6">
         
         {/* QR Section */}
         <div className="flex flex-col items-center">
-           <div className="bg-surface p-10 md:p-12 rounded-[40px] shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-black/5">
-             <div className="relative flex items-center justify-center">
-               <QrCode className="w-[280px] h-[280px] md:w-[380px] md:h-[380px] text-ink" strokeWidth={1} />
+           <div className="bg-white p-4 md:p-6 rounded-[24px] shadow-[0_20px_60px_rgb(0,0,0,0.3)] relative overflow-hidden">
+             {/* Decorative corners */}
+             <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-accent rounded-tl-[24px] opacity-20"></div>
+             <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-accent rounded-br-[24px] opacity-20"></div>
+             
+             <div className="relative flex items-center justify-center bg-canvas rounded-xl p-3">
+               <QrCode className="w-[200px] h-[200px] md:w-[320px] md:h-[320px] text-ink" strokeWidth={0.75} />
+               
+               {/* Scanning line animation */}
+               <div key={qrKey} className="absolute top-0 left-0 w-full h-1 bg-accent/80 shadow-[0_0_15px_rgba(216,178,79,0.8)] animate-[scan_1.5s_ease-in-out_infinite_alternate]" />
              </div>
            </div>
            
-           <div className="mt-10 flex flex-col items-center w-full max-w-[380px]">
-             <div className="flex justify-between w-full text-[15px] font-bold mb-3 text-ink tracking-wide uppercase">
+           <div className="mt-8 flex flex-col items-center w-full max-w-[340px]">
+             <div className="flex justify-between w-full text-[14px] font-bold mb-3 text-white/90 tracking-widest uppercase">
                <span>Mã động điểm danh</span>
-               <span className="text-muted">Làm mới sau 15s</span>
+               <span className="text-accent">Làm mới sau 15s</span>
              </div>
-             <div className="w-full h-2 bg-border rounded-full overflow-hidden">
-                <div key={qrKey} className="h-full bg-primary animate-[shrink_15s_linear_forwards]" />
+             <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden shadow-inner backdrop-blur-sm">
+                <div key={qrKey} className="h-full bg-accent animate-[shrink_15s_linear_forwards] shadow-[0_0_10px_rgba(216,178,79,0.5)]" />
              </div>
            </div>
         </div>
 
         {/* Live Stats */}
-        <div className="flex flex-col gap-6 w-full max-w-[420px]">
-           <div className="bg-surface border border-black/5 rounded-[32px] p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-             <div className="flex items-center gap-3 mb-10 pb-8 border-b border-border">
-               <div className="relative flex h-3.5 w-3.5">
+        <div className="flex flex-col gap-4 w-full max-w-[420px]">
+           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] p-8 shadow-2xl">
+             <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/10">
+               <div className="relative flex h-3 w-3">
                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
-                 <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-success"></span>
+                 <span className="relative inline-flex rounded-full h-3 w-3 bg-success"></span>
                </div>
-               <h2 className="text-[20px] font-bold text-ink uppercase tracking-wider">Trạng thái điểm danh</h2>
+               <h2 className="text-[18px] font-bold text-white uppercase tracking-widest">Trạng thái điểm danh</h2>
              </div>
              
              <div className="flex flex-col gap-8">
-               <div className="flex items-center justify-between">
-                 <span className="text-muted text-[17px] font-medium">Đã điểm danh</span>
-                 <div className="flex items-center gap-2">
-                   <CheckCircle2 className="w-8 h-8 text-success" />
-                   <span className="text-5xl font-extrabold text-ink tracking-tight">145</span>
+               <div className="flex items-center justify-between group">
+                 <span className="text-white/70 text-[16px] font-medium uppercase tracking-wide group-hover:text-white transition-colors">Đã điểm danh</span>
+                 <div className="flex items-center gap-2.5">
+                   <CheckCircle2 className="w-8 h-8 text-success drop-shadow-[0_0_15px_rgba(33,131,90,0.5)]" />
+                   <span className="text-5xl font-black text-white tracking-tighter drop-shadow-md">145</span>
                  </div>
                </div>
                
-               <div className="flex items-center justify-between mt-2">
-                 <span className="text-muted text-[17px] font-medium">Đăng ký tham gia</span>
-                 <div className="flex items-center gap-2">
-                   <Users className="w-6 h-6 text-muted" />
-                   <span className="text-4xl font-bold text-ink tracking-tight">{event.registeredCount}</span>
+               <div className="flex items-center justify-between group">
+                 <span className="text-white/70 text-[16px] font-medium uppercase tracking-wide group-hover:text-white transition-colors">Đăng ký tham gia</span>
+                 <div className="flex items-center gap-2.5">
+                   <Users className="w-6 h-6 text-white/40" />
+                   <span className="text-4xl font-bold text-white/90 tracking-tighter">{event.registeredCount}</span>
                  </div>
                </div>
                
-               <div className="w-full h-px bg-border my-4"></div>
+               <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-1"></div>
                
-               <div className="flex items-center justify-between">
-                 <span className="text-ink text-[17px] font-bold">Tỷ lệ tham dự</span>
-                 <span className="text-4xl font-extrabold text-primary">{Math.round((145 / event.registeredCount) * 100)}%</span>
+               <div className="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                 <span className="text-white/90 text-[16px] font-bold uppercase tracking-wide">Tỷ lệ tham dự</span>
+                 <span className="text-4xl font-black text-accent drop-shadow-[0_0_15px_rgba(216,178,79,0.3)]">{Math.round((145 / event.registeredCount) * 100)}%</span>
                </div>
              </div>
+           </div>
+           
+           <div className="flex items-center justify-center gap-2 text-white/40 text-[12px] mt-2 font-medium uppercase tracking-widest">
+             <Maximize className="w-3.5 h-3.5" /> Bấm F11 để xem toàn màn hình
            </div>
         </div>
       </main>
@@ -116,6 +126,12 @@ export default function ProjectorModePage({ params }: { params: { eventId: strin
         @keyframes shrink {
           0% { width: 100%; }
           100% { width: 0%; }
+        }
+        @keyframes scan {
+          0% { top: 0%; opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
         }
       `}} />
     </div>

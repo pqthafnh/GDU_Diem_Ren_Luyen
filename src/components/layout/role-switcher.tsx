@@ -9,8 +9,8 @@ export function RoleSwitcher() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
 
-  // Only show in demo routes
-  if (!pathname.startsWith("/demo")) return null
+  // Only show in demo routes, and hide in admin routes (admin is strictly isolated)
+  if (!pathname.startsWith("/demo") || pathname.startsWith("/demo/admin")) return null
 
   const roles = [
     { name: "Admin", href: "/demo/admin", icon: Shield, desc: "Kiểm duyệt & Quản trị" },

@@ -53,6 +53,18 @@ body {
   color: var(--color-body);
 }
 
+@media (min-width: 768px) {
+  body {
+    zoom: 0.95;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    zoom: 0.9;
+  }
+}
+
 .container {
   width: min(100%, 1200px);
   margin-inline: auto;
