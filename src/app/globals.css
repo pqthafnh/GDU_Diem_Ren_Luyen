@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #173a67;
+  --color-primary-hover: #102e52;
+  --color-primary-active: #0b2340;
+  --color-primary-soft: #eaf0f7;
+  --color-primary-muted: #c9d6e5;
+  --color-accent: #d8b24f;
+  --color-accent-hover: #c59c35;
+  --color-accent-active: #a98224;
+  --color-accent-soft: #fbf5e5;
+  --color-accent-muted: #e9d69b;
+  --color-canvas: #fafafa;
+  --color-canvas-soft: #f2f3f5;
+  --color-surface: #ffffff;
+  --color-ink: #111111;
+  --color-body: #555555;
+  --color-muted: #888888;
+  --color-border: #eaeaea;
+  --color-border-strong: #d0d0d0;
+  --color-success: #21835a;
+  --color-warning: #a66a12;
+  --color-error: #c23b3b;
+  --color-info: #2563a6;
+
+  --page-padding: 16px;
+  --section-padding-block: 48px;
+}
+
+@media (min-width: 480px) {
+  :root { --page-padding: 20px; }
+}
+
+@media (min-width: 640px) {
+  :root {
+    --page-padding: 24px;
+    --section-padding-block: 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --page-padding: 32px;
+    --section-padding-block: 96px;
+  }
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-body);
+}
+
+.container {
+  width: min(100%, 1200px);
+  margin-inline: auto;
+  padding-inline: var(--page-padding);
+}
