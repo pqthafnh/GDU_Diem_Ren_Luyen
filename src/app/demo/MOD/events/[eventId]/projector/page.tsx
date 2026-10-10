@@ -28,13 +28,13 @@ export default function ProjectorMODPage({ params }: { params: { eventId: string
       {/* Header */}
       <header className="flex items-center justify-between pb-6 border-b border-white/10 shrink-0">
         <div className="flex items-start gap-3 md:gap-5">
-          <button onClick={() => window.history.back()} className="mt-0.5 h-10 w-10 md:h-12 md:w-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-colors shadow-sm shrink-0">
+          <button onClick={() => window.history.back()} className="mt-0.5 h-10 w-10 md:h-12 md:w-12 rounded-full bg-surface/5 hover:bg-surface/10 border border-white/10 flex items-center justify-center transition-colors shadow-sm shrink-0">
             <ChevronLeft className="h-5 w-5 md:h-6 md:w-6 text-white" />
           </button>
           <div className="flex flex-col gap-1">
             <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-white leading-tight drop-shadow-sm">{event.title}</h1>
             <div className="flex items-center gap-3 text-white/70 text-[14px] md:text-[15px] font-medium mt-1">
-              <span className="flex items-center gap-1.5 bg-white/10 px-2.5 py-1 rounded-full"><MapPin className="h-3.5 w-3.5 text-accent" /> {event.location}</span>
+              <span className="flex items-center gap-1.5 bg-surface/10 px-2.5 py-1 rounded-full"><MapPin className="h-3.5 w-3.5 text-accent" /> {event.location}</span>
               <span className="hidden sm:inline text-accent/80 font-semibold tracking-wide uppercase text-xs md:text-sm">GDU Sinh viên • Quét mã điểm danh</span>
             </div>
           </div>
@@ -55,7 +55,7 @@ export default function ProjectorMODPage({ params }: { params: { eventId: string
         
         {/* QR Section */}
         <div className="flex flex-col items-center">
-           <div className="bg-white p-4 md:p-6 rounded-[24px] shadow-[0_20px_60px_rgb(0,0,0,0.3)] relative overflow-hidden">
+           <div className="bg-surface p-4 md:p-6 rounded-[24px] shadow-[0_20px_60px_rgb(0,0,0,0.3)] relative overflow-hidden">
              {/* Decorative corners */}
              <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-accent rounded-tl-[24px] opacity-20"></div>
              <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-accent rounded-br-[24px] opacity-20"></div>
@@ -73,7 +73,7 @@ export default function ProjectorMODPage({ params }: { params: { eventId: string
                <span>Mã động điểm danh</span>
                <span className="text-accent">Làm mới sau 15s</span>
              </div>
-             <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden shadow-inner backdrop-blur-sm">
+             <div className="w-full h-2 bg-surface/10 rounded-full overflow-hidden shadow-inner backdrop-blur-sm">
                 <div key={qrKey} className="h-full bg-accent animate-[shrink_15s_linear_forwards] shadow-[0_0_10px_rgba(216,178,79,0.5)]" />
              </div>
            </div>
@@ -81,7 +81,7 @@ export default function ProjectorMODPage({ params }: { params: { eventId: string
 
         {/* Live Stats */}
         <div className="flex flex-col gap-4 w-full max-w-[420px]">
-           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] p-8 shadow-2xl">
+           <div className="bg-surface/5 backdrop-blur-md border border-white/10 rounded-[24px] p-8 shadow-2xl">
              <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/10">
                <div className="relative flex h-3 w-3">
                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
@@ -109,7 +109,7 @@ export default function ProjectorMODPage({ params }: { params: { eventId: string
                
                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-1"></div>
                
-               <div className="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+               <div className="flex items-center justify-between bg-surface/5 p-4 rounded-xl border border-white/5">
                  <span className="text-white/90 text-[16px] font-bold uppercase tracking-wide">Tỷ lệ tham dự</span>
                  <span className="text-4xl font-black text-accent drop-shadow-[0_0_15px_rgba(216,178,79,0.3)]">{Math.round((145 / event.registeredCount) * 100)}%</span>
                </div>

@@ -16,12 +16,12 @@ export default function StudentTicketsPage() {
 
       <div className="flex flex-col gap-4">
         {MOCK_TICKETS.map((ticket) => (
-          <div key={ticket.id} className="flex flex-col md:flex-row bg-surface border border-black/5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:border-black/10 transition-all group overflow-hidden">
+          <div key={ticket.id} className="flex flex-col md:flex-row bg-surface border border-border rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:border-border-strong transition-all group overflow-hidden">
             
             {/* Event Info */}
             <div className="flex-1 p-4 md:p-6 flex flex-row gap-4 md:gap-5 items-center relative">
               {/* Thumbnail */}
-              <div className="relative w-16 md:w-20 aspect-square rounded-[14px] overflow-hidden shrink-0 bg-canvas border border-black/5 shadow-sm">
+              <div className="relative w-16 md:w-20 aspect-square rounded-[14px] overflow-hidden shrink-0 bg-canvas border border-border shadow-sm">
                 <Image 
                   src={ticket.event.banner} 
                   alt={ticket.event.title} 
@@ -98,8 +98,8 @@ export default function StudentTicketsPage() {
         ))}
         
         {MOCK_TICKETS.length === 0 && (
-          <div className="flex flex-col items-center justify-center p-12 rounded-3xl border border-black/5 bg-surface text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-            <div className="h-14 w-14 bg-canvas rounded-2xl flex items-center justify-center mb-5 border border-black/5">
+          <div className="flex flex-col items-center justify-center p-12 rounded-3xl border border-border bg-surface text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+            <div className="h-14 w-14 bg-canvas rounded-2xl flex items-center justify-center mb-5 border border-border">
               <QrCode className="h-6 w-6 text-muted" />
             </div>
             <p className="text-[16px] font-bold text-ink">Chưa có vé nào</p>

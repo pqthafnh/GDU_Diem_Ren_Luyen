@@ -31,28 +31,33 @@
 }
 
 .dark {
-  --color-primary: #173a67; /* Keep primary for brand */
-  --color-primary-hover: #1a4478;
-  --color-primary-active: #215494;
-  --color-primary-soft: #0b1a2e;
-  --color-primary-muted: #2f4b6b;
+  /* Brand Navy - Adjusted for better contrast on dark */
+  --color-primary: #3b76c4; 
+  --color-primary-hover: #4d8ce0;
+  --color-primary-active: #2b5c9e;
+  --color-primary-soft: #14223b; 
+  --color-primary-muted: #1e3354;
   
+  /* Academic Gold */
   --color-accent: #d8b24f;
   --color-accent-hover: #e5c365;
   --color-accent-active: #c59c35;
-  --color-accent-soft: #382c11;
-  --color-accent-muted: #6b5621;
+  --color-accent-soft: #2d2411;
+  --color-accent-muted: #574621;
   
-  --color-canvas: #09090b;
-  --color-canvas-soft: #121214;
-  --color-surface: #18181b;
+  /* Canvas & Surfaces - Deep Slate / Navy Tint */
+  --color-canvas: #0c121e;
+  --color-canvas-soft: #111a2b;
+  --color-surface: #151e32;
   
-  --color-ink: #f8fafc;
-  --color-body: #cbd5e1;
-  --color-muted: #94a3b8;
+  /* Text */
+  --color-ink: #f1f5f9;
+  --color-body: #94a3b8;
+  --color-muted: #64748b;
   
-  --color-border: #27272a;
-  --color-border-strong: #3f3f46;
+  /* Borders */
+  --color-border: #23314a;
+  --color-border-strong: #334563;
 }
 
 @media (min-width: 480px) {

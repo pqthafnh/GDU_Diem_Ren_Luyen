@@ -15,7 +15,7 @@ export default function StudentTrainingPointsPage() {
       {/* Student Profile Card */}
       <section className="relative overflow-hidden bg-primary rounded-2xl p-6 md:p-8 flex items-center shadow-sm">
         <div className="relative z-10 flex items-center gap-4 md:gap-5">
-          <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-white text-primary flex items-center justify-center font-bold text-[20px] md:text-[24px] shadow-sm shrink-0">
+          <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-surface text-primary flex items-center justify-center font-bold text-[20px] md:text-[24px] shadow-sm shrink-0">
             {MOCK_STUDENT.fullName.charAt(0)}
           </div>
           <div className="flex flex-col">
@@ -30,7 +30,7 @@ export default function StudentTrainingPointsPage() {
       </section>
 
       <div className="flex flex-col gap-4">
-        <div className="rounded-[20px] bg-white border border-black/5 p-7 md:p-10 flex flex-col shadow-[0_12px_40px_rgb(0,0,0,0.06)] relative overflow-hidden group">
+        <div className="rounded-[20px] bg-surface border border-border p-7 md:p-10 flex flex-col shadow-[0_12px_40px_rgb(0,0,0,0.06)] relative overflow-hidden group">
           {/* Subtle top accent line */}
           <div className="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-[#173A67] via-[#173A67]/60 to-transparent"></div>
           
@@ -84,7 +84,7 @@ export default function StudentTrainingPointsPage() {
 
             {/* Right side: Classification Table */}
             <div className="flex-1 w-full flex flex-col justify-center">
-               <div className="rounded-[12px] overflow-hidden border border-border/60 bg-white text-[13px] shadow-sm">
+               <div className="rounded-[12px] overflow-hidden border border-border/60 bg-surface text-[13px] shadow-sm">
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="bg-canvas border-b border-border/80">
@@ -101,7 +101,7 @@ export default function StudentTrainingPointsPage() {
                         { range: "35 - dưới 50", label: "Yếu", condition: MOCK_STUDENT.totalPoints >= 35 && MOCK_STUDENT.totalPoints < 50 },
                         { range: "Dưới 35", label: "Kém", condition: MOCK_STUDENT.totalPoints < 35 },
                       ].map((row, idx) => (
-                        <tr key={idx} className={`border-b border-border/50 last:border-0 transition-colors ${row.condition ? 'bg-[#eaf0f7]' : 'bg-white hover:bg-canvas/40'}`}>
+                        <tr key={idx} className={`border-b border-border/50 last:border-0 transition-colors ${row.condition ? 'bg-[#eaf0f7]' : 'bg-surface hover:bg-canvas/40'}`}>
                           <td className={`py-3 ${row.condition ? 'font-bold text-[#173A67] border-l-4 border-[#173A67] pl-4' : 'text-body font-medium border-l-4 border-transparent pl-5'}`}>
                             {row.range}
                           </td>

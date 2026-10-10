@@ -21,7 +21,7 @@ export function AppHeader() {
   const [isSearchActive, setIsSearchActive] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-black/5 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-surface shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
       <div className="container flex h-14 md:h-16 items-center justify-between relative">
         
         {isSearchActive ? (
@@ -75,7 +75,7 @@ export function AppHeader() {
                 <input 
                   type="text" 
                   placeholder="Tìm kiếm sự kiện..." 
-                  className="h-9 w-[180px] lg:w-[240px] rounded-full bg-canvas border border-transparent focus:border-black/10 focus:bg-surface focus:outline-none focus:ring-4 focus:ring-black/5 transition-all pl-9 pr-4 text-[13px]"
+                  className="h-9 w-[180px] lg:w-[240px] rounded-full bg-canvas border border-transparent focus:border-border-strong focus:bg-surface focus:outline-none focus:ring-4 focus:ring-black/5 transition-all pl-9 pr-4 text-[13px]"
                 />
               </div>
               
@@ -100,14 +100,14 @@ export function AppHeader() {
                 {showNotifications && (
                   <>
                     <div className="fixed inset-0 z-40 md:hidden" onClick={() => setShowNotifications(false)}></div>
-                    <div className="absolute right-[-20px] sm:right-0 mt-2 w-[300px] sm:w-[340px] md:w-[400px] bg-surface rounded-[16px] shadow-[0_12px_40px_rgb(0,0,0,0.08)] border border-black/5 z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200 max-w-[95vw]">
-                      <div className="flex items-center justify-between p-4 border-b border-black/5">
+                    <div className="absolute right-[-20px] sm:right-0 mt-2 w-[300px] sm:w-[340px] md:w-[400px] bg-surface rounded-[16px] shadow-[0_12px_40px_rgb(0,0,0,0.08)] border border-border z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200 max-w-[95vw]">
+                      <div className="flex items-center justify-between p-4 border-b border-border">
                         <h4 className="font-bold text-ink text-[16px]">Thông báo</h4>
                         <button className="text-[12px] text-muted hover:text-primary transition-colors font-medium">Đánh dấu đã đọc</button>
                       </div>
                       
                       <div className="flex flex-col max-h-[350px] overflow-y-auto">
-                        <Link href="/demo/student/tickets" className="flex items-start gap-4 p-4 border-b border-black/5 hover:bg-canvas transition-colors relative group">
+                        <Link href="/demo/student/tickets" className="flex items-start gap-4 p-4 border-b border-border hover:bg-canvas transition-colors relative group">
                           {/* Unread dot */}
                           <div className="absolute left-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-primary opacity-80"></div>
                           
@@ -130,7 +130,7 @@ export function AppHeader() {
                           </div>
                         </Link>
                         
-                        <Link href="/demo/student/tickets" className="flex items-start gap-4 p-4 border-b border-black/5 hover:bg-canvas transition-colors relative group">
+                        <Link href="/demo/student/tickets" className="flex items-start gap-4 p-4 border-b border-border hover:bg-canvas transition-colors relative group">
                           <div className="absolute left-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-primary opacity-80"></div>
                           
                           <div className="h-10 w-10 shrink-0 rounded-full bg-primary-soft flex items-center justify-center text-primary mt-0.5">
@@ -150,7 +150,7 @@ export function AppHeader() {
                           </div>
                         </Link>
                       </div>
-                      <div className="p-3 text-center bg-surface hover:bg-canvas cursor-pointer transition-colors border-t border-black/5">
+                      <div className="p-3 text-center bg-surface hover:bg-canvas cursor-pointer transition-colors border-t border-border">
                         <span className="text-[13px] font-semibold text-primary">Xem tất cả thông báo</span>
                       </div>
                     </div>

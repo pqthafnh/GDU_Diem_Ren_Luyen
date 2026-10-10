@@ -32,7 +32,7 @@ export default function StudentEventsPage() {
       <div className="flex flex-col gap-5 px-2">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl md:text-3xl font-bold text-ink tracking-tight">Lịch sự kiện</h1>
-          <button className="h-10 w-10 rounded-full bg-surface border border-black/5 flex items-center justify-center hover:bg-canvas transition-colors shadow-sm">
+          <button className="h-10 w-10 rounded-full bg-surface border border-border flex items-center justify-center hover:bg-canvas transition-colors shadow-sm">
             <Search className="h-5 w-5 text-ink" />
           </button>
         </div>
@@ -40,9 +40,9 @@ export default function StudentEventsPage() {
         {/* Luma-style Pill Filters */}
         <div className="flex flex-wrap gap-2">
           <Button variant="primary" size="sm" className="h-9 rounded-full text-[14px] px-5 font-semibold">Tất cả</Button>
-          <Button variant="outline" size="sm" className="h-9 rounded-full border-black/5 bg-surface text-ink font-medium hover:bg-canvas text-[14px] px-5 shadow-[0_2px_4px_rgba(0,0,0,0.02)]">Học thuật</Button>
-          <Button variant="outline" size="sm" className="h-9 rounded-full border-black/5 bg-surface text-ink font-medium hover:bg-canvas text-[14px] px-5 shadow-[0_2px_4px_rgba(0,0,0,0.02)]">Kỹ năng mềm</Button>
-          <Button variant="outline" size="sm" className="h-9 rounded-full border-black/5 bg-surface text-ink font-medium hover:bg-canvas text-[14px] px-5 shadow-[0_2px_4px_rgba(0,0,0,0.02)]">Tình nguyện</Button>
+          <Button variant="outline" size="sm" className="h-9 rounded-full border-border bg-surface text-ink font-medium hover:bg-canvas text-[14px] px-5 shadow-[0_2px_4px_rgba(0,0,0,0.02)]">Học thuật</Button>
+          <Button variant="outline" size="sm" className="h-9 rounded-full border-border bg-surface text-ink font-medium hover:bg-canvas text-[14px] px-5 shadow-[0_2px_4px_rgba(0,0,0,0.02)]">Kỹ năng mềm</Button>
+          <Button variant="outline" size="sm" className="h-9 rounded-full border-border bg-surface text-ink font-medium hover:bg-canvas text-[14px] px-5 shadow-[0_2px_4px_rgba(0,0,0,0.02)]">Tình nguyện</Button>
         </div>
       </div>
 
@@ -73,7 +73,7 @@ export default function StudentEventsPage() {
                   <div key={event.id}>
                     <Link 
                       href={`/demo/student/events/${event.id}`} 
-                      className="group flex items-start gap-3 md:gap-5 p-3 md:p-4 rounded-[20px] bg-white transition-all border border-black/5 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-0.5"
+                      className="group flex items-start gap-3 md:gap-5 p-3 md:p-4 rounded-[20px] bg-surface transition-all border border-border shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-0.5"
                     >
                       {/* Time (Left column) */}
                       <div className="w-12 md:w-16 shrink-0 pt-1.5 md:pt-2">
@@ -92,7 +92,7 @@ export default function StudentEventsPage() {
                       </div>
                       
                       {/* Thumbnail (Right column) */}
-                      <div className="w-16 h-16 md:w-24 md:h-24 shrink-0 rounded-xl md:rounded-[14px] overflow-hidden relative border border-black/5 bg-canvas ml-1 md:ml-0">
+                      <div className="w-16 h-16 md:w-24 md:h-24 shrink-0 rounded-xl md:rounded-[14px] overflow-hidden relative border border-border bg-canvas ml-1 md:ml-0">
                          <Image 
                            src={event.banner} 
                            alt={event.title} 

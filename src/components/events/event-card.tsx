@@ -12,7 +12,7 @@ interface EventCardProps {
 export function EventCard({ event, href }: EventCardProps) {
   return (
     <Link href={href} className="group flex flex-row sm:flex-col gap-3.5 sm:gap-0 bg-transparent sm:bg-surface border-none sm:border border-border/60 transition-all sm:rounded-2xl sm:overflow-hidden sm:shadow-sm hover:shadow-none sm:hover:shadow-md hover:border-border-strong/50 sm:hover:-translate-y-0.5">
-      <div className="relative w-[90px] h-[90px] sm:h-auto sm:w-full shrink-0 sm:aspect-[16/10] overflow-hidden rounded-[14px] sm:rounded-t-2xl sm:rounded-b-none bg-canvas border border-black/5 sm:border-none">
+      <div className="relative w-[90px] h-[90px] sm:h-auto sm:w-full shrink-0 sm:aspect-[16/10] overflow-hidden rounded-[14px] sm:rounded-t-2xl sm:rounded-b-none bg-canvas border border-border sm:border-none">
         <Image
           src={event.banner}
           alt={event.title}
@@ -21,8 +21,8 @@ export function EventCard({ event, href }: EventCardProps) {
           sizes="(max-width: 640px) 90px, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 flex flex-col sm:flex-row gap-1 sm:gap-2 items-start">
-          <StatusBadge status={event.status} variant="default" className="shadow-sm bg-white/95 text-ink backdrop-blur-md border border-black/5 text-[9px] px-1.5 py-0.5 sm:text-[11px] sm:px-2 sm:py-0.5" />
-          <StatusBadge status={event.category} variant="accent" className="hidden sm:inline-flex shadow-sm bg-white/95 text-ink backdrop-blur-md border border-black/5" />
+          <StatusBadge status={event.status} variant="default" className="shadow-sm bg-surface/95 text-ink backdrop-blur-md border border-border text-[9px] px-1.5 py-0.5 sm:text-[11px] sm:px-2 sm:py-0.5" />
+          <StatusBadge status={event.category} variant="accent" className="hidden sm:inline-flex shadow-sm bg-surface/95 text-ink backdrop-blur-md border border-border" />
         </div>
       </div>
       <div className="flex flex-1 flex-col py-0.5 sm:p-4">
