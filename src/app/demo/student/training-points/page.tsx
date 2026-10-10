@@ -89,79 +89,90 @@ export default function StudentTrainingPointsPage() {
         </div>
 
 
-        <div className="lg:col-span-3 rounded-[16px] bg-surface border border-black/5 p-6 md:p-8 flex flex-col shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
-          {/* Subtle academic top accent line */}
-          <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-primary to-transparent"></div>
+        <div className="lg:col-span-3 rounded-[20px] bg-white border border-black/5 p-7 md:p-10 flex flex-col shadow-[0_12px_40px_rgb(0,0,0,0.06)] relative overflow-hidden group">
+          {/* Subtle top accent line */}
+          <div className="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-[#173A67] via-[#173A67]/60 to-transparent"></div>
           
-          <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-black/5 pb-4 mb-6 gap-3">
-            <div className="flex flex-col gap-1">
-               <h3 className="text-[16px] font-bold text-primary flex items-center gap-2 tracking-tight uppercase">
-                 <TrendingUp className="h-4 w-4" />
-                 Tăng trưởng tích lũy
-               </h3>
-               <span className="text-[13px] text-muted font-medium">Lộ trình rèn luyện 3 năm học</span>
-            </div>
-            
-            {/* Academic Growth Indicator (Gold accent) */}
-            <div className="flex items-center gap-2 bg-accent-soft border border-accent/20 px-3 py-1.5 rounded-lg w-fit">
-              <span className="text-[12px] font-bold text-warning">Tiến độ vượt mức 12.5%</span>
-            </div>
-          </div>
-          
-          <div className="flex-1 relative h-[180px] flex mt-2">
-            {/* Y-axis labels */}
-            <div className="flex flex-col justify-between text-[11px] font-medium text-muted pb-[28px] pr-3 w-8 text-right shrink-0">
-              <span>45</span>
-              <span>30</span>
-              <span>15</span>
-              <span>0</span>
-            </div>
-            
-            {/* Chart Area */}
-            <div className="flex-1 relative h-full flex items-end pb-[28px]">
-              {/* Grid lines (Y-axis) - Refined dashed lines */}
-              <div className="absolute inset-0 pb-[28px] flex flex-col justify-between pointer-events-none z-0">
-                <div className="w-full h-[1px] border-t border-dashed border-black/10"></div>
-                <div className="w-full h-[1px] border-t border-dashed border-black/10"></div>
-                <div className="w-full h-[1px] border-t border-dashed border-black/10"></div>
-                {/* X-axis solid line */}
-                <div className="w-full h-[1px] bg-black/15"></div>
+          <div className="flex flex-col md:flex-row gap-8 lg:gap-14 items-center flex-1">
+            {/* Left side: Circular Chart */}
+            <div className="w-full md:w-[260px] flex flex-col items-center shrink-0">
+              <div className="w-full text-center md:text-left mb-8 flex flex-col gap-1.5">
+                 <h3 className="text-[17px] font-bold text-[#173A67] tracking-tight uppercase flex items-center justify-center md:justify-start gap-2">
+                   Kết quả rèn luyện
+                 </h3>
+                 <span className="text-[12px] text-muted font-medium bg-canvas px-3 py-1 rounded-md border border-border/50 inline-flex w-fit mx-auto md:mx-0 shadow-sm">
+                   Căn cứ QĐ 251/2023/GDU/QĐ-HT
+                 </span>
               </div>
               
-              {/* Bars */}
-              <div className="relative z-10 w-full h-full flex items-end justify-around px-4 md:px-12 gap-4">
-                {[
-                  { label: "Năm 1", value: 35 },
-                  { label: "Năm 2", value: 37 },
-                  { label: "Năm 3", value: 13 },
-                ].map((item, index) => (
-                  <div key={item.label} className="relative flex flex-col items-center h-full justify-end group cursor-default w-full max-w-[48px] md:max-w-[64px]">
-                    {/* Tooltip */}
-                    <span className="absolute -top-8 text-[11px] font-bold text-white opacity-0 group-hover:opacity-100 transition-all duration-300 bg-primary px-2 py-0.5 rounded shadow-md translate-y-1 group-hover:translate-y-0">
-                      {item.value > 0 ? `+${item.value}` : '0'}
-                    </span>
-                    
-                    {/* Bar */}
-                    <div 
-                      className={`w-full rounded-t-[6px] transition-all duration-300 relative overflow-hidden ${
-                        index === 2 
-                          ? 'bg-primary shadow-[0_4px_12px_rgb(23,58,103,0.25)]' 
-                          : 'bg-primary-muted group-hover:bg-primary/50' 
-                      }`}
-                      style={{ height: `${Math.max((item.value / 45) * 100, 4)}%` }}
-                    >
-                    </div>
-                    
-                    {/* X-axis Label */}
-                    <span className={`absolute -bottom-[26px] text-[11px] transition-colors whitespace-nowrap ${
-                      index === 2 ? 'text-primary font-bold' : 'text-muted font-medium group-hover:text-ink'
-                    }`}>
-                      {item.label}
-                    </span>
-                  </div>
-                ))}
+              <div className="relative w-[160px] h-[160px] flex items-center justify-center">
+                {/* SVG Circular Chart */}
+                <svg className="w-full h-full transform -rotate-90 drop-shadow-md" viewBox="0 0 100 100">
+                  {/* Track */}
+                  <circle cx="50" cy="50" r="42" className="stroke-[#eaf0f7]" strokeWidth="8" fill="none" />
+                  {/* Progress */}
+                  <circle 
+                    cx="50" cy="50" r="42" 
+                    className="stroke-[#173A67]" 
+                    strokeWidth="8" 
+                    fill="none" 
+                    strokeDasharray="264" 
+                    strokeDashoffset={264 - (264 * MOCK_STUDENT.totalPoints) / 100}
+                    strokeLinecap="round"
+                    style={{ transition: "stroke-dashoffset 1.5s ease-out" }}
+                  />
+                </svg>
+                {/* Score */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                   <span className="text-[44px] font-black text-[#173A67] leading-none tracking-tighter">{MOCK_STUDENT.totalPoints}</span>
+                </div>
               </div>
+              
+
             </div>
+
+            {/* Soft Divider for desktop */}
+            <div className="hidden md:block w-px h-[260px] bg-gradient-to-b from-transparent via-border/80 to-transparent shrink-0"></div>
+
+            {/* Right side: Classification Table */}
+            <div className="flex-1 w-full flex flex-col justify-center">
+               <div className="rounded-[12px] overflow-hidden border border-border/60 bg-white text-[13px] shadow-sm">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="bg-canvas border-b border-border/80">
+                        <th className="px-5 py-3.5 font-semibold text-muted w-1/2 uppercase tracking-wide text-[11px]">Thang điểm</th>
+                        <th className="px-5 py-3.5 font-semibold text-muted w-1/2 uppercase tracking-wide text-[11px]">Xếp loại</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        { range: "90 - 100", label: "Xuất sắc", condition: MOCK_STUDENT.totalPoints >= 90 },
+                        { range: "80 - dưới 90", label: "Giỏi", condition: MOCK_STUDENT.totalPoints >= 80 && MOCK_STUDENT.totalPoints < 90 },
+                        { range: "65 - dưới 80", label: "Khá", condition: MOCK_STUDENT.totalPoints >= 65 && MOCK_STUDENT.totalPoints < 80 },
+                        { range: "50 - dưới 65", label: "Trung bình", condition: MOCK_STUDENT.totalPoints >= 50 && MOCK_STUDENT.totalPoints < 65 },
+                        { range: "35 - dưới 50", label: "Yếu", condition: MOCK_STUDENT.totalPoints >= 35 && MOCK_STUDENT.totalPoints < 50 },
+                        { range: "Dưới 35", label: "Kém", condition: MOCK_STUDENT.totalPoints < 35 },
+                      ].map((row, idx) => (
+                        <tr key={idx} className={`border-b border-border/50 last:border-0 transition-colors ${row.condition ? 'bg-[#eaf0f7]' : 'bg-white hover:bg-canvas/40'}`}>
+                          <td className={`py-3 ${row.condition ? 'font-bold text-[#173A67] border-l-4 border-[#173A67] pl-4' : 'text-body font-medium border-l-4 border-transparent pl-5'}`}>
+                            {row.range}
+                          </td>
+                          <td className={`px-5 py-3 ${row.condition ? 'font-bold text-[#173A67]' : 'text-ink font-medium'}`}>
+                            {row.label}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+               </div>
+            </div>
+          </div>
+
+          <div className="mt-8 pt-5 border-t border-border/50 flex justify-between items-center">
+            <p className="text-[13px] font-semibold text-[#173A67] flex items-center gap-2">
+              <TrendingUp className="w-4 h-4" />
+              Điểm rèn luyện theo 5 tiêu chí
+            </p>
           </div>
         </div>
       </div>

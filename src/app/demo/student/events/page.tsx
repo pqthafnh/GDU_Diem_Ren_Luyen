@@ -73,7 +73,7 @@ export default function StudentEventsPage() {
                   <div key={event.id}>
                     <Link 
                       href={`/demo/student/events/${event.id}`} 
-                      className="group flex items-start gap-3 md:gap-5 p-3 md:p-4 rounded-[20px] hover:bg-surface transition-colors border border-transparent hover:border-black/5 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+                      className="group flex items-start gap-3 md:gap-5 p-3 md:p-4 rounded-[20px] bg-white transition-all border border-black/5 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-0.5"
                     >
                       {/* Time (Left column) */}
                       <div className="w-12 md:w-16 shrink-0 pt-1.5 md:pt-2">
