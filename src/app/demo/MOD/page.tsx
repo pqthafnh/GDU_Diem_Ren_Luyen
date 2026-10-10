@@ -4,17 +4,17 @@ import { Calendar, Users, FileText, ChevronRight, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { StatusBadge } from "@/components/ui/status-badge"
 
-export default function ModeDashboardPage() {
-  const modeEvents = MOCK_EVENTS.slice(0, 5) // Mock events managed by this Mode
+export default function MODDashboardPage() {
+  const MODvents = MOCK_EVENTS.slice(0, 5) // Mock events managed by this MOD
 
   return (
     <div className="container py-6 flex flex-col gap-6">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-ink">Không gian làm việc (Mode)</h1>
+          <h1 className="text-xl font-bold text-ink">Không gian làm việc (MOD)</h1>
           <p className="text-[13px] text-muted mt-1">Quản lý và vận hành sự kiện, kiểm soát người tham dự và điểm danh.</p>
         </div>
-        <Link href="/demo/mode/events/new">
+        <Link href="/demo/MOD/events/new">
           <Button variant="primary" className="w-full md:w-auto h-9 text-[13px]">
             <Plus className="h-4 w-4 mr-1.5" /> Tạo sự kiện mới
           </Button>
@@ -54,7 +54,7 @@ export default function ModeDashboardPage() {
       <section className="flex flex-col gap-3">
         <div className="flex items-center justify-between border-b border-border pb-2">
           <h2 className="text-[15px] font-semibold text-ink">Sự kiện gần đây</h2>
-          <Link href="/demo/mode/events" className="text-[13px] font-medium text-primary hover:underline">
+          <Link href="/demo/MOD/events" className="text-[13px] font-medium text-primary hover:underline">
             Xem tất cả
           </Link>
         </div>
@@ -72,14 +72,14 @@ export default function ModeDashboardPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
-                {modeEvents.map((event) => (
+                {MODvents.map((event) => (
                   <tr key={event.id} className="hover:bg-canvas-soft/50 transition-colors">
                     <td className="p-3 font-medium text-ink max-w-[200px] truncate" title={event.title}>{event.title}</td>
                     <td className="p-3 text-body">{new Date(event.startTime).toLocaleDateString("vi-VN")}</td>
                     <td className="p-3"><StatusBadge status={event.status} variant="default" className="text-[10px] px-1.5 py-0.5" /></td>
                     <td className="p-3 text-body">{event.registeredCount} / {event.capacity}</td>
                     <td className="p-3 text-right">
-                      <Link href={`/demo/mode/events/${event.id}`}>
+                      <Link href={`/demo/MOD/events/${event.id}`}>
                         <Button variant="ghost" size="sm" className="h-7 text-[12px] px-2 text-primary">Quản lý</Button>
                       </Link>
                     </td>

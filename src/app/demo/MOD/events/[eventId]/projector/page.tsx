@@ -5,7 +5,7 @@ import { notFound } from "next/navigation"
 import { MOCK_EVENTS } from "@/mocks"
 import { QrCode, Users, CheckCircle2, ChevronLeft, MapPin, Maximize, Clock } from "lucide-react"
 
-export default function ProjectorModePage({ params }: { params: { eventId: string } }) {
+export default function ProjectorMODPage({ params }: { params: { eventId: string } }) {
   const event = MOCK_EVENTS.find(e => e.id === params.eventId)
   const [time, setTime] = useState<Date | null>(null)
   const [qrKey, setQrKey] = useState(0)

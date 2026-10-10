@@ -21,12 +21,12 @@ export default function RoleSelectorPage() {
             </div>
           </Link>
 
-          <Link href="/demo/mode" className="bg-surface border border-border rounded-xl p-6 flex flex-col items-center text-center gap-4 hover:border-primary hover:shadow-md transition-all">
+          <Link href="/demo/MOD" className="bg-surface border border-border rounded-xl p-6 flex flex-col items-center text-center gap-4 hover:border-primary hover:shadow-md transition-all">
             <div className="h-16 w-16 rounded-full bg-primary-soft text-primary flex items-center justify-center">
               <LayoutDashboard className="h-8 w-8" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-ink">Mode (Tổ chức)</h2>
+              <h2 className="text-lg font-bold text-ink">MOD (Tổ chức)</h2>
               <p className="text-[13px] text-muted mt-1">Tạo sự kiện, vận hành, điểm danh và quản lý người tham gia.</p>
             </div>
           </Link>

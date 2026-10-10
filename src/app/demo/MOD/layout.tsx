@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { LayoutDashboard, CalendarDays, Users, LogOut } from "lucide-react"
 
-const MODE_NAV = [
-  { href: "/demo/mode", label: "Tổng quan", icon: LayoutDashboard },
-  { href: "/demo/mode/events", label: "Quản lý sự kiện", icon: CalendarDays },
+const MOD_NAV = [
+  { href: "/demo/MOD", label: "Tổng quan", icon: LayoutDashboard },
+  { href: "/demo/MOD/events", label: "Quản lý sự kiện", icon: CalendarDays },
 ]
 
-export default function ModeLayout({ children }: { children: React.ReactNode }) {
+export default function MODLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
   return (
@@ -28,8 +28,8 @@ export default function ModeLayout({ children }: { children: React.ReactNode }) 
           />
         </div>
         <nav className="flex-1 flex flex-col gap-1 px-3 py-4">
-          {MODE_NAV.map((item) => {
-            const isActive = pathname === item.href || (item.href !== "/demo/mode" && pathname.startsWith(item.href))
+          {MOD_NAV.map((item) => {
+            const isActive = pathname === item.href || (item.href !== "/demo/MOD" && pathname.startsWith(item.href))
             return (
               <Link
                 key={item.href}
@@ -55,7 +55,7 @@ export default function ModeLayout({ children }: { children: React.ReactNode }) 
 
       {/* Topbar for Mobile */}
       <header className="lg:hidden sticky top-0 z-50 flex h-14 w-full items-center justify-between border-b border-border bg-surface px-4 shadow-sm">
-        <span className="text-[16px] font-bold text-primary">GDU Mode</span>
+        <span className="text-[16px] font-bold text-primary">GDU MOD</span>
         <Link href="/" className="text-[12px] font-medium text-muted hover:text-ink">Đổi vai trò</Link>
       </header>
 
@@ -66,8 +66,8 @@ export default function ModeLayout({ children }: { children: React.ReactNode }) 
 
       {/* Bottom Nav for Mobile */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 flex h-14 w-full items-center justify-around border-t border-border bg-surface pb-safe lg:hidden">
-        {MODE_NAV.map((item) => {
-          const isActive = pathname === item.href || (item.href !== "/demo/mode" && pathname.startsWith(item.href))
+        {MOD_NAV.map((item) => {
+          const isActive = pathname === item.href || (item.href !== "/demo/MOD" && pathname.startsWith(item.href))
           return (
             <Link
               key={item.href}

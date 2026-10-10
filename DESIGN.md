@@ -368,7 +368,7 @@ Semantic meaning takes precedence over brand color. A successful attendance mess
 
 ### Role and Status Mapping
 - **Admin:** navy-dark emphasis.
-- **Mode:** standard primary navy emphasis.
+- **MOD:** standard primary navy emphasis.
 - **Sinh viên:** primary-soft surfaces with navy labels.
 - **Pending approval / waitlist:** accent-soft surface with warning text.
 - **Public / checked in / approved:** semantic success.
@@ -377,7 +377,7 @@ Semantic meaning takes precedence over brand color. A successful attendance mess
 Role colors are navigational aids only. Status colors must always use semantic meanings.
 
 ## Typography, Radius and Spacing
-Typography, radius, and spacing remain unchanged from the source design system. Do not modify type families, font weights, size scale, pill geometry, card radius, input radius, or the 4px spacing base as part of this redesign.
+Typography, radius, and spacing remain unchanged from the source design system. Do not MODify type families, font weights, size scale, pill geometry, card radius, input radius, or the 4px spacing base as part of this redesign.
 
 ## Mobile-First Responsive System
 
@@ -472,14 +472,14 @@ The base styles target a narrow mobile viewport first. Media queries only add la
 
 ### Dialogs and Confirmations
 - Base: width `calc(100vw - 32px)` and action buttons stacked when necessary.
-- Tablet and desktop: use the existing modal width and inline actions.
+- Tablet and desktop: use the existing MODal width and inline actions.
 - Important details such as event name, time, seat number, waitlist position and cancellation deadline remain visible without horizontal scrolling.
 
 ### Dashboard and Role Shells
 - Base: no persistent sidebar; use drawer navigation or bottom navigation.
 - Tablet: optional collapsible rail.
 - Desktop: persistent sidebar is permitted.
-- Admin, Mode and Sinh viên preserve the same color foundation. Role differences come from navigation and available actions, not entirely different themes.
+- Admin, MOD and Sinh viên preserve the same color foundation. Role differences come from navigation and available actions, not entirely different themes.
 
 ## CSS Mobile-First Reference
 
@@ -567,7 +567,7 @@ The base styles target a narrow mobile viewport first. Media queries only add la
 ### Don't
 - Do not fill every card, heading, button and icon with gold.
 - Do not use gold text on white for important information.
-- Do not create separate unrelated color themes for Admin, Mode and Sinh viên.
+- Do not create separate unrelated color themes for Admin, MOD and Sinh viên.
 - Do not hide essential actions inside horizontal tables on mobile.
 - Do not reduce typography or touch targets merely to preserve a desktop layout.
 - Do not change radius, typography or spacing tokens as part of this color and responsive redesign.

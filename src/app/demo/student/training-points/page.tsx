@@ -29,67 +29,8 @@ export default function StudentTrainingPointsPage() {
         </div>
       </section>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-        <div className="lg:col-span-2 rounded-[16px] p-6 md:p-8 flex flex-col relative overflow-hidden shadow-[0_8px_30px_rgb(23,58,103,0.15)] border border-[#315781]/50">
-          {/* Background & Material */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#173A67] to-[#102B4D] z-0"></div>
-          
-          {/* Faint blue light at one corner */}
-          <div className="absolute -top-16 -right-16 w-56 h-56 bg-[#5B9BFF]/15 blur-3xl rounded-full pointer-events-none z-0"></div>
-          
-          {/* Low contrast geometric line/arc */}
-          <div className="absolute right-[-40px] bottom-[-20px] w-48 h-48 border border-[#5B9BFF]/10 rounded-full pointer-events-none z-0"></div>
-          <div className="absolute left-0 top-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#5B9BFF]/10 to-transparent pointer-events-none z-0"></div>
-
-          {/* Header */}
-          <div className="relative z-10 flex justify-between items-start mb-6">
-            <h2 className="text-[11px] font-semibold text-[#B9CBE0] uppercase tracking-[0.15em]">
-              Tổng điểm rèn luyện
-            </h2>
-            <div className="h-9 w-9 rounded-full border border-[#315781] flex items-center justify-center bg-[#102B4D]/50 shadow-sm">
-              <Award className="h-4 w-4 text-[#5B9BFF]" />
-            </div>
-          </div>
-
-          {/* Center */}
-          <div className="relative z-10 flex flex-col mb-8">
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-6xl md:text-7xl font-bold text-[#FFFFFF] tracking-tight">
-                {MOCK_STUDENT.totalPoints}
-              </span>
-              <span className="text-[18px] font-medium text-[#B9CBE0]">/ 100</span>
-            </div>
-            {/* Progress bar */}
-            <div className="w-full h-1.5 bg-[#102B4D] rounded-full mt-4 overflow-hidden border border-[#315781]/30">
-              <div 
-                className="h-full bg-[#5B9BFF] rounded-full" 
-                style={{ width: `${Math.min(100, (MOCK_STUDENT.totalPoints / 100) * 100)}%` }}
-              ></div>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="relative z-10 mt-auto flex items-center gap-6 pt-5 border-t border-[#315781]">
-            <div className="flex-1 flex flex-col gap-1.5">
-              <span className="text-[10px] font-medium text-[#B9CBE0] uppercase tracking-[0.1em]">Xếp loại</span>
-              <div className="flex items-center gap-2">
-                <Medal className="w-3.5 h-3.5 text-[#5B9BFF]" />
-                <span className="text-[16px] font-bold text-[#FFFFFF]">{MOCK_STUDENT.classification}</span>
-              </div>
-            </div>
-            <div className="w-px h-10 bg-[#315781]"></div>
-            <div className="flex-1 flex flex-col gap-1.5 pl-2">
-              <span className="text-[10px] font-medium text-[#B9CBE0] uppercase tracking-[0.1em]">Trạng thái</span>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#5B9BFF]" />
-                <span className="text-[16px] font-bold text-[#FFFFFF]">Đạt tín chỉ</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div className="lg:col-span-3 rounded-[20px] bg-white border border-black/5 p-7 md:p-10 flex flex-col shadow-[0_12px_40px_rgb(0,0,0,0.06)] relative overflow-hidden group">
+      <div className="flex flex-col gap-4">
+        <div className="rounded-[20px] bg-white border border-black/5 p-7 md:p-10 flex flex-col shadow-[0_12px_40px_rgb(0,0,0,0.06)] relative overflow-hidden group">
           {/* Subtle top accent line */}
           <div className="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-[#173A67] via-[#173A67]/60 to-transparent"></div>
           
@@ -105,15 +46,21 @@ export default function StudentTrainingPointsPage() {
                  </span>
               </div>
               
-              <div className="relative w-[160px] h-[160px] flex items-center justify-center">
+              <div className="relative w-[200px] h-[200px] flex items-center justify-center">
                 {/* SVG Circular Chart */}
-                <svg className="w-full h-full transform -rotate-90 drop-shadow-md" viewBox="0 0 100 100">
+                <svg className="w-full h-full transform -rotate-90 drop-shadow-[0_4px_12px_rgba(23,58,103,0.3)]" viewBox="0 0 100 100">
+                  <defs>
+                    <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#173A67" />
+                      <stop offset="100%" stopColor="#3b82f6" />
+                    </linearGradient>
+                  </defs>
                   {/* Track */}
-                  <circle cx="50" cy="50" r="42" className="stroke-[#eaf0f7]" strokeWidth="8" fill="none" />
+                  <circle cx="50" cy="50" r="42" className="stroke-[#eaf0f7]/60" strokeWidth="6" fill="none" />
                   {/* Progress */}
                   <circle 
                     cx="50" cy="50" r="42" 
-                    className="stroke-[#173A67]" 
+                    stroke="url(#ring-gradient)"
                     strokeWidth="8" 
                     fill="none" 
                     strokeDasharray="264" 
@@ -124,7 +71,8 @@ export default function StudentTrainingPointsPage() {
                 </svg>
                 {/* Score */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                   <span className="text-[44px] font-black text-[#173A67] leading-none tracking-tighter">{MOCK_STUDENT.totalPoints}</span>
+                   <span className="text-[52px] font-black text-primary leading-none tracking-tighter drop-shadow-sm">{MOCK_STUDENT.totalPoints}</span>
+                   <span className="text-[14px] font-bold text-muted uppercase tracking-widest mt-1">Điểm</span>
                 </div>
               </div>
               

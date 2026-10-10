@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { StatusBadge } from "@/components/ui/status-badge"
 import { Users, QrCode, FileBarChart, ChevronLeft, Edit, AlertTriangle } from "lucide-react"
 
-export default function ModeEventDetailPage({ params }: { params: { eventId: string } }) {
+export default function MODventDetailPage({ params }: { params: { eventId: string } }) {
   const event = MOCK_EVENTS.find(e => e.id === params.eventId)
   
   if (!event) notFound()
@@ -14,7 +14,7 @@ export default function ModeEventDetailPage({ params }: { params: { eventId: str
     <div className="container py-6 flex flex-col gap-5">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-3">
         <div className="flex items-center gap-2">
-          <Link href="/demo/mode/events">
+          <Link href="/demo/MOD/events">
             <Button variant="ghost" size="icon" className="h-8 w-8 text-muted">
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -50,7 +50,7 @@ export default function ModeEventDetailPage({ params }: { params: { eventId: str
             </div>
             <p className="text-[12px] text-muted mt-1">Đã bao gồm danh sách chờ.</p>
           </div>
-          <Link href={`/demo/mode/events/${event.id}/registrations`}>
+          <Link href={`/demo/MOD/events/${event.id}/registrations`}>
             <Button variant="outline" className="w-full text-[13px] h-8 mt-2">Quản lý vé</Button>
           </Link>
         </div>
@@ -67,13 +67,13 @@ export default function ModeEventDetailPage({ params }: { params: { eventId: str
               <span className="text-3xl font-bold text-success">0</span>
               <span className="text-[14px] text-muted">/ {event.registeredCount} đã tới</span>
             </div>
-            <p className="text-[12px] text-muted mt-1">Hỗ trợ Projector Mode & GPS.</p>
+            <p className="text-[12px] text-muted mt-1">Hỗ trợ Projector MOD & GPS.</p>
           </div>
           <div className="flex gap-2 mt-2">
-            <Link href={`/demo/mode/events/${event.id}/attendance`} className="flex-1">
+            <Link href={`/demo/MOD/events/${event.id}/attendance`} className="flex-1">
               <Button variant="outline" className="w-full text-[13px] h-8">Theo dõi</Button>
             </Link>
-            <Link href={`/demo/mode/events/${event.id}/projector`} className="flex-1">
+            <Link href={`/demo/MOD/events/${event.id}/projector`} className="flex-1">
               <Button variant="primary" className="w-full text-[13px] h-8">Trình chiếu</Button>
             </Link>
           </div>
@@ -92,7 +92,7 @@ export default function ModeEventDetailPage({ params }: { params: { eventId: str
             </div>
             <p className="text-[12px] text-muted mt-1">Xuất danh sách điểm danh ra Excel.</p>
           </div>
-          <Link href={`/demo/mode/events/${event.id}/report`}>
+          <Link href={`/demo/MOD/events/${event.id}/report`}>
             <Button variant="outline" className="w-full text-[13px] h-8 mt-2">Xem báo cáo</Button>
           </Link>
         </div>

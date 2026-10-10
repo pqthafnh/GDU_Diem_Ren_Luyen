@@ -36,7 +36,7 @@ Khi tài liệu mâu thuẫn:
 ```text
 Admin
   ↓
-Mode
+MOD
   ↓
 Sinh viên
 ```
@@ -48,7 +48,7 @@ Admin chỉ tập trung vào:
 - Xem sự kiện chờ duyệt.
 - Duyệt sự kiện.
 - Từ chối sự kiện.
-- Yêu cầu Mode chỉnh sửa.
+- Yêu cầu MOD chỉnh sửa.
 - Nhập phản hồi xét duyệt.
 - Xem lịch sử xử lý.
 - Xóa sự kiện.
@@ -57,13 +57,13 @@ Admin không được triển khai như người vận hành sự kiện hằng 
 
 - Tạo hoặc cấu hình sự kiện.
 - Quản lý đăng ký hằng ngày.
-- Mở Projector Mode.
+- Mở Projector MOD.
 - Theo dõi live attendance.
 - Xuất báo cáo sự kiện.
 
-### Mode
+### MOD
 
-Mode thuộc quyền Admin và cao hơn Sinh viên. Mode chịu trách nhiệm tạo và vận hành sự kiện:
+MOD thuộc quyền Admin và cao hơn Sinh viên. MOD chịu trách nhiệm tạo và vận hành sự kiện:
 
 - Tạo, sửa và lưu bản nháp.
 - Thêm banner và nội dung.
@@ -75,11 +75,11 @@ Mode thuộc quyền Admin và cao hơn Sinh viên. Mode chịu trách nhiệm t
 - Nhận phản hồi, sửa và gửi lại.
 - Cancel sự kiện trong giới hạn 24 giờ theo business rules.
 - Quản lý đăng ký và waitlist.
-- Mở Projector Mode và QR động 30 giây.
+- Mở Projector MOD và QR động 30 giây.
 - Theo dõi điểm danh.
 - Xem báo cáo và xuất Excel.
 
-Mode không được:
+MOD không được:
 
 - Tự duyệt.
 - Tự Public.
@@ -199,8 +199,8 @@ Các quy tắc bắt buộc:
 - Không dùng icon trước mọi heading.
 - Không biến mọi metadata thành badge.
 - Không dùng hero lớn, heading quá khổ hoặc khoảng trắng kiểu landing page trong màn hình ứng dụng.
-- Không tự thêm chatbot, AI assistant, social feed, leaderboard, gamification, dark mode hoặc chức năng ngoài PRD.
-- Admin, Mode và Sinh viên dùng cùng một design language; khác biệt nằm ở navigation, thông tin ưu tiên và quyền thao tác, không phải ba theme khác nhau.
+- Không tự thêm chatbot, AI assistant, social feed, leaderboard, gamification, dark MOD hoặc chức năng ngoài PRD.
+- Admin, MOD và Sinh viên dùng cùng một design language; khác biệt nằm ở navigation, thông tin ưu tiên và quyền thao tác, không phải ba theme khác nhau.
 - Mobile phải được thiết kế lại theo tác vụ, không chỉ ép layout desktop thành một cột.
 - Mock data phải cụ thể, tự nhiên và không dùng số liệu đối xứng hoặc hoàn hảo một cách giả tạo.
 
@@ -258,7 +258,7 @@ Wide:    1280px+
 - Form: 1 cột mobile; 2 cột cho trường ngắn từ tablet.
 - Dialog: stacked actions trên mobile, inline actions khi đủ chỗ.
 - Detail page: sticky action bar trên mobile nhưng không che bottom navigation.
-- Projector Mode: tối ưu màn hình lớn, tương phản cao, không hiển thị dữ liệu cá nhân.
+- Projector MOD: tối ưu màn hình lớn, tương phản cao, không hiển thị dữ liệu cá nhân.
 
 ## Kiến trúc frontend
 
@@ -286,7 +286,7 @@ src/
     training-points/
   features/
     student/
-    mode/
+    MOD/
     admin/
   mocks/
   lib/
@@ -308,14 +308,14 @@ Nếu chưa có route phù hợp, tạo route demo riêng và không phá route 
 /demo/student/attendance
 /demo/student/training-points
 
-/demo/mode
-/demo/mode/events
-/demo/mode/events/new
-/demo/mode/events/:id
-/demo/mode/events/:id/registrations
-/demo/mode/events/:id/attendance
-/demo/mode/events/:id/report
-/demo/mode/events/:id/projector
+/demo/MOD
+/demo/MOD/events
+/demo/MOD/events/new
+/demo/MOD/events/:id
+/demo/MOD/events/:id/registrations
+/demo/MOD/events/:id/attendance
+/demo/MOD/events/:id/report
+/demo/MOD/events/:id/projector
 
 /demo/admin
 /demo/admin/reviews
@@ -346,18 +346,18 @@ Cú pháp route phải theo router đang dùng.
 
 Sau Phase 1, chạy kiểm tra, tạo screenshot artifacts và **dừng chờ duyệt**.
 
-### Phase 2: Mode
+### Phase 2: MOD
 
 Chỉ bắt đầu khi người dùng duyệt Phase 1:
 
-- Dashboard Mode.
+- Dashboard MOD.
 - Danh sách sự kiện.
 - Form tạo/chỉnh sửa.
 - Cấu hình mẫu.
 - Preview và gửi duyệt.
 - Chờ duyệt/yêu cầu chỉnh sửa.
 - Registration/waitlist.
-- Projector Mode.
+- Projector MOD.
 - Live attendance.
 - Report và cancel.
 

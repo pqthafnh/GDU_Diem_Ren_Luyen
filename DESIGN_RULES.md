@@ -9,7 +9,7 @@ Rõ ràng.
 Thực dụng.
 Dễ học.
 Thân thiện với sinh viên.
-Đủ nghiêm túc cho Admin và Mode.
+Đủ nghiêm túc cho Admin và MOD.
 Có mật độ thông tin hợp lý.
 Có thể triển khai thực tế.
 Giao diện không được mang cảm giác:
@@ -42,7 +42,7 @@ Danh sách sự kiện: tìm và chọn sự kiện.
 Chi tiết sự kiện: hiểu thông tin và đăng ký.
 Vé của tôi: theo dõi trạng thái tham gia.
 Điểm rèn luyện: hiểu tổng điểm và nguồn phát sinh điểm.
-Mode tạo sự kiện: hoàn thành thông tin và gửi duyệt.
+MOD tạo sự kiện: hoàn thành thông tin và gửi duyệt.
 Admin xét duyệt: đọc, đối chiếu và quyết định.
 Không đặt nhiều CTA cùng cấp trong cùng một màn hình.
 
@@ -98,8 +98,8 @@ Tổng sinh viên toàn hệ thống.
 Tổng check-in.
 Tỷ lệ tham dự.
 Các chart vận hành không thuộc công việc Admin.
-Mode
-Mode có thể xem:
+MOD
+MOD có thể xem:
 
 Sự kiện sắp diễn ra.
 Chờ duyệt.
@@ -239,7 +239,7 @@ Không biến:
 Thể loại.
 Địa điểm.
 Ngày giờ.
-Mode tổ chức.
+MOD tổ chức.
 Mọi metadata.
 thành badge.
 
@@ -281,7 +281,7 @@ Confirm.
 14. Form design
 Form phải được chia theo logic nghiệp vụ, không chia chỉ để tạo nhiều card.
 
-Mode tạo sự kiện được chia thành:
+MOD tạo sự kiện được chia thành:
 
 Thông tin chung.
 Thời gian và địa điểm.
@@ -359,7 +359,7 @@ Dùng dữ liệu như:
 Không tạo số liệu hoàn hảo hoặc đối xứng một cách giả tạo.
 
 18. Vai trò không phải theme
-Admin, Mode và Sinh viên dùng cùng một design system.
+Admin, MOD và Sinh viên dùng cùng một design system.
 
 Sự khác biệt nằm ở:
 
@@ -371,7 +371,7 @@ Workflow.
 Không tạo:
 
 Admin theme tối.
-Mode theme vàng.
+MOD theme vàng.
 Sinh viên theme xanh.
 nếu không có yêu cầu riêng.
 
@@ -407,7 +407,7 @@ AI assistant.
 Social feed.
 Leaderboard.
 Achievement system.
-Dark mode.
+Dark MOD.
 Gamification.
 Calendar integration.
 Recommendation AI.

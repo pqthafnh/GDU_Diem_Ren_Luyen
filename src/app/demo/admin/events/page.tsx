@@ -40,7 +40,7 @@ export default function AdminEventsPage() {
             <thead>
               <tr className="bg-canvas-soft border-b border-border text-muted">
                 <th className="p-3 font-medium">Sự kiện</th>
-                <th className="p-3 font-medium">Đơn vị / Mode</th>
+                <th className="p-3 font-medium">Đơn vị / MOD</th>
                 <th className="p-3 font-medium">Trạng thái</th>
                 <th className="p-3 font-medium text-right">Thao tác</th>
               </tr>

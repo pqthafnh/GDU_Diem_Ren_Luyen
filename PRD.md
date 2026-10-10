@@ -4,7 +4,7 @@ version: "2.0"
 status: "Bản cập nhật phân quyền và chức năng"
 roles:
   - Admin
-  - Mode
+  - MOD
   - Sinh viên
 last_updated: "2026-10-07"
 source: "PRD.docx"
@@ -18,23 +18,23 @@ source: "PRD.docx"
 
 | Phiên bản > **2.0** --- |
 | Trạng thái | Bản cập nhật phân quyền và chức năng |
-| Phân quyền | Admin > Mode > Sinh viên |
+| Phân quyền | Admin > MOD > Sinh viên |
 | Ngày cập nhật | 07/10/2026 |
-| Trọng tâm | Admin duyệt/xóa; Mode tạo và vận hành; Sinh viên tham gia |
+| Trọng tâm | Admin duyệt/xóa; MOD tạo và vận hành; Sinh viên tham gia |
 
 # 1. Tổng quan tài liệu
 
 ## 1.1. Mục đích
 
-Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự kiện sinh viên, đăng ký, danh sách chờ, điểm danh QR kết hợp GPS, quản lý điểm rèn luyện, báo cáo và thông báo. Phiên bản 2.0 tái cấu trúc sản phẩm thành ba cấp quyền Admin, Mode và Sinh viên.
+Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự kiện sinh viên, đăng ký, danh sách chờ, điểm danh QR kết hợp GPS, quản lý điểm rèn luyện, báo cáo và thông báo. Phiên bản 2.0 tái cấu trúc sản phẩm thành ba cấp quyền Admin, MOD và Sinh viên.
 
 ## 1.2. Nguyên tắc phân cấp
 
-> **THỨ BẬC QUYỀN  Admin là cấp cao nhất, Mode thuộc quyền Admin và có quyền cao hơn Sinh viên. Admin không vận hành sự kiện hằng ngày; công việc chính của Admin là duyệt, từ chối và xóa sự kiện. Mode chịu trách nhiệm tạo, cấu hình và vận hành sự kiện. Sinh viên khám phá, đăng ký, điểm danh và theo dõi điểm.**
+> **THỨ BẬC QUYỀN  Admin là cấp cao nhất, MOD thuộc quyền Admin và có quyền cao hơn Sinh viên. Admin không vận hành sự kiện hằng ngày; công việc chính của Admin là duyệt, từ chối và xóa sự kiện. MOD chịu trách nhiệm tạo, cấu hình và vận hành sự kiện. Sinh viên khám phá, đăng ký, điểm danh và theo dõi điểm.**
 
-- Ba vai trò đăng nhập: Admin, Mode và Sinh viên.
+- Ba vai trò đăng nhập: Admin, MOD và Sinh viên.
 - Các System Jobs chỉ là chức năng tự động, không phải vai trò thứ tư.
-- Mode không được tự duyệt, tự Public hoặc xóa sự kiện.
+- MOD không được tự duyệt, tự Public hoặc xóa sự kiện.
 - Sự kiện chỉ được Public sau khi Admin duyệt.
 - Các xử lý rủi ro kỹ thuật và ngoại lệ chuyên sâu được đặc tả ở tài liệu sau.
 
@@ -42,7 +42,7 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 | Thuật ngữ > **Định nghĩa** --- |
 | Admin | Cấp quyền cao nhất, có nhiệm vụ chính là duyệt/từ chối và xóa sự kiện. |
-| Mode | Vai trò tổ chức sự kiện dưới quyền Admin và trên quyền Sinh viên; tạo, cấu hình, gửi duyệt và vận hành sự kiện. |
+| MOD | Vai trò tổ chức sự kiện dưới quyền Admin và trên quyền Sinh viên; tạo, cấu hình, gửi duyệt và vận hành sự kiện. |
 | Sinh viên | Người khám phá, đăng ký, điểm danh và nhận điểm rèn luyện. |
 | Public | Trạng thái sự kiện đã được Admin duyệt và hiển thị cho Sinh viên. |
 | Vé chính thức | Đăng ký được ghi nhận trong giới hạn sức chứa. |
@@ -54,10 +54,10 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 ## 2.1. Mục tiêu
 
-- Tạo quy trình rõ ràng từ Mode tạo sự kiện, Admin duyệt đến Sinh viên đăng ký.
+- Tạo quy trình rõ ràng từ MOD tạo sự kiện, Admin duyệt đến Sinh viên đăng ký.
 - Giảm thao tác thủ công trong quản lý sức chứa, danh sách chờ, điểm danh và tổng hợp điểm.
 - Cung cấp QR động kết hợp GPS thử nghiệm trong bán kính 100 mét.
-- Cho phép Mode sử dụng lại cấu hình sự kiện đã lưu.
+- Cho phép MOD sử dụng lại cấu hình sự kiện đã lưu.
 - Hiển thị điểm và xếp loại rèn luyện theo từng giai đoạn và toàn chu kỳ 3 năm.
 - Tự động gửi thông báo, nhắc lịch, cập nhật waitlist và ghi nhận no-show.
 
@@ -83,13 +83,13 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 > **ADMIN  Duyệt, từ chối và xóa sự kiện.**
 
-> **MODE  Tạo, cấu hình, gửi duyệt, cancel có giới hạn, vận hành QR, theo dõi và xuất báo cáo sự kiện.**
+> **MOD  Tạo, cấu hình, gửi duyệt, cancel có giới hạn, vận hành QR, theo dõi và xuất báo cáo sự kiện.**
 
 > **SINH VIÊN  Xem, đăng ký, hủy đăng ký, điểm danh, xem vé, waitlist và điểm rèn luyện.**
 
 ## 3.2. Ma trận quyền
 
-| Chức năng | Admin | Mode > **Sinh viên** --- | --- | --- |
+| Chức năng | Admin | MOD > **Sinh viên** --- | --- | --- |
 | Xem sự kiện Public | Có | Có | Có |
 | Tạo sự kiện | Không | Có | Không |
 | Chỉnh sửa bản nháp | Không | Có | Không |
@@ -115,22 +115,22 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 ## 4.1. Trạng thái
 
 | Trạng thái | Mô tả > **Quyền thao tác** --- | --- |
-| Bản nháp | Mode đang tạo hoặc chỉnh sửa. | Mode |
-| Chờ duyệt | Mode đã gửi sự kiện đến Admin. | Admin xem xét |
-| Yêu cầu chỉnh sửa | Admin chưa duyệt và yêu cầu cập nhật. | Mode chỉnh sửa, gửi lại |
+| Bản nháp | MOD đang tạo hoặc chỉnh sửa. | MOD |
+| Chờ duyệt | MOD đã gửi sự kiện đến Admin. | Admin xem xét |
+| Yêu cầu chỉnh sửa | Admin chưa duyệt và yêu cầu cập nhật. | MOD chỉnh sửa, gửi lại |
 | Đã duyệt/Public | Admin duyệt; sự kiện hiển thị cho Sinh viên. | Sinh viên xem/đăng ký |
-| Đang diễn ra | Sự kiện đang được tổ chức. | Mode vận hành |
-| Đã kết thúc | Sự kiện đã qua thời gian kết thúc. | Mode xem báo cáo |
-| Đã cancel | Mode cancel theo giới hạn 24 giờ. | Chỉ còn xem lịch sử |
+| Đang diễn ra | Sự kiện đang được tổ chức. | MOD vận hành |
+| Đã kết thúc | Sự kiện đã qua thời gian kết thúc. | MOD xem báo cáo |
+| Đã cancel | MOD cancel theo giới hạn 24 giờ. | Chỉ còn xem lịch sử |
 | Đã xóa | Admin xóa sự kiện. | Không hiển thị công khai |
 
 ## 4.2. Luồng chính
 
-1. Mode tạo bản nháp và nhập thông tin.
-1. Mode gửi duyệt.
+1. MOD tạo bản nháp và nhập thông tin.
+1. MOD gửi duyệt.
 1. Admin duyệt, từ chối hoặc yêu cầu chỉnh sửa.
 1. Nếu được duyệt, hệ thống chuyển sự kiện sang Public.
-1. Mode vận hành đăng ký, QR, điểm danh và báo cáo.
+1. MOD vận hành đăng ký, QR, điểm danh và báo cáo.
 1. Admin chỉ can thiệp khi cần duyệt, từ chối hoặc xóa sự kiện.
 
 # 5. Yêu cầu chức năng dành cho Admin
@@ -145,16 +145,16 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 **Người sử dụng:** Admin
 
-**Điều kiện sử dụng:** Có sự kiện do Mode gửi duyệt.
+**Điều kiện sử dụng:** Có sự kiện do MOD gửi duyệt.
 
 **Luồng chức năng chính:**
 1. Admin mở danh sách Chờ duyệt.
-1. Hệ thống hiển thị tên sự kiện, Mode tạo, thời gian gửi và trạng thái.
+1. Hệ thống hiển thị tên sự kiện, MOD tạo, thời gian gửi và trạng thái.
 1. Admin mở chi tiết để kiểm tra banner, nội dung, thời gian, địa điểm, ngành, sức chứa, GPS và điểm rèn luyện.
 
 **Kết quả:** Admin xem đầy đủ dữ liệu trước khi quyết định.
 
-**Thông tin giao diện chính:** Bộ lọc, tìm kiếm, chi tiết sự kiện và thông tin Mode.
+**Thông tin giao diện chính:** Bộ lọc, tìm kiếm, chi tiết sự kiện và thông tin MOD.
 
 `ADM-APR-02`
 
@@ -170,7 +170,7 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 1. Admin chọn Duyệt, Từ chối hoặc Yêu cầu chỉnh sửa.
 1. Nếu duyệt, hệ thống chuyển sự kiện sang Public.
 1. Nếu từ chối hoặc yêu cầu chỉnh sửa, Admin nhập ghi chú.
-1. Hệ thống gửi kết quả đến Mode.
+1. Hệ thống gửi kết quả đến MOD.
 
 **Kết quả:** Sự kiện có trạng thái xét duyệt rõ ràng.
 
@@ -197,30 +197,30 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 **Kết quả:** Sự kiện bị xóa khỏi phạm vi sử dụng thông thường.
 
-**Thông tin giao diện chính:** Tên sự kiện, Mode tạo, trạng thái và xác nhận xóa.
+**Thông tin giao diện chính:** Tên sự kiện, MOD tạo, trạng thái và xác nhận xóa.
 
-> **GIỚI HẠN ADMIN  Admin không chịu trách nhiệm tạo, cấu hình, vận hành QR, theo dõi danh sách đăng ký hoặc xuất báo cáo hằng ngày. Các chức năng đó thuộc Mode.**
+> **GIỚI HẠN ADMIN  Admin không chịu trách nhiệm tạo, cấu hình, vận hành QR, theo dõi danh sách đăng ký hoặc xuất báo cáo hằng ngày. Các chức năng đó thuộc MOD.**
 
-# 6. Yêu cầu chức năng dành cho Mode
+# 6. Yêu cầu chức năng dành cho MOD
 
 ## 6.1. Tạo và quản lý sự kiện
 
 `MOD-EVT-01`
 
-### Danh sách sự kiện của Mode
+### Danh sách sự kiện của MOD
 
-**Mục đích:** Cho phép Mode quản lý các sự kiện do mình tạo.
+**Mục đích:** Cho phép MOD quản lý các sự kiện do mình tạo.
 
-**Người sử dụng:** Mode
+**Người sử dụng:** MOD
 
-**Điều kiện sử dụng:** Mode đã đăng nhập.
+**Điều kiện sử dụng:** MOD đã đăng nhập.
 
 **Luồng chức năng chính:**
-1. Mode mở khu vực Sự kiện của tôi.
+1. MOD mở khu vực Sự kiện của tôi.
 1. Hệ thống hiển thị bản nháp, chờ duyệt, yêu cầu chỉnh sửa, Public, đang diễn ra, kết thúc hoặc cancel.
-1. Mode tìm kiếm và lọc theo trạng thái hoặc thời gian.
+1. MOD tìm kiếm và lọc theo trạng thái hoặc thời gian.
 
-**Kết quả:** Mode theo dõi được toàn bộ vòng đời sự kiện của mình.
+**Kết quả:** MOD theo dõi được toàn bộ vòng đời sự kiện của mình.
 
 **Thông tin giao diện chính:** Tên, thời gian, trạng thái, số đăng ký và thao tác được phép.
 
@@ -228,18 +228,18 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 ### Tạo và chỉnh sửa sự kiện
 
-**Mục đích:** Cho phép Mode chuẩn bị đầy đủ nội dung sự kiện.
+**Mục đích:** Cho phép MOD chuẩn bị đầy đủ nội dung sự kiện.
 
-**Người sử dụng:** Mode
+**Người sử dụng:** MOD
 
-**Điều kiện sử dụng:** Mode có quyền tạo sự kiện.
+**Điều kiện sử dụng:** MOD có quyền tạo sự kiện.
 
 **Luồng chức năng chính:**
-1. Mode chọn Tạo sự kiện.
-1. Mode nhập tên, banner, nội dung, thể loại, đơn vị tổ chức, thời gian và địa điểm.
-1. Mode cấu hình ngành/đối tượng tham gia, số lượng, sức chứa và thời gian đăng ký.
-1. Mode cấu hình tọa độ GPS, bán kính thử nghiệm 100 mét, tiêu chí và số điểm rèn luyện.
-1. Mode lưu bản nháp hoặc tiếp tục gửi duyệt.
+1. MOD chọn Tạo sự kiện.
+1. MOD nhập tên, banner, nội dung, thể loại, đơn vị tổ chức, thời gian và địa điểm.
+1. MOD cấu hình ngành/đối tượng tham gia, số lượng, sức chứa và thời gian đăng ký.
+1. MOD cấu hình tọa độ GPS, bán kính thử nghiệm 100 mét, tiêu chí và số điểm rèn luyện.
+1. MOD lưu bản nháp hoặc tiếp tục gửi duyệt.
 
 **Kết quả:** Bản nháp sự kiện được tạo hoặc cập nhật.
 
@@ -251,15 +251,15 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 **Mục đích:** Giảm thời gian tạo các sự kiện có cấu hình lặp lại.
 
-**Người sử dụng:** Mode
+**Người sử dụng:** MOD
 
 **Điều kiện sử dụng:** Đã tồn tại cấu hình mẫu.
 
 **Luồng chức năng chính:**
-1. Mode chọn một cấu hình đã lưu.
+1. MOD chọn một cấu hình đã lưu.
 1. Hệ thống tự điền địa điểm, GPS, bán kính, thể loại, ngành, sức chứa, tiêu chí và điểm mặc định.
-1. Mode chỉnh sửa dữ liệu riêng của sự kiện.
-1. Mode lưu bản nháp.
+1. MOD chỉnh sửa dữ liệu riêng của sự kiện.
+1. MOD lưu bản nháp.
 
 **Kết quả:** Một cấu hình có thể được sử dụng nhiều lần.
 
@@ -271,15 +271,15 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 **Mục đích:** Khởi tạo quy trình kiểm duyệt trước khi Public.
 
-**Người sử dụng:** Mode
+**Người sử dụng:** MOD
 
 **Điều kiện sử dụng:** Bản nháp có đủ thông tin bắt buộc.
 
 **Luồng chức năng chính:**
-1. Mode xem lại sự kiện.
-1. Mode chọn Gửi duyệt.
+1. MOD xem lại sự kiện.
+1. MOD chọn Gửi duyệt.
 1. Hệ thống chuyển trạng thái sang Chờ duyệt.
-1. Mode theo dõi kết quả duyệt và ghi chú của Admin.
+1. MOD theo dõi kết quả duyệt và ghi chú của Admin.
 
 **Kết quả:** Sự kiện được chuyển đến Admin.
 
@@ -289,16 +289,16 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 ### Cancel sự kiện trong giới hạn 24 giờ
 
-**Mục đích:** Cho phép Mode dừng sự kiện trong phạm vi được quy định mà không có quyền xóa.
+**Mục đích:** Cho phép MOD dừng sự kiện trong phạm vi được quy định mà không có quyền xóa.
 
-**Người sử dụng:** Mode
+**Người sử dụng:** MOD
 
-**Điều kiện sử dụng:** Sự kiện thuộc Mode và còn trong giới hạn 24 giờ áp dụng.
+**Điều kiện sử dụng:** Sự kiện thuộc MOD và còn trong giới hạn 24 giờ áp dụng.
 
 **Luồng chức năng chính:**
-1. Mode chọn Cancel sự kiện.
+1. MOD chọn Cancel sự kiện.
 1. Hệ thống hiển thị popup xác nhận và yêu cầu lý do.
-1. Mode xác nhận.
+1. MOD xác nhận.
 1. Hệ thống chuyển trạng thái sang Đã cancel và ngừng nhận đăng ký.
 
 **Kết quả:** Sự kiện bị cancel nhưng không bị xóa.
@@ -311,19 +311,19 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 ### Quản lý danh sách đăng ký
 
-**Mục đích:** Cho phép Mode theo dõi người tham gia sự kiện của mình.
+**Mục đích:** Cho phép MOD theo dõi người tham gia sự kiện của mình.
 
-**Người sử dụng:** Mode
+**Người sử dụng:** MOD
 
 **Điều kiện sử dụng:** Sự kiện đã Public và có đăng ký.
 
 **Luồng chức năng chính:**
-1. Mode mở danh sách đăng ký.
+1. MOD mở danh sách đăng ký.
 1. Hệ thống hiển thị vé chính thức và danh sách chờ.
-1. Mode tìm kiếm theo MSSV, họ tên, lớp, khoa hoặc ngành.
-1. Mode xem thời gian đăng ký, số thứ tự và số ghế nếu có.
+1. MOD tìm kiếm theo MSSV, họ tên, lớp, khoa hoặc ngành.
+1. MOD xem thời gian đăng ký, số thứ tự và số ghế nếu có.
 
-**Kết quả:** Mode theo dõi được sức chứa và người tham gia.
+**Kết quả:** MOD theo dõi được sức chứa và người tham gia.
 
 **Thông tin giao diện chính:** MSSV, họ tên, ngành, trạng thái vé, số thứ tự, số ghế.
 
@@ -331,14 +331,14 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 ### Chi tiết danh sách chờ
 
-**Mục đích:** Cho phép Mode theo dõi thứ tự chờ.
+**Mục đích:** Cho phép MOD theo dõi thứ tự chờ.
 
-**Người sử dụng:** Mode
+**Người sử dụng:** MOD
 
 **Điều kiện sử dụng:** Sự kiện đã đủ sức chứa và có waitlist.
 
 **Luồng chức năng chính:**
-1. Mode mở tab Danh sách chờ.
+1. MOD mở tab Danh sách chờ.
 1. Hệ thống hiển thị vị trí, thời gian vào hàng đợi và trạng thái từng sinh viên.
 1. Khi có chỗ trống, hệ thống cập nhật người được chuyển sang vé chính thức.
 
@@ -350,16 +350,16 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 `MOD-ATT-01`
 
-### Projector Mode và QR động
+### Projector MOD và QR động
 
-**Mục đích:** Cho phép Mode trình chiếu QR điểm danh.
+**Mục đích:** Cho phép MOD trình chiếu QR điểm danh.
 
-**Người sử dụng:** Mode
+**Người sử dụng:** MOD
 
-**Điều kiện sử dụng:** Sự kiện của Mode đang trong thời gian tổ chức.
+**Điều kiện sử dụng:** Sự kiện của MOD đang trong thời gian tổ chức.
 
 **Luồng chức năng chính:**
-1. Mode mở Projector Mode.
+1. MOD mở Projector MOD.
 1. Hệ thống hiển thị QR lớn, tên sự kiện và đồng hồ đếm ngược.
 1. QR tự làm mới sau mỗi 30 giây.
 1. Sinh viên quét QR bằng camera web.
@@ -372,18 +372,18 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 ### Theo dõi kết quả điểm danh
 
-**Mục đích:** Cho phép Mode giám sát số người tham gia.
+**Mục đích:** Cho phép MOD giám sát số người tham gia.
 
-**Người sử dụng:** Mode
+**Người sử dụng:** MOD
 
 **Điều kiện sử dụng:** Sự kiện có dữ liệu điểm danh.
 
 **Luồng chức năng chính:**
-1. Mode mở danh sách điểm danh.
+1. MOD mở danh sách điểm danh.
 1. Hệ thống hiển thị sinh viên đã check-in và thời gian chính xác.
-1. Mode tìm kiếm và lọc danh sách.
+1. MOD tìm kiếm và lọc danh sách.
 
-**Kết quả:** Mode có dữ liệu phục vụ báo cáo.
+**Kết quả:** MOD có dữ liệu phục vụ báo cáo.
 
 **Thông tin giao diện chính:** MSSV, họ tên, ngành, thời gian check-in và trạng thái.
 
@@ -393,18 +393,18 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 ### Thống kê và xuất Excel
 
-**Mục đích:** Cho phép Mode tổng hợp sự kiện do mình phụ trách.
+**Mục đích:** Cho phép MOD tổng hợp sự kiện do mình phụ trách.
 
-**Người sử dụng:** Mode
+**Người sử dụng:** MOD
 
 **Điều kiện sử dụng:** Sự kiện có dữ liệu đăng ký hoặc điểm danh.
 
 **Luồng chức năng chính:**
-1. Mode xem tổng số đăng ký, vé chính thức, waitlist, hủy, điểm danh và no-show.
-1. Mode chọn Xuất minh chứng.
+1. MOD xem tổng số đăng ký, vé chính thức, waitlist, hủy, điểm danh và no-show.
+1. MOD chọn Xuất minh chứng.
 1. Hệ thống tạo file .xlsx theo mẫu.
 
-**Kết quả:** Mode có báo cáo và file minh chứng.
+**Kết quả:** MOD có báo cáo và file minh chứng.
 
 **Thông tin giao diện chính:** Chỉ số tổng quan, bộ lọc và nút tải Excel.
 
@@ -443,7 +443,7 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 **Luồng chức năng chính:**
 1. Hệ thống hiển thị banner và nội dung chi tiết.
-1. Hệ thống hiển thị đơn vị tổ chức, Mode phụ trách, ngành/đối tượng, thời gian, địa điểm, sức chứa và điểm.
+1. Hệ thống hiển thị đơn vị tổ chức, MOD phụ trách, ngành/đối tượng, thời gian, địa điểm, sức chứa và điểm.
 1. Hệ thống hiển thị trạng thái và nút đăng ký/hủy phù hợp.
 
 **Kết quả:** Sinh viên có đủ thông tin để quyết định.
@@ -612,7 +612,7 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 **Kết quả:** Nguồn điểm được hiển thị minh bạch.
 
-**Thông tin giao diện chính:** Sự kiện, tiêu chí, điểm, thời điểm và Mode tổ chức.
+**Thông tin giao diện chính:** Sự kiện, tiêu chí, điểm, thời điểm và MOD tổ chức.
 
 # 8. Chức năng hệ thống tự động
 
@@ -622,7 +622,7 @@ Tài liệu mô tả phạm vi chức năng của hệ thống quản lý sự k
 
 ### Thông báo kết quả duyệt
 
-Gửi cho Mode khi Admin duyệt, từ chối hoặc yêu cầu chỉnh sửa.
+Gửi cho MOD khi Admin duyệt, từ chối hoặc yêu cầu chỉnh sửa.
 
 `SYS-NTF-02`
 
@@ -697,12 +697,12 @@ Gửi khi Sinh viên đạt ngưỡng vi phạm.
 | SCR-ADM-01 | Sự kiện chờ duyệt | Admin | Duyệt, từ chối, yêu cầu chỉnh sửa. |
 | SCR-ADM-02 | Chi tiết xét duyệt | Admin | Xem toàn bộ nội dung và quyết định. |
 | SCR-ADM-03 | Quản lý xóa sự kiện | Admin | Tìm và xóa sự kiện. |
-| SCR-MOD-01 | Sự kiện của Mode | Mode | Quản lý vòng đời sự kiện. |
-| SCR-MOD-02 | Form tạo/chỉnh sửa | Mode | Banner, nội dung, ngành, số lượng, GPS, điểm. |
-| SCR-MOD-03 | Cấu hình mẫu | Mode | Chọn cấu hình dùng lại. |
-| SCR-MOD-04 | Danh sách đăng ký/waitlist | Mode | Theo dõi vé, vị trí chờ, ghế. |
-| SCR-MOD-05 | Projector Mode | Mode | QR động 30 giây. |
-| SCR-MOD-06 | Điểm danh/Báo cáo | Mode | Theo dõi và xuất Excel. |
+| SCR-MOD-01 | Sự kiện của MOD | MOD | Quản lý vòng đời sự kiện. |
+| SCR-MOD-02 | Form tạo/chỉnh sửa | MOD | Banner, nội dung, ngành, số lượng, GPS, điểm. |
+| SCR-MOD-03 | Cấu hình mẫu | MOD | Chọn cấu hình dùng lại. |
+| SCR-MOD-04 | Danh sách đăng ký/waitlist | MOD | Theo dõi vé, vị trí chờ, ghế. |
+| SCR-MOD-05 | Projector MOD | MOD | QR động 30 giây. |
+| SCR-MOD-06 | Điểm danh/Báo cáo | MOD | Theo dõi và xuất Excel. |
 | SCR-STU-01 | Danh sách sự kiện | Sinh viên | Xem và lọc sự kiện Public. |
 | SCR-STU-02 | Chi tiết sự kiện | Sinh viên | Banner, nội dung, đăng ký/hủy. |
 | SCR-STU-03 | Vé và waitlist | Sinh viên | Số thứ tự, ghế, vị trí chờ. |
@@ -713,8 +713,8 @@ Gửi khi Sinh viên đạt ngưỡng vi phạm.
 # 10. Yêu cầu dữ liệu chức năng
 
 | Nhóm > **Trường tối thiểu** --- |
-| Sự kiện | Tên, banner, nội dung, thể loại, Mode tạo, thời gian, địa điểm, ngành, số lượng, sức chứa, trạng thái. |
-| Duyệt | Sự kiện, Mode gửi, Admin xử lý, quyết định, ghi chú và thời điểm. |
+| Sự kiện | Tên, banner, nội dung, thể loại, MOD tạo, thời gian, địa điểm, ngành, số lượng, sức chứa, trạng thái. |
+| Duyệt | Sự kiện, MOD gửi, Admin xử lý, quyết định, ghi chú và thời điểm. |
 | GPS | Tọa độ địa điểm, bán kính thử nghiệm 100 m, tọa độ/độ chính xác thiết bị và kết quả. |
 | Đăng ký | Sinh viên, thời điểm, loại vé, số thứ tự, số ghế, vị trí waitlist, hạn hủy 48 giờ. |
 | Điểm danh | Sự kiện, Sinh viên, QR, thời điểm check-in và kết quả vị trí. |
@@ -728,9 +728,9 @@ Gửi khi Sinh viên đạt ngưỡng vi phạm.
 
 - Chỉ thực hiện đúng phạm vi chính: xem xét, duyệt/từ chối/yêu cầu chỉnh sửa và xóa sự kiện.
 - Sự kiện chỉ Public sau khi Admin duyệt.
-- Có thể xem đầy đủ dữ liệu do Mode gửi trước khi quyết định.
+- Có thể xem đầy đủ dữ liệu do MOD gửi trước khi quyết định.
 
-## 11.2. Mode
+## 11.2. MOD
 
 - Có thể tạo sự kiện với banner, nội dung, ngành, số lượng, GPS và điểm.
 - Có thể dùng lại cấu hình đã lưu.
@@ -757,12 +757,12 @@ Gửi khi Sinh viên đạt ngưỡng vi phạm.
 
 # 12. Phụ thuộc và giả định
 
-- Tài khoản được gán một trong ba vai trò Admin, Mode hoặc Sinh viên.
-- Mode luôn thuộc phạm vi quản lý của Admin.
+- Tài khoản được gán một trong ba vai trò Admin, MOD hoặc Sinh viên.
+- MOD luôn thuộc phạm vi quản lý của Admin.
 - Nguồn dữ liệu ngành, lớp, khoa, học kỳ và tiêu chí điểm đã tồn tại.
 - Thiết bị Sinh viên hỗ trợ camera và định vị; hệ thống chạy qua HTTPS.
 - Dịch vụ email và mẫu Excel do đơn vị triển khai cung cấp.
-- Ý nghĩa cụ thể của giới hạn cancel 24 giờ được cấu hình trong Business Rules nhưng quyền được cố định là Mode có cancel, không có xóa.
+- Ý nghĩa cụ thể của giới hạn cancel 24 giờ được cấu hình trong Business Rules nhưng quyền được cố định là MOD có cancel, không có xóa.
 
 # 13. Các tài liệu đặc tả tiếp theo
 
@@ -770,4 +770,4 @@ Gửi khi Sinh viên đạt ngưỡng vi phạm.
 1. Exception Handling: lỗi QR, GPS, camera, email, mất mạng và dữ liệu không đồng bộ.
 1. API & Data Specification: API, trạng thái, database và ràng buộc.
 1. Security & Privacy: QR, định vị, dữ liệu cá nhân và lưu trữ.
-1. Test Plan: test case cho Admin, Mode, Sinh viên và System Jobs.
+1. Test Plan: test case cho Admin, MOD, Sinh viên và System Jobs.

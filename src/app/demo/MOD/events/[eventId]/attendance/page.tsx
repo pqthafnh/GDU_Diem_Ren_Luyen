@@ -4,7 +4,7 @@ import { MOCK_EVENTS } from "@/mocks"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, QrCode, Search, RefreshCw } from "lucide-react"
 
-export default function ModeLiveAttendancePage({ params }: { params: { eventId: string } }) {
+export default function MODLiveAttendancePage({ params }: { params: { eventId: string } }) {
   const event = MOCK_EVENTS.find(e => e.id === params.eventId)
   if (!event) notFound()
 
@@ -12,7 +12,7 @@ export default function ModeLiveAttendancePage({ params }: { params: { eventId: 
     <div className="container py-6 flex flex-col gap-5">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-3">
         <div className="flex items-center gap-2">
-          <Link href={`/demo/mode/events/${event.id}`}>
+          <Link href={`/demo/MOD/events/${event.id}`}>
             <Button variant="ghost" size="icon" className="h-8 w-8 text-muted">
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -23,8 +23,8 @@ export default function ModeLiveAttendancePage({ params }: { params: { eventId: 
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Link href={`/demo/mode/events/${event.id}/projector`}>
-            <Button variant="primary" className="h-9 text-[13px] px-3"><QrCode className="h-3.5 w-3.5 mr-1.5" /> Mở Projector Mode</Button>
+          <Link href={`/demo/MOD/events/${event.id}/projector`}>
+            <Button variant="primary" className="h-9 text-[13px] px-3"><QrCode className="h-3.5 w-3.5 mr-1.5" /> Mở Projector MOD</Button>
           </Link>
         </div>
       </header>

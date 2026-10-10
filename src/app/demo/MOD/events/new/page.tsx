@@ -5,14 +5,14 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Save, Send, ChevronLeft } from "lucide-react"
 
-export default function ModeNewEventPage() {
+export default function MODNewEventPage() {
   const [loading, setLoading] = useState(false)
 
   return (
     <div className="container py-6 flex flex-col gap-5 max-w-4xl mx-auto">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-3">
         <div className="flex items-center gap-2">
-          <Link href="/demo/mode/events">
+          <Link href="/demo/MOD/events">
             <Button variant="ghost" size="icon" className="h-8 w-8 text-muted">
               <ChevronLeft className="h-4 w-4" />
             </Button>

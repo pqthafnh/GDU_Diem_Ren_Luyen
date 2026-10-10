@@ -11,7 +11,7 @@ export default function AdminReviewsPage() {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-3">
         <div>
           <h1 className="text-xl font-bold text-ink">Chờ duyệt</h1>
-          <p className="text-[13px] text-body mt-1">Danh sách sự kiện yêu cầu phê duyệt từ Mode.</p>
+          <p className="text-[13px] text-body mt-1">Danh sách sự kiện yêu cầu phê duyệt từ MOD.</p>
         </div>
       </header>
 

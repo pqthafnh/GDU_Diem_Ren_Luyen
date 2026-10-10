@@ -14,7 +14,7 @@ export function RoleSwitcher() {
 
   const roles = [
     { name: "Admin", href: "/demo/admin", icon: Shield, desc: "Kiểm duyệt & Quản trị" },
-    { name: "Mode", href: "/demo/mode", icon: Settings, desc: "Tổ chức & Vận hành sự kiện" },
+    { name: "MOD", href: "/demo/MOD", icon: Settings, desc: "Tổ chức & Vận hành sự kiện" },
     { name: "Sinh viên", href: "/demo/student", icon: User, desc: "Người tham gia" },
   ]
 

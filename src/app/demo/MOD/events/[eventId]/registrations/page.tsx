@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { StatusBadge } from "@/components/ui/status-badge"
 import { ChevronLeft, Search, Download, Trash2 } from "lucide-react"
 
-export default function ModeRegistrationsPage({ params }: { params: { eventId: string } }) {
+export default function MODRegistrationsPage({ params }: { params: { eventId: string } }) {
   const event = MOCK_EVENTS.find(e => e.id === params.eventId)
   if (!event) notFound()
 
@@ -16,7 +16,7 @@ export default function ModeRegistrationsPage({ params }: { params: { eventId: s
     <div className="container py-6 flex flex-col gap-5">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-3">
         <div className="flex items-center gap-2">
-          <Link href={`/demo/mode/events/${event.id}`}>
+          <Link href={`/demo/MOD/events/${event.id}`}>
             <Button variant="ghost" size="icon" className="h-8 w-8 text-muted">
               <ChevronLeft className="h-4 w-4" />
             </Button>

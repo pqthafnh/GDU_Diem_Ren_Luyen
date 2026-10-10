@@ -83,7 +83,7 @@ export default function LoginPage() {
                 Góc nhìn Sinh viên
               </Button>
             </Link>
-            <Link href="/demo/mode">
+            <Link href="/demo/MOD">
               <Button variant="outline" className="w-full h-11 border-border-strong text-ink hover:bg-canvas font-medium">
                 Góc nhìn Ban tổ chức
               </Button>
