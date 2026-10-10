@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { RoleSwitcher } from "@/components/layout/role-switcher";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["vietnamese"] });
 
@@ -16,10 +17,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi">
+    <html lang="vi" suppressHydrationWarning>
       <body className={inter.className}>
-        {children}
-        <RoleSwitcher />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <RoleSwitcher />
+        </ThemeProvider>
       </body>
     </html>
   );

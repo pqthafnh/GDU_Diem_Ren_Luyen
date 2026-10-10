@@ -30,6 +30,31 @@
   --section-padding-block: 48px;
 }
 
+.dark {
+  --color-primary: #173a67; /* Keep primary for brand */
+  --color-primary-hover: #1a4478;
+  --color-primary-active: #215494;
+  --color-primary-soft: #0b1a2e;
+  --color-primary-muted: #2f4b6b;
+  
+  --color-accent: #d8b24f;
+  --color-accent-hover: #e5c365;
+  --color-accent-active: #c59c35;
+  --color-accent-soft: #382c11;
+  --color-accent-muted: #6b5621;
+  
+  --color-canvas: #09090b;
+  --color-canvas-soft: #121214;
+  --color-surface: #18181b;
+  
+  --color-ink: #f8fafc;
+  --color-body: #cbd5e1;
+  --color-muted: #94a3b8;
+  
+  --color-border: #27272a;
+  --color-border-strong: #3f3f46;
+}
+
 @media (min-width: 480px) {
   :root { --page-padding: 20px; }
 }
