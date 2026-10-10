@@ -53,7 +53,7 @@ export default function StudentProfilePage() {
               <h3 className="font-semibold text-ink text-[15px]">Tùy chọn tài khoản</h3>
             </div>
             <div className="flex flex-col">
-              <button className="flex items-center justify-between px-5 py-4 hover:bg-canvas transition-colors border-b border-border group">
+              <Link href="/demo/settings" className="flex items-center justify-between px-5 py-4 hover:bg-canvas transition-colors border-b border-border group">
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-canvas border border-border flex items-center justify-center group-hover:border-primary/30 transition-colors">
                     <Settings className="h-5 w-5 text-ink group-hover:text-primary transition-colors" />
@@ -64,7 +64,7 @@ export default function StudentProfilePage() {
                   </div>
                 </div>
                 <ChevronRight className="h-5 w-5 text-muted group-hover:text-primary transition-colors" />
-              </button>
+              </Link>
               
               <button className="flex items-center justify-between px-5 py-4 hover:bg-canvas transition-colors group">
                 <div className="flex items-center gap-3">
