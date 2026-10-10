@@ -36,7 +36,7 @@ export function RoleSwitcher() {
                     key={role.href} 
                     href={role.href}
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-3 p-3 border-b border-border/50 hover:bg-canvas transition-colors ${isActive ? 'bg-primary-soft' : ''}`}
+                    className={`flex items-center gap-3 p-3 border-b  hover:bg-canvas transition-colors ${isActive ? 'bg-primary-soft' : ''}`}
                   >
                     <div className={`h-8 w-8 rounded-full flex items-center justify-center shrink-0 ${isActive ? 'bg-primary text-white' : 'bg-canvas border border-border text-muted'}`}>
                       <role.icon className="h-4 w-4" />

@@ -41,7 +41,7 @@ export default function StudentTrainingPointsPage() {
                  <h3 className="text-[17px] font-bold text-[#173A67] tracking-tight uppercase flex items-center justify-center md:justify-start gap-2">
                    Kết quả rèn luyện
                  </h3>
-                 <span className="text-[12px] text-muted font-medium bg-canvas px-3 py-1 rounded-md border border-border/50 inline-flex w-fit mx-auto md:mx-0 shadow-sm">
+                 <span className="text-[12px] text-muted font-medium bg-canvas px-3 py-1 rounded-md border  inline-flex w-fit mx-auto md:mx-0 shadow-sm">
                    Căn cứ QĐ 251/2023/GDU/QĐ-HT
                  </span>
               </div>
@@ -84,10 +84,10 @@ export default function StudentTrainingPointsPage() {
 
             {/* Right side: Classification Table */}
             <div className="flex-1 w-full flex flex-col justify-center">
-               <div className="rounded-[12px] overflow-hidden border border-border/60 bg-surface text-[13px] shadow-sm">
+               <div className="rounded-[12px] overflow-hidden border  bg-surface text-[13px] shadow-sm">
                   <table className="w-full text-left border-collapse">
                     <thead>
-                      <tr className="bg-canvas border-b border-border/80">
+                      <tr className="bg-canvas border-b ">
                         <th className="px-5 py-3.5 font-semibold text-muted w-1/2 uppercase tracking-wide text-[11px]">Thang điểm</th>
                         <th className="px-5 py-3.5 font-semibold text-muted w-1/2 uppercase tracking-wide text-[11px]">Xếp loại</th>
                       </tr>
@@ -101,7 +101,7 @@ export default function StudentTrainingPointsPage() {
                         { range: "35 - dưới 50", label: "Yếu", condition: MOCK_STUDENT.totalPoints >= 35 && MOCK_STUDENT.totalPoints < 50 },
                         { range: "Dưới 35", label: "Kém", condition: MOCK_STUDENT.totalPoints < 35 },
                       ].map((row, idx) => (
-                        <tr key={idx} className={`border-b border-border/50 last:border-0 transition-colors ${row.condition ? 'bg-[#eaf0f7]' : 'bg-surface hover:bg-canvas/40'}`}>
+                        <tr key={idx} className={`border-b  last:border-0 transition-colors ${row.condition ? 'bg-[#eaf0f7]' : 'bg-surface hover:'}`}>
                           <td className={`py-3 ${row.condition ? 'font-bold text-[#173A67] border-l-4 border-[#173A67] pl-4' : 'text-body font-medium border-l-4 border-transparent pl-5'}`}>
                             {row.range}
                           </td>
@@ -116,7 +116,7 @@ export default function StudentTrainingPointsPage() {
             </div>
           </div>
 
-          <div className="mt-8 pt-5 border-t border-border/50 flex justify-between items-center">
+          <div className="mt-8 pt-5 border-t  flex justify-between items-center">
             <p className="text-[13px] font-semibold text-[#173A67] flex items-center gap-2">
               <TrendingUp className="w-4 h-4" />
               Điểm rèn luyện theo 5 tiêu chí

@@ -29,12 +29,12 @@ export default function StudentSchedulePage() {
       <div className="flex flex-col gap-6">
         {Object.entries(groupedEvents).map(([dateStr, tickets]) => (
           <div key={dateStr} className="flex flex-col gap-3">
-            <h2 className="text-[15px] font-bold text-primary flex items-center gap-1.5 sticky top-14 bg-canvas/90 backdrop-blur py-2 z-10 uppercase tracking-wide">
+            <h2 className="text-[15px] font-bold text-primary flex items-center gap-1.5 sticky top-14  backdrop-blur py-2 z-10 uppercase tracking-wide">
               <CalendarIcon className="h-4 w-4" />
               {dateStr}
             </h2>
             
-            <div className="flex flex-col gap-3 pl-2 md:pl-4 border-l-2 border-border/60">
+            <div className="flex flex-col gap-3 pl-2 md:pl-4 border-l-2 ">
               {tickets.map(ticket => {
                 const startTime = new Date(ticket.event.startTime).toLocaleTimeString("vi-VN", { hour: '2-digit', minute: '2-digit' })
                 const endTime = new Date(ticket.event.endTime).toLocaleTimeString("vi-VN", { hour: '2-digit', minute: '2-digit' })

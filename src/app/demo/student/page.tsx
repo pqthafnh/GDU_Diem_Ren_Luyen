@@ -32,12 +32,12 @@ export default function StudentHomePage() {
           />
           <div className="absolute inset-0 bg-black/40 mix-blend-multiply"></div>
           {/* Gradient that fades to the page background color at the bottom */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#f6f8fb] via-ink/80 to-ink/50"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-canvas via-ink/80 to-ink/50"></div>
         </div>
         
         {/* Banner Content inside container to align with page content */}
         <div className="container relative z-10 flex flex-col gap-3 w-full">
-          <div className="inline-flex items-center gap-1.5 w-fit px-2.5 py-1 rounded-full bg-accent/20 text-accent text-[11px] font-bold uppercase tracking-wide backdrop-blur-md border border-accent/20">
+          <div className="inline-flex items-center gap-1.5 w-fit px-2.5 py-1 rounded-full bg-accent/20 text-accent text-[11px] font-bold uppercase tracking-wide backdrop-blur-md border ">
             <Sparkles className="h-3 w-3" /> Nổi bật
           </div>
           <h1 className="text-2xl md:text-4xl font-bold text-white leading-tight text-balance">

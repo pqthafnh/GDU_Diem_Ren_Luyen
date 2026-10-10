@@ -22,7 +22,7 @@ export default function StudentProfilePage() {
             </div>
             
             <h2 className="mt-4 text-[20px] font-bold text-ink">{MOCK_STUDENT.fullName}</h2>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[12px] font-semibold mt-2">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full  text-primary text-[12px] font-semibold mt-2">
               <Shield className="h-3.5 w-3.5" />
               Sinh viên
             </div>
@@ -55,7 +55,7 @@ export default function StudentProfilePage() {
             <div className="flex flex-col">
               <Link href="/demo/settings" className="flex items-center justify-between px-5 py-4 hover:bg-canvas transition-colors border-b border-border group">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-canvas border border-border flex items-center justify-center group-hover:border-primary/30 transition-colors">
+                  <div className="h-10 w-10 rounded-full bg-canvas border border-border flex items-center justify-center group-hover: transition-colors">
                     <Settings className="h-5 w-5 text-ink group-hover:text-primary transition-colors" />
                   </div>
                   <div className="flex flex-col items-start">
@@ -68,7 +68,7 @@ export default function StudentProfilePage() {
               
               <button className="flex items-center justify-between px-5 py-4 hover:bg-canvas transition-colors group">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-canvas border border-border flex items-center justify-center group-hover:border-primary/30 transition-colors">
+                  <div className="h-10 w-10 rounded-full bg-canvas border border-border flex items-center justify-center group-hover: transition-colors">
                     <Bell className="h-5 w-5 text-ink group-hover:text-primary transition-colors" />
                   </div>
                   <div className="flex flex-col items-start">

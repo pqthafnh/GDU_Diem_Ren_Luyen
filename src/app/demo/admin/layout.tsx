@@ -30,7 +30,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 href={item.href}
                 className={cn(
                   "flex items-center gap-3 px-3 py-2.5 rounded-md text-[14px] font-medium transition-colors",
-                  isActive ? "bg-accent-soft text-ink border border-accent/20" : "text-muted hover:bg-canvas hover:text-ink"
+                  isActive ? "bg-accent-soft text-ink border " : "text-muted hover:bg-canvas hover:text-ink"
                 )}
               >
                 <item.icon className="h-4 w-4" />

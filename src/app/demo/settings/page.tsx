@@ -38,7 +38,7 @@ export default function SettingsPage() {
 
       <div className="space-y-8">
         <section className="bg-surface rounded-2xl border border-border overflow-hidden shadow-sm">
-          <div className="px-6 py-5 border-b border-border bg-canvas/30">
+          <div className="px-6 py-5 border-b border-border ">
             <h2 className="text-[16px] font-semibold text-ink">Giao diện (Theme)</h2>
           </div>
           
@@ -53,8 +53,8 @@ export default function SettingsPage() {
                     className={cn(
                       "relative flex flex-col items-start p-5 rounded-xl border-2 text-left transition-all overflow-hidden group",
                       isActive 
-                        ? "border-primary bg-primary-soft/50 shadow-sm" 
-                        : "border-border hover:border-primary/40 bg-surface hover:bg-canvas-soft/50"
+                        ? "border-primary  shadow-sm" 
+                        : "border-border hover: bg-surface hover:bg-canvas-soft/50"
                     )}
                   >
                     {isActive && (
@@ -65,7 +65,7 @@ export default function SettingsPage() {
                     
                     <div className={cn(
                       "p-3 rounded-lg mb-4 transition-colors",
-                      isActive ? "bg-primary text-white shadow-md shadow-primary/20" : "bg-canvas text-muted group-hover:text-primary group-hover:bg-primary-soft/50"
+                      isActive ? "bg-primary text-white shadow-md shadow-primary/20" : "bg-canvas text-muted group-hover:text-primary group-hover:"
                     )}>
                       <t.icon className="h-6 w-6" />
                     </div>

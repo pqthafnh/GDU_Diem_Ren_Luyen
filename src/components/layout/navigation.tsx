@@ -158,11 +158,6 @@ export function AppHeader() {
                 )}
               </div>
 
-              {/* Settings */}
-              <Link href="/demo/settings" className="p-2 text-muted hover:text-primary transition-colors">
-                <Settings className="h-5 w-5" />
-              </Link>
-
               {/* Profile */}
               <Link href="/demo/student/profile" className="h-8 w-8 rounded-full bg-primary-soft text-primary flex items-center justify-center font-bold text-[12px] hover:bg-primary hover:text-white transition-colors" title="Trang cá nhân">
                 SV
