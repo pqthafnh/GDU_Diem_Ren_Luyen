@@ -81,19 +81,7 @@
 body {
   background-color: var(--color-canvas);
   color: var(--color-body);
-  zoom: 0.75; /* Substantially smaller base size for mobile */
-}
-
-@media (min-width: 768px) {
-  body {
-    zoom: 0.80; 
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    zoom: 0.80; 
-  }
+  min-height: 100vh;
 }
 
 .container {
