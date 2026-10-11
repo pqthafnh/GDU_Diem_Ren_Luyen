@@ -1,12 +1,81 @@
-import { Event, StudentSummary, Ticket, TrainingPointEntry } from "@/types";
+import { Event, StudentSummary, Ticket, TrainingPointEntry, ExcelExportRecord } from "@/types";
 
 export const MOCK_STUDENT: StudentSummary = {
   studentId: "2024001",
-  fullName: "Nguyễn Văn A",
+  lastName: "Nguyễn Văn",
+  firstName: "An",
+  fullName: "Nguyễn Văn An",
+  gender: "Nam",
+  birthDate: "15/08/2004",
+  className: "2401CNTT01",
   major: "Công nghệ thông tin",
+  schoolEmail: "2024001@gdu.edu.vn",
   totalPoints: 85,
   classification: "Giỏi",
 };
+
+export const MOCK_EXCEL_RECORDS: ExcelExportRecord[] = [
+  {
+    stt: 1,
+    studentId: "2024001",
+    lastName: "Nguyễn Văn",
+    firstName: "An",
+    gender: "Nam",
+    birthDate: "15/08/2004",
+    className: "2401CNTT01",
+    major: "Công nghệ thông tin",
+    activityTitle: "Hội thảo Kỹ năng phỏng vấn và xây dựng CV",
+    totalPoints: 15,
+  },
+  {
+    stt: 2,
+    studentId: "2024002",
+    lastName: "Trần Thị",
+    firstName: "Bình",
+    gender: "Nữ",
+    birthDate: "20/11/2004",
+    className: "2401CNTT02",
+    major: "Công nghệ thông tin",
+    activityTitle: "Hội thảo Kỹ năng phỏng vấn và xây dựng CV",
+    totalPoints: 15,
+  },
+  {
+    stt: 3,
+    studentId: "2024003",
+    lastName: "Lê Hoàng",
+    firstName: "Cường",
+    gender: "Nam",
+    birthDate: "05/03/2003",
+    className: "2301QTKD01",
+    major: "Quản trị kinh doanh",
+    activityTitle: "Hội thảo Kỹ năng phỏng vấn và xây dựng CV",
+    totalPoints: 15,
+  },
+  {
+    stt: 4,
+    studentId: "2024004",
+    lastName: "Phạm Thúy",
+    firstName: "Duyên",
+    gender: "Nữ",
+    birthDate: "12/09/2004",
+    className: "2401NNA01",
+    major: "Ngôn ngữ Anh",
+    activityTitle: "Hội thảo Kỹ năng phỏng vấn và xây dựng CV",
+    totalPoints: 15,
+  },
+  {
+    stt: 5,
+    studentId: "2024005",
+    lastName: "Hoàng Minh",
+    firstName: "Đức",
+    gender: "Nam",
+    birthDate: "28/01/2004",
+    className: "2401CNTT01",
+    major: "Công nghệ thông tin",
+    activityTitle: "Hội thảo Kỹ năng phỏng vấn và xây dựng CV",
+    totalPoints: 15,
+  },
+];
 
 export const MOCK_EVENTS: Event[] = [
   {

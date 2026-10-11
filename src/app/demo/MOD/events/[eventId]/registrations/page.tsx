@@ -1,16 +1,51 @@
+"use client"
+
+import { useState } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { MOCK_EVENTS, MOCK_TICKETS } from "@/mocks"
+import { MOCK_EVENTS, MOCK_TICKETS, MOCK_EXCEL_RECORDS } from "@/mocks"
 import { Button } from "@/components/ui/button"
 import { StatusBadge } from "@/components/ui/status-badge"
-import { ChevronLeft, Search, Download, Trash2 } from "lucide-react"
+import { ChevronLeft, Search, Download, Trash2, Check } from "lucide-react"
 
 export default function MODRegistrationsPage({ params }: { params: { eventId: string } }) {
   const event = MOCK_EVENTS.find(e => e.id === params.eventId)
+  const [exportSuccess, setExportSuccess] = useState(false)
+
   if (!event) notFound()
 
   // MOCK_TICKETS usually associates with multiple events, but here we just mock
   const registrations = MOCK_TICKETS
+
+  // Xuất file Excel 10 cột theo quy định
+  const handleExportExcel = () => {
+    const headers = ["STT", "MSSV", "Họ", "Tên", "Giới tính", "Ngày sinh", "Lớp", "Ngành", "Tên hoạt động", "Tổng"]
+    const rows = MOCK_EXCEL_RECORDS.map(r => [
+      r.stt,
+      `"${r.studentId}"`,
+      `"${r.lastName}"`,
+      `"${r.firstName}"`,
+      `"${r.gender}"`,
+      `"${r.birthDate}"`,
+      `"${r.className}"`,
+      `"${r.major}"`,
+      `"${event.title.replace(/"/g, '""')}"`,
+      event.points
+    ])
+    const csvContent = "\uFEFF" + [headers.join(","), ...rows.map(e => e.join(","))].join("\r\n")
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement("a")
+    link.href = url
+    link.setAttribute("download", `GDU_Danh_sach_dang_ky_${event.id}.csv`)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+
+    setExportSuccess(true)
+    setTimeout(() => setExportSuccess(false), 2500)
+  }
 
   return (
     <div className="container py-6 flex flex-col gap-5">
@@ -27,7 +62,23 @@ export default function MODRegistrationsPage({ params }: { params: { eventId: st
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="h-9 text-[13px] px-3"><Download className="h-3.5 w-3.5 mr-1.5" /> Xuất Excel</Button>
+          <Button 
+            onClick={handleExportExcel}
+            variant="outline" 
+            className="h-9 text-[13px] px-3 font-semibold border-border hover:bg-canvas rounded-xl"
+          >
+            {exportSuccess ? (
+              <>
+                <Check className="h-3.5 w-3.5 mr-1.5 text-success" />
+                Đã xuất Excel (.csv)
+              </>
+            ) : (
+              <>
+                <Download className="h-3.5 w-3.5 mr-1.5" />
+                Xuất Excel danh sách
+              </>
+            )}
+          </Button>
         </div>
       </header>
 

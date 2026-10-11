@@ -8,7 +8,9 @@ import { ArrowRight, KeyRound, Mail, CheckCircle2, ShieldAlert, ArrowLeft, Lock,
 
 type LoginStep = "LOGIN" | "CHANGE_PASSWORD_FIRST_TIME" | "VERIFY_EMAIL" | "SUCCESS"
 
-const DEFAULT_PASSWORD = "Gdu@123"
+// Cấu trúc mật khẩu mặc định lần đầu: GDU@ + TEN(không dấu) + NgàyThángSinh (ddmm)
+// Ví dụ: Nguyễn Văn An, sinh ngày 15/08/2004 -> GDU@AN1508
+const DEFAULT_PASSWORD = "GDU@AN1508"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -17,9 +19,9 @@ export default function LoginPage() {
   // Tab đăng nhập: Sinh viên hoặc Cán bộ / Quản trị
   const [roleTab, setRoleTab] = useState<"STUDENT" | "STAFF">("STUDENT")
   
-  // Login form state - Sinh viên
+  // Login form state - Sinh viên (Mẫu: SV Nguyễn Văn An, sinh 15/08/2004)
   const [studentId, setStudentId] = useState("2024001")
-  const [password, setPassword] = useState("Gdu@123")
+  const [password, setPassword] = useState("GDU@AN1508")
   const [loginError, setLoginError] = useState("")
 
   // Login form state - Cán bộ / MOD / Admin
@@ -38,6 +40,12 @@ export default function LoginPage() {
   const [otpError, setOtpError] = useState("")
   const [resendCooldown, setResendCooldown] = useState(45)
 
+  // Kiểm tra mật khẩu ban đầu chưa thay đổi theo cấu trúc GDU@ + TEN + ddmm
+  const isDefaultPassword = (pass: string) => {
+    const trimmed = pass.trim().toUpperCase()
+    return trimmed === DEFAULT_PASSWORD || trimmed.startsWith("GDU@")
+  }
+
   // Xử lý đăng nhập Sinh viên
   const handleLogin = (e?: React.FormEvent) => {
     if (e) e.preventDefault()
@@ -53,8 +61,8 @@ export default function LoginPage() {
       return
     }
 
-    // Nếu mật khẩu trùng với mật khẩu mặc định của trường -> Phát hiện lần đầu đăng nhập
-    if (password === DEFAULT_PASSWORD) {
+    // Nếu mật khẩu khớp cấu trúc mặc định của trường -> Phát hiện lần đầu đăng nhập
+    if (isDefaultPassword(password)) {
       setStep("CHANGE_PASSWORD_FIRST_TIME")
     } else {
       // Đã đổi mật khẩu trước đó -> Vào thẳng hệ thống
@@ -110,8 +118,8 @@ export default function LoginPage() {
       return
     }
 
-    if (newPassword === DEFAULT_PASSWORD) {
-      setPasswordError("Mật khẩu mới không được trùng với mật khẩu mặc định ban đầu.")
+    if (isDefaultPassword(newPassword)) {
+      setPasswordError("Mật khẩu mới không được trùng hoặc dùng cấu trúc mật khẩu mặc định ban đầu.")
       return
     }
 
@@ -280,7 +288,7 @@ export default function LoginPage() {
                           Mật khẩu <span className="text-error">*</span>
                         </label>
                         <span className="text-[11.5px] text-muted">
-                          Mặc định: <strong className="text-primary font-mono">{DEFAULT_PASSWORD}</strong>
+                          Mẫu: <strong className="text-primary font-mono">{DEFAULT_PASSWORD}</strong>
                         </span>
                       </div>
                       <input 
@@ -295,8 +303,8 @@ export default function LoginPage() {
                     {/* Hướng dẫn mật khẩu mặc định */}
                     <div className="p-3 bg-primary-soft/60 rounded-xl border border-primary/20 text-[12px] text-primary flex items-start gap-2.5">
                       <KeyRound className="h-4 w-4 shrink-0 mt-0.5 text-primary" />
-                      <div>
-                        <span className="font-semibold">Lần đầu đăng nhập?</span> Dùng mật khẩu mặc định <span className="font-mono font-bold bg-white/70 px-1 py-0.5 rounded text-primary">{DEFAULT_PASSWORD}</span>. Hệ thống sẽ tự động yêu cầu đổi mật khẩu và xác thực qua hòm thư trường.
+                      <div className="leading-relaxed">
+                        <span className="font-semibold">Mật khẩu lần đầu:</span> Cấu trúc theo quy định trường là <span className="font-mono font-bold bg-white/70 px-1.5 py-0.5 rounded text-primary">GDU@ + TEN(không dấu) + NgàyThángSinh</span> (Ví dụ: Sinh viên Nguyễn Văn An sinh 15/08 là <span className="font-mono font-bold bg-white/70 px-1 py-0.5 rounded text-primary">{DEFAULT_PASSWORD}</span>). Đăng nhập lần đầu hệ thống sẽ yêu cầu đổi mật khẩu và kích hoạt qua email trường.
                       </div>
                     </div>
 

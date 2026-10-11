@@ -52,8 +52,28 @@ export interface TrainingPointEntry {
 
 export interface StudentSummary {
   studentId: string;
+  lastName: string;
+  firstName: string;
   fullName: string;
+  gender: "Nam" | "Nữ";
+  birthDate: string;
+  className: string;
   major: string;
+  schoolEmail: string;
   totalPoints: number;
   classification: "Xuất sắc" | "Giỏi" | "Khá" | "Trung bình" | "Yếu" | "Kém";
 }
+
+export interface ExcelExportRecord {
+  stt: number;
+  studentId: string;
+  lastName: string;
+  firstName: string;
+  gender: "Nam" | "Nữ";
+  birthDate: string;
+  className: string;
+  major: string;
+  activityTitle: string;
+  totalPoints: number;
+}
+
