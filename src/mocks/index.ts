@@ -94,6 +94,10 @@ export const MOCK_EVENTS: Event[] = [
     status: "Public",
     points: 15,
     cancellationDeadline: "2026-10-13T20:00:00Z",
+    speaker: {
+      name: "ThS. Trần Hoàng Nam",
+      role: "Giám đốc Tuyển dụng & Đào tạo Nguồn nhân lực - FPT Software",
+    },
   },
   {
     id: "evt-02",
@@ -111,6 +115,10 @@ export const MOCK_EVENTS: Event[] = [
     status: "Public",
     points: 10,
     cancellationDeadline: "2026-10-18T20:00:00Z",
+    speaker: {
+      name: "TS. Lê Hoàng Long",
+      role: "Chuyên gia Cố vấn Trí tuệ nhân tạo (AI) & Kỹ nghệ dữ liệu - VinAI Research",
+    },
   },
   {
     id: "evt-03",
@@ -127,6 +135,10 @@ export const MOCK_EVENTS: Event[] = [
     registeredCount: 450,
     status: "Public",
     points: 20,
+    speaker: {
+      name: "BS. CKI. Trần Thanh Trúc",
+      role: "Bác sĩ phụ trách chuyên môn - Bệnh viện Truyền máu Huyết học TP.HCM",
+    },
   }
 ];
 

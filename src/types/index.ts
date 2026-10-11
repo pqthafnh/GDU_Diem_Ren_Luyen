@@ -22,6 +22,10 @@ export interface Event {
   status: EventStatus;
   points: number;
   cancellationDeadline?: string;
+  speaker?: {
+    name: string;
+    role: string;
+  };
 }
 
 export interface Ticket {

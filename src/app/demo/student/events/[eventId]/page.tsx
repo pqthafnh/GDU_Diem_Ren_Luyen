@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import { Calendar, MapPin, Users, Award, Building } from "lucide-react"
+import { Calendar, MapPin, Users, Award, Building, Mic } from "lucide-react"
 import { MOCK_EVENTS, MOCK_TICKETS } from "@/mocks"
 import { Button } from "@/components/ui/button"
 import { StatusBadge } from "@/components/ui/status-badge"
@@ -86,6 +86,21 @@ export default function EventDetailPage({ params }: { params: { eventId: string 
                   <div className="flex flex-col justify-center">
                     <p className="font-bold text-ink text-[15px]">Đơn vị tổ chức</p>
                     <p className="text-muted text-[14px]">{event.organizer}</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 items-start">
+                  <div className="h-12 w-12 shrink-0 bg-surface rounded-xl border shadow-sm flex items-center justify-center mt-0.5">
+                    <Mic className="text-primary h-5 w-5" />
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <p className="font-bold text-ink text-[15px]">Diễn giả</p>
+                    <p className="text-ink font-semibold text-[14.5px] mt-0.5">
+                      {event.speaker?.name || "ThS. Trần Hoàng Nam"}
+                    </p>
+                    <p className="text-muted text-[13.5px] mt-0.5 leading-snug">
+                      {event.speaker?.role || "Giám đốc Tuyển dụng & Đào tạo Nguồn nhân lực - FPT Software"}
+                    </p>
                   </div>
                 </div>
               </div>
