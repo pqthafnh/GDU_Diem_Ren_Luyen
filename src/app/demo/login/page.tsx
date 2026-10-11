@@ -1,11 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, KeyRound, Mail, CheckCircle2, ShieldAlert, ArrowLeft, Lock, RefreshCw, UserCheck, GraduationCap, Building2, ShieldCheck, Sparkles } from "lucide-react"
+import { ArrowRight, KeyRound, Mail, CheckCircle2, ShieldAlert, ArrowLeft, Lock, RefreshCw, UserCheck, GraduationCap, Building2, ShieldCheck } from "lucide-react"
 
 type LoginStep = "LOGIN" | "CHANGE_PASSWORD_FIRST_TIME" | "VERIFY_EMAIL" | "SUCCESS"
 
@@ -306,21 +305,6 @@ export default function LoginPage() {
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>
                   </form>
-
-                  {/* Phân cách demo */}
-                  <div className="relative flex items-center py-1">
-                    <div className="flex-grow border-t border-border"></div>
-                    <span className="flex-shrink-0 mx-3 text-muted text-[11px] uppercase tracking-wider font-semibold">
-                      Chuyển nhanh góc nhìn demo
-                    </span>
-                    <div className="flex-grow border-t border-border"></div>
-                  </div>
-
-                  <Link href="/demo/student">
-                    <Button variant="outline" className="w-full h-10 border-border text-ink hover:bg-canvas text-[13px] font-medium rounded-xl">
-                      Vào thẳng Sinh viên (Bỏ qua bước đổi pass)
-                    </Button>
-                  </Link>
                 </div>
               )}
 
@@ -343,7 +327,7 @@ export default function LoginPage() {
 
                   {/* Nút chọn nhanh vai trò để test */}
                   <div className="flex flex-col gap-1.5">
-                    <span className="text-[12px] text-muted font-medium">Chọn nhanh tài khoản mẫu:</span>
+                    <span className="text-[12px] text-muted font-medium">Chọn tài khoản kiểm thử:</span>
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         type="button"
@@ -412,28 +396,6 @@ export default function LoginPage() {
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>
                   </form>
-
-                  {/* Phân cách demo */}
-                  <div className="relative flex items-center py-1">
-                    <div className="flex-grow border-t border-border"></div>
-                    <span className="flex-shrink-0 mx-3 text-muted text-[11px] uppercase tracking-wider font-semibold">
-                      Chuyển nhanh góc nhìn demo
-                    </span>
-                    <div className="flex-grow border-t border-border"></div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2.5">
-                    <Link href="/demo/MOD">
-                      <Button variant="outline" className="w-full h-10 border-border text-ink hover:bg-canvas text-[12.5px] font-medium rounded-xl">
-                        Vào thẳng MOD
-                      </Button>
-                    </Link>
-                    <Link href="/demo/admin">
-                      <Button variant="outline" className="w-full h-10 border-border text-ink hover:bg-canvas text-[12.5px] font-medium rounded-xl">
-                        Vào thẳng Admin
-                      </Button>
-                    </Link>
-                  </div>
                 </div>
               )}
             </div>

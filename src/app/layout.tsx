@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { RoleSwitcher } from "@/components/layout/role-switcher";
 import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["vietnamese"] });
@@ -26,7 +25,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <RoleSwitcher />
         </ThemeProvider>
       </body>
     </html>
