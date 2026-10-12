@@ -47,7 +47,11 @@ export function EventCard({ event, href }: EventCardProps) {
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-canvas border ">
             <Users className="h-3.5 w-3.5 text-muted" />
             <span className="text-[12px] font-medium text-ink">
-              {event.registeredCount} <span className="font-normal">/ {event.capacity}</span>
+              {event.eventType === "interactive" ? (
+                <span>{event.registeredCount} <span className="font-normal text-muted">SV tham gia</span></span>
+              ) : (
+                <span>{event.registeredCount} <span className="font-normal">/ {event.capacity}</span></span>
+              )}
             </span>
           </div>
           <div className="flex items-center gap-1.5">

@@ -59,6 +59,12 @@ export default function StudentTicketsPage() {
                     <span className="font-medium truncate">{ticket.event.location}</span>
                   </div>
                 </div>
+
+                {(ticket.event.category === "Ngoại khóa" || ticket.event.checkInMethod === "manual_rollcall") && (
+                  <p className="text-[11.5px] text-[#A66A12] mt-2 flex items-center gap-1 font-medium">
+                    <span>* Sự kiện ngoài trường: Cán bộ MOD sẽ điểm danh thủ công theo danh sách (không dùng QR).</span>
+                  </p>
+                )}
               </div>
             </div>
 

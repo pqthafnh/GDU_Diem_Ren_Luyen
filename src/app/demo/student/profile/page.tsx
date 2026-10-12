@@ -84,27 +84,27 @@ export default function StudentProfilePage() {
         <div className="md:col-span-8 flex flex-col gap-6">
           {/* Card Thông tin sinh viên (Thiết kế thanh lịch, không border từng ô) */}
           <div className="bg-surface rounded-2xl border border-border/80 shadow-[0_2px_12px_rgba(0,0,0,0.03)] overflow-hidden">
-            <div className="px-6 py-4.5 border-b border-border/80 flex items-center justify-between bg-canvas/40">
-              <div className="flex items-center gap-2.5">
-                <div className="h-8 w-8 rounded-lg bg-primary-soft text-primary flex items-center justify-center">
-                  <User className="h-4 w-4" />
+            <div className="px-6 py-5 sm:py-6 border-b border-border/80 flex items-center justify-between bg-canvas/40 min-h-[72px]">
+              <div className="flex items-center gap-3">
+                <div className="h-9 w-9 rounded-lg bg-primary-soft text-primary flex items-center justify-center shrink-0">
+                  <User className="h-4.5 w-4.5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-ink text-[15px]">Thông tin sinh viên</h3>
-                  <p className="text-[12px] text-muted">Dữ liệu hồ sơ gốc theo hệ thống quản lý đào tạo</p>
+                  <h3 className="font-bold text-ink text-[15.5px] leading-snug">Thông tin sinh viên</h3>
+                  <p className="text-[12.5px] text-muted leading-relaxed">Dữ liệu hồ sơ gốc theo hệ thống quản lý đào tạo</p>
                 </div>
               </div>
             </div>
 
             {/* Danh sách thông tin dạng phẳng 2 cột tinh tế */}
-            <div className="p-6 md:p-7">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+            <div className="p-6 md:p-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 sm:gap-y-6">
                 {academicFields.map((field, idx) => (
-                  <div key={idx} className="flex flex-col gap-1 pb-3 sm:pb-3.5 border-b border-border/50">
+                  <div key={idx} className="flex flex-col gap-1.5 pb-3.5 sm:pb-4 border-b border-border/50">
                     <span className="text-[12px] font-medium text-muted uppercase tracking-wider">
                       {field.label}
                     </span>
-                    <span className={`text-[15px] ${
+                    <span className={`text-[15px] leading-normal break-words ${
                       field.highlight ? 'text-primary font-bold' : 'text-ink font-semibold'
                     } ${field.isMono ? 'font-mono' : ''}`}>
                       {field.value}
@@ -114,7 +114,7 @@ export default function StudentProfilePage() {
               </div>
 
               {/* Ghi chú chân trang nhẹ nhàng */}
-              <div className="mt-6 pt-4 border-t border-border/60 flex items-start gap-2.5 text-[12.5px] text-muted">
+              <div className="mt-8 pt-5 border-t border-border/60 flex items-start gap-2.5 text-[12.5px] text-muted">
                 <GraduationCap className="h-4 w-4 shrink-0 text-primary mt-0.5" />
                 <p className="leading-relaxed">
                   Để yêu cầu điều chỉnh các thông tin lý lịch cá nhân (Họ tên, Ngày sinh, CCCD), sinh viên vui lòng liên hệ trực tiếp <strong>Văn phòng Một cửa (Phòng Quản lý Đào tạo)</strong> của Nhà trường.
@@ -125,7 +125,7 @@ export default function StudentProfilePage() {
 
           {/* Card Cài đặt & Tiện ích */}
           <div className="bg-surface rounded-2xl border border-border/80 shadow-[0_2px_12px_rgba(0,0,0,0.03)] overflow-hidden">
-            <div className="px-6 py-4 border-b border-border/80 bg-canvas/40">
+            <div className="px-6 py-5 border-b border-border/80 bg-canvas/40">
               <h3 className="font-bold text-ink text-[15px]">Tùy chọn tài khoản</h3>
             </div>
             <div className="divide-y divide-border/60">

@@ -44,6 +44,39 @@ export default function AdminReviewDetailPage({ params }: { params: { eventId: s
                 <span className="text-muted block mb-1">Tên sự kiện</span>
                 <p className="font-medium text-ink">{event.title}</p>
               </div>
+
+              {event.eventType === "interactive" && (
+                <div className="p-3.5 bg-[#1877F2]/5 border border-[#1877F2]/20 rounded-xl flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-[#1877F2] text-[13.5px] flex items-center gap-1.5">
+                      <span className="h-4.5 w-4.5 rounded bg-[#1877F2] text-white flex items-center justify-center font-bold text-xs">f</span>
+                      Bài viết Facebook cần tương tác
+                    </span>
+                    <a 
+                      href={event.interactiveConfig?.facebookPostUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-[12px] text-[#1877F2] hover:underline font-semibold"
+                    >
+                      Mở liên kết ↗
+                    </a>
+                  </div>
+                  <p className="font-mono text-body text-[12.5px] bg-surface p-2 rounded border border-border/60 break-all">
+                    {event.interactiveConfig?.facebookPostUrl}
+                  </p>
+
+                  <div className="mt-1 flex flex-col gap-1.5 pt-2 border-t border-[#1877F2]/15">
+                    <span className="font-semibold text-ink text-[12.5px]">Danh sách hành động bắt buộc (1 điểm / hành động):</span>
+                    {event.interactiveConfig?.actions.map((act, i) => (
+                      <div key={act.id} className="flex items-center justify-between text-[12px] bg-surface px-2.5 py-1.5 rounded border border-border/40">
+                        <span className="text-ink font-medium">{i + 1}. {act.label}</span>
+                        <span className="font-bold text-accent-active bg-accent-soft px-2 py-0.5 rounded text-[11px]">+{act.points}đ</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <div>
                 <span className="text-muted block mb-1">Mô tả</span>
                 <p className="text-body whitespace-pre-line">{event.content}</p>
@@ -55,7 +88,9 @@ export default function AdminReviewDetailPage({ params }: { params: { eventId: s
                 </div>
                 <div>
                   <span className="text-muted block mb-1">Phân loại</span>
-                  <p className="text-ink">{event.category}</p>
+                  <p className="text-ink">
+                    {event.category} {event.eventType === "interactive" && "(Tương tác MXH)"}
+                  </p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -96,12 +131,16 @@ export default function AdminReviewDetailPage({ params }: { params: { eventId: s
                 <span className="font-bold text-primary">+{event.points} điểm</span>
               </div>
               <div className="flex justify-between items-center py-1 border-b border-dashed border-border">
-                <span className="text-muted">Sức chứa</span>
-                <span className="font-medium text-ink">{event.capacity} vé</span>
+                <span className="text-muted">Hình thức tham gia</span>
+                <span className="font-medium text-ink">
+                  {event.eventType === "interactive" ? "Không dùng vé (Mở toàn trường)" : `${event.capacity} vé`}
+                </span>
               </div>
               <div className="flex justify-between items-center py-1 border-b border-dashed border-border">
                 <span className="text-muted">Kiểm tra GPS</span>
-                <span className="font-medium text-success">Bật (100m)</span>
+                <span className={`font-medium ${event.eventType === "interactive" ? "text-muted" : "text-success"}`}>
+                  {event.eventType === "interactive" ? "Không áp dụng (Online)" : "Bật (100m)"}
+                </span>
               </div>
             </div>
           </div>

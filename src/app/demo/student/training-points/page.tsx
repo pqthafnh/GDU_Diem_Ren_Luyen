@@ -1,10 +1,34 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { MOCK_STUDENT, MOCK_TRAINING_POINTS } from "@/mocks"
+import { TrainingPointEntry } from "@/types"
 import { Award, TrendingUp, Calendar as CalendarIcon, Filter, CheckCircle2, Medal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { StatusBadge } from "@/components/ui/status-badge"
 
 export default function StudentTrainingPointsPage() {
+  const [totalPoints, setTotalPoints] = useState(MOCK_STUDENT.totalPoints)
+  const [history, setHistory] = useState<TrainingPointEntry[]>(MOCK_TRAINING_POINTS)
+
+  useEffect(() => {
+    try {
+      const storedPoints = localStorage.getItem("gdu_student_total_points")
+      if (storedPoints) {
+        setTotalPoints(parseInt(storedPoints, 10))
+      }
+
+      const storedHistory = localStorage.getItem("gdu_training_points_history")
+      if (storedHistory) {
+        const parsed: TrainingPointEntry[] = JSON.parse(storedHistory)
+        setHistory([...parsed, ...MOCK_TRAINING_POINTS])
+      }
+    } catch {
+      // Ignore
+    }
+  }, [])
+
   return (
     <div className="container py-6 flex flex-col gap-6">
       <div className="flex flex-col gap-2 border-b border-border pb-3">
@@ -64,14 +88,14 @@ export default function StudentTrainingPointsPage() {
                     strokeWidth="8" 
                     fill="none" 
                     strokeDasharray="264" 
-                    strokeDashoffset={264 - (264 * MOCK_STUDENT.totalPoints) / 100}
+                    strokeDashoffset={Math.max(0, 264 - (264 * Math.min(100, totalPoints)) / 100)}
                     strokeLinecap="round"
                     style={{ transition: "stroke-dashoffset 1.5s ease-out" }}
                   />
                 </svg>
                 {/* Score */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                   <span className="text-[52px] font-black text-primary leading-none tracking-tighter drop-shadow-sm">{MOCK_STUDENT.totalPoints}</span>
+                   <span className="text-[52px] font-black text-primary leading-none tracking-tighter drop-shadow-sm">{totalPoints}</span>
                    <span className="text-[14px] font-bold text-muted uppercase tracking-widest mt-1">Điểm</span>
                 </div>
               </div>
@@ -94,12 +118,12 @@ export default function StudentTrainingPointsPage() {
                     </thead>
                     <tbody>
                       {[
-                        { range: "90 - 100", label: "Xuất sắc", condition: MOCK_STUDENT.totalPoints >= 90 },
-                        { range: "80 - dưới 90", label: "Giỏi", condition: MOCK_STUDENT.totalPoints >= 80 && MOCK_STUDENT.totalPoints < 90 },
-                        { range: "65 - dưới 80", label: "Khá", condition: MOCK_STUDENT.totalPoints >= 65 && MOCK_STUDENT.totalPoints < 80 },
-                        { range: "50 - dưới 65", label: "Trung bình", condition: MOCK_STUDENT.totalPoints >= 50 && MOCK_STUDENT.totalPoints < 65 },
-                        { range: "35 - dưới 50", label: "Yếu", condition: MOCK_STUDENT.totalPoints >= 35 && MOCK_STUDENT.totalPoints < 50 },
-                        { range: "Dưới 35", label: "Kém", condition: MOCK_STUDENT.totalPoints < 35 },
+                        { range: "90 - 100", label: "Xuất sắc", condition: totalPoints >= 90 },
+                        { range: "80 - dưới 90", label: "Giỏi", condition: totalPoints >= 80 && totalPoints < 90 },
+                        { range: "65 - dưới 80", label: "Khá", condition: totalPoints >= 65 && totalPoints < 80 },
+                        { range: "50 - dưới 65", label: "Trung bình", condition: totalPoints >= 50 && totalPoints < 65 },
+                        { range: "35 - dưới 50", label: "Yếu", condition: totalPoints >= 35 && totalPoints < 50 },
+                        { range: "Dưới 35", label: "Kém", condition: totalPoints < 35 },
                       ].map((row, idx) => (
                         <tr key={idx} className={`border-b  last:border-0 transition-colors ${row.condition ? 'bg-[#eaf0f7]' : 'bg-surface hover:'}`}>
                           <td className={`py-3 ${row.condition ? 'font-bold text-[#173A67] border-l-4 border-[#173A67] pl-4' : 'text-body font-medium border-l-4 border-transparent pl-5'}`}>
@@ -119,7 +143,7 @@ export default function StudentTrainingPointsPage() {
           <div className="mt-8 pt-5 border-t  flex justify-between items-center">
             <p className="text-[13px] font-semibold text-[#173A67] flex items-center gap-2">
               <TrendingUp className="w-4 h-4" />
-              Điểm rèn luyện theo 5 tiêu chí
+              Điểm rèn luyện theo 5 tiêu chí (Cộng dồn liên tục 3 năm)
             </p>
           </div>
         </div>
@@ -134,11 +158,11 @@ export default function StudentTrainingPointsPage() {
         </div>
 
         <div className="flex flex-col rounded-xl border border-border bg-surface shadow-sm">
-          {MOCK_TRAINING_POINTS.map((entry, index) => (
+          {history.map((entry, index) => (
             <div 
               key={entry.id} 
               className={`p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
-                index !== MOCK_TRAINING_POINTS.length - 1 ? 'border-b border-border' : ''
+                index !== history.length - 1 ? 'border-b border-border' : ''
               }`}
             >
               <div className="flex flex-col gap-1.5">
@@ -150,7 +174,7 @@ export default function StudentTrainingPointsPage() {
                     <span>{new Date(entry.earnedAt).toLocaleDateString("vi-VN")}</span>
                   </div>
                   <span className="hidden sm:inline text-border-strong">•</span>
-                  <span className="truncate max-w-[150px]">{entry.organizer}</span>
+                  <span className="truncate max-w-[200px]">{entry.organizer}</span>
                 </div>
               </div>
               <div className="flex items-center sm:justify-end">

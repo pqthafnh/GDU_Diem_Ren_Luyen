@@ -44,7 +44,7 @@ export default function MODventsPage() {
                 <th className="p-3 font-medium">Phân loại</th>
                 <th className="p-3 font-medium">Thời gian bắt đầu</th>
                 <th className="p-3 font-medium">Trạng thái</th>
-                <th className="p-3 font-medium">Vé</th>
+                <th className="p-3 font-medium">Quy mô / Vé</th>
                 <th className="p-3 font-medium text-right">Thao tác</th>
               </tr>
             </thead>
@@ -55,7 +55,13 @@ export default function MODventsPage() {
                   <td className="p-3 text-body">{event.category}</td>
                   <td className="p-3 text-body">{new Date(event.startTime).toLocaleString("vi-VN", { dateStyle: "short", timeStyle: "short" })}</td>
                   <td className="p-3"><StatusBadge status={event.status} variant="default" className="text-[10px] px-1.5 py-0.5" /></td>
-                  <td className="p-3 text-body">{event.registeredCount}/{event.capacity}</td>
+                  <td className="p-3 text-body">
+                    {event.eventType === "interactive" ? (
+                      <span className="text-muted text-[12px]">Không dùng vé ({event.registeredCount} SV)</span>
+                    ) : (
+                      `${event.registeredCount}/${event.capacity}`
+                    )}
+                  </td>
                   <td className="p-3 text-right">
                     <Link href={`/demo/MOD/events/${event.id}`}>
                       <Button variant="outline" size="sm" className="h-7 text-[12px] px-2.5">Chi tiết</Button>

@@ -139,6 +139,128 @@ export const MOCK_EVENTS: Event[] = [
       name: "BS. CKI. Trần Thanh Trúc",
       role: "Bác sĩ phụ trách chuyên môn - Bệnh viện Truyền máu Huyết học TP.HCM",
     },
+  },
+  {
+    id: "evt-competition-01",
+    title: "Giải đấu Thể thao Điện tử Sinh viên GDU E-Sports Championship 2026",
+    banner: "https://placehold.co/800x400/173A67/ffffff?text=GDU+Esports+Tournament",
+    content: "Giải đấu Thể thao điện tử thường niên quy mô toàn trường nhằm kết nối và rèn luyện tinh thần đồng đội cho sinh viên Đại học Gia Định.",
+    category: "Thi đấu",
+    organizer: "Đoàn - Hội Sinh viên GDU",
+    startTime: "2026-10-28T08:00:00Z",
+    endTime: "2026-10-29T17:30:00Z",
+    location: "Hội trường lớn, cơ sở Tân Sơn Nhất",
+    targetAudience: "Toàn thể sinh viên GDU",
+    capacity: 250,
+    registeredCount: 180,
+    status: "Public",
+    points: 15,
+  },
+  {
+    id: "evt-extracurricular-01",
+    title: "Hành trình Xanh: Hoạt động Ngoại khóa Sinh viên GDU tại Rừng Ngập mặn Cần Giờ",
+    banner: "https://placehold.co/800x400/173a67/ffffff?text=Can+Gio+Extracurricular",
+    content: "Chương trình hoạt động ngoại khóa ngoài trường dành cho sinh viên GDU trải nghiệm thực tế sinh thái, trồng rừng ngập mặn và rèn luyện kỹ năng làm việc nhóm. Vì là sự kiện ngoài trường, Ban Tổ chức (MOD) sẽ trực tiếp điểm danh thủ công theo danh sách sinh viên đã đăng ký tham gia (không dùng mã QR).",
+    category: "Ngoại khóa",
+    checkInMethod: "manual_rollcall",
+    organizer: "Đoàn Thanh niên & CLB Kỹ năng GDU",
+    startTime: "2026-10-26T06:30:00Z",
+    endTime: "2026-10-26T17:30:00Z",
+    location: "Rừng phòng hộ sinh thái Cần Giờ, TP.HCM (Sự kiện ngoài trường)",
+    targetAudience: "Toàn thể sinh viên GDU",
+    capacity: 120,
+    registeredCount: 85,
+    status: "Public",
+    points: 15,
+    cancellationDeadline: "2026-10-24T20:00:00Z",
+  },
+  {
+    id: "evt-interactive-01",
+    title: "Chiến dịch Tương tác Fanpage: Lan tỏa Chào đón Tân sinh viên K18",
+    banner: "https://placehold.co/800x400/173a67/ffffff?text=K18+Facebook+Campaign",
+    content: "Chiến dịch truyền thông số của Trường Đại học Gia Định (GDU) nhằm lan tỏa tinh thần nhiệt huyết, giới thiệu các hoạt động phong trào và chào đón tân sinh viên K18. Sinh viên tham gia tương tác trực tiếp trên bài viết chính thức của Fanpage Nhà trường để nhận điểm rèn luyện theo từng hoạt động hoàn thành (tối đa 3 điểm rèn luyện).",
+    category: "Tương tác",
+    eventType: "interactive",
+    interactiveConfig: {
+      facebookPostUrl: "https://www.facebook.com/GiaDinhUniversity/posts/pfbid02V9xk7m8L3b4q",
+      instruction: "Hoàn thành 3 hoạt động tương tác bắt buộc: Like/Thả cảm xúc (+1đ), Chia sẻ công khai kèm hashtag #GDU_K18 (+1đ), Bình luận gắn thẻ 3 bạn bè (+1đ). Sinh viên dán link trang cá nhân hoặc link bài chia sẻ để hệ thống đối soát tự động.",
+      actions: [
+        {
+          id: "act-01",
+          type: "like",
+          label: "Like / Thả cảm xúc bài viết",
+          description: "Bấm Thích hoặc Thả tim bài viết chào đón K18 trên Fanpage Đại học Gia Định",
+          points: 1,
+        },
+        {
+          id: "act-02",
+          type: "share",
+          label: "Chia sẻ bài viết ở chế độ Công khai",
+          description: "Chia sẻ về trang cá nhân Facebook kèm hashtag #GDU_K18 #GiaDinhUniversity",
+          points: 1,
+        },
+        {
+          id: "act-03",
+          type: "comment",
+          label: "Bình luận gắn thẻ 3 người bạn & gửi lời chúc",
+          description: "Để lại bình luận chào mừng năm học mới và gắn thẻ (tag) ít nhất 3 bạn sinh viên",
+          points: 1,
+        },
+      ],
+    },
+    organizer: "Ban Truyền thông & Tuyển sinh GDU",
+    startTime: "2026-10-14T08:00:00Z",
+    endTime: "2026-10-24T23:59:00Z",
+    location: "Trực tuyến (Fanpage Facebook GDU)",
+    targetAudience: "Toàn thể sinh viên GDU",
+    capacity: 2000,
+    registeredCount: 846,
+    status: "Public",
+    points: 3,
+  },
+  {
+    id: "evt-interactive-02",
+    title: "Minigame Tương tác: Khám phá Không gian Sáng tạo GDU Hub",
+    banner: "https://placehold.co/800x400/214A7A/ffffff?text=GDU+Hub+Minigame",
+    content: "Minigame tìm hiểu về hệ thống tiện ích, thư viện số và khu tự học thông minh tại cơ sở Tân Sơn Nhất. Sinh viên hoàn thành chuỗi tương tác để nhận 3 điểm rèn luyện.",
+    category: "Tương tác",
+    eventType: "interactive",
+    interactiveConfig: {
+      facebookPostUrl: "https://www.facebook.com/GiaDinhUniversity/posts/pfbid08kL2m1p0N9x",
+      instruction: "Tương tác like bài viết, chia sẻ công khai và để lại bình luận câu trả lời đúng kèm 3 số may mắn.",
+      actions: [
+        {
+          id: "act-mg-01",
+          type: "like",
+          label: "Like bài viết minigame",
+          description: "Thả cảm xúc bài đăng trên Fanpage GDU Hub",
+          points: 1,
+        },
+        {
+          id: "act-mg-02",
+          type: "share",
+          label: "Chia sẻ bài viết công khai",
+          description: "Share bài viết lên tường kèm hashtag #GDUHub #TânSơnNhất",
+          points: 1,
+        },
+        {
+          id: "act-mg-03",
+          type: "comment",
+          label: "Bình luận đáp án minigame",
+          description: "Comment đáp án A/B/C/D kèm tag 2 bạn bè",
+          points: 1,
+        },
+      ],
+    },
+    organizer: "CLB Truyền thông Trẻ GDU",
+    startTime: "2026-10-22T08:00:00Z",
+    endTime: "2026-10-28T22:00:00Z",
+    location: "Trực tuyến (Fanpage Facebook GDU)",
+    targetAudience: "Toàn thể sinh viên GDU",
+    capacity: 1500,
+    registeredCount: 0,
+    status: "Chờ duyệt",
+    points: 3,
   }
 ];
 
@@ -162,7 +284,106 @@ export const MOCK_TICKETS: Ticket[] = [
     registeredAt: "2026-10-12T08:00:00Z",
     waitlistPosition: 5,
     attendance: "Chưa điểm danh",
+  },
+  {
+    id: "tk-003",
+    eventId: "evt-extracurricular-01",
+    event: MOCK_EVENTS.find(e => e.id === "evt-extracurricular-01") || MOCK_EVENTS[3],
+    studentId: "2024001",
+    status: "Vé chính thức",
+    registeredAt: "2026-10-18T09:15:00Z",
+    sequenceNumber: 12,
+    attendance: "Chưa điểm danh",
   }
+];
+
+export interface EventRegistrationItem {
+  id: string;
+  studentId: string;
+  fullName: string;
+  className: string;
+  major: string;
+  registeredAt: string;
+  status: "Chưa điểm danh" | "Đã check-in";
+  checkInTime?: string;
+  verifiedBy?: string;
+}
+
+export const MOCK_EXTRACURRICULAR_REGISTRATIONS: EventRegistrationItem[] = [
+  {
+    id: "reg-01",
+    studentId: "2024001",
+    fullName: "Nguyễn Văn An",
+    className: "2401CNTT01",
+    major: "Công nghệ thông tin",
+    registeredAt: "2026-10-18T09:15:00Z",
+    status: "Chưa điểm danh",
+  },
+  {
+    id: "reg-02",
+    studentId: "2024002",
+    fullName: "Trần Thị Bình",
+    className: "2401CNTT02",
+    major: "Công nghệ thông tin",
+    registeredAt: "2026-10-18T10:30:00Z",
+    status: "Chưa điểm danh",
+  },
+  {
+    id: "reg-03",
+    studentId: "2024003",
+    fullName: "Lê Hoàng Cường",
+    className: "2301QTKD01",
+    major: "Quản trị kinh doanh",
+    registeredAt: "2026-10-19T08:00:00Z",
+    status: "Đã check-in",
+    checkInTime: "2026-10-26T07:15:00Z",
+    verifiedBy: "Cán bộ MOD",
+  },
+  {
+    id: "reg-04",
+    studentId: "2024004",
+    fullName: "Phạm Thúy Duyên",
+    className: "2401NNA01",
+    major: "Ngôn ngữ Anh",
+    registeredAt: "2026-10-19T14:20:00Z",
+    status: "Chưa điểm danh",
+  },
+  {
+    id: "reg-05",
+    studentId: "2024005",
+    fullName: "Hoàng Minh Đức",
+    className: "2401CNTT01",
+    major: "Công nghệ thông tin",
+    registeredAt: "2026-10-20T08:45:00Z",
+    status: "Chưa điểm danh",
+  },
+  {
+    id: "reg-06",
+    studentId: "2024006",
+    fullName: "Võ Ngọc Hương",
+    className: "2401TMDH01",
+    major: "Thương mại điện tử",
+    registeredAt: "2026-10-20T11:10:00Z",
+    status: "Chưa điểm danh",
+  },
+  {
+    id: "reg-07",
+    studentId: "2024007",
+    fullName: "Đỗ Gia Khang",
+    className: "2401CNTT03",
+    major: "Công nghệ thông tin",
+    registeredAt: "2026-10-21T09:00:00Z",
+    status: "Chưa điểm danh",
+  },
+  {
+    id: "reg-08",
+    studentId: "2024008",
+    fullName: "Bùi Trúc Linh",
+    className: "2301QTKD02",
+    major: "Quản trị kinh doanh",
+    registeredAt: "2026-10-21T15:30:00Z",
+    status: "Chưa điểm danh",
+  },
 ];
 
 export const MOCK_TRAINING_POINTS: TrainingPointEntry[] = [

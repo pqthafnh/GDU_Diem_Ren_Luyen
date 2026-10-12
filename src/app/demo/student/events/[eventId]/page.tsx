@@ -5,6 +5,7 @@ import { MOCK_EVENTS, MOCK_TICKETS } from "@/mocks"
 import { Button } from "@/components/ui/button"
 import { StatusBadge } from "@/components/ui/status-badge"
 import { RegistrationDialog } from "@/components/events/registration-dialog"
+import { InteractiveEventDetail } from "@/components/events/interactive-event-detail"
 
 export default function EventDetailPage({ params }: { params: { eventId: string } }) {
   const event = MOCK_EVENTS.find(e => e.id === params.eventId)
@@ -15,6 +16,10 @@ export default function EventDetailPage({ params }: { params: { eventId: string 
 
   // Check if user already registered
   const ticket = MOCK_TICKETS.find(t => t.eventId === event.id)
+
+  if (event.eventType === "interactive") {
+    return <InteractiveEventDetail event={event} />
+  }
 
   return (
     <div className="min-h-screen bg-canvas pb-20 md:pb-12">
@@ -44,9 +49,9 @@ export default function EventDetailPage({ params }: { params: { eventId: string 
             {/* Event Header Info */}
             <div className="flex flex-col gap-5">
               <div className="flex flex-col gap-3">
-                <div className="flex flex-wrap gap-2">
-                  <StatusBadge status={event.status} variant="default" className="text-[12px] px-2.5 py-1" />
-                  <StatusBadge status={event.category} variant="accent" className="text-[12px] px-2.5 py-1" />
+                <div className="flex flex-wrap items-center gap-2">
+                  <StatusBadge status={event.status} variant="default" className="text-[11.5px] px-2.5 py-0.5 font-semibold" />
+                  <StatusBadge status={event.category} variant="accent" className="text-[11.5px] px-2.5 py-0.5 font-semibold" />
                 </div>
                 <h1 className="text-2xl md:text-[32px] font-bold text-ink leading-tight tracking-tight">
                   {event.title}
@@ -142,6 +147,13 @@ export default function EventDetailPage({ params }: { params: { eventId: string 
                   </div>
                   <span className="font-medium text-body text-[13px] text-right truncate max-w-[120px]" title={event.targetAudience}>{event.targetAudience}</span>
                 </div>
+
+                {(event.category === "Ngoại khóa" || event.checkInMethod === "manual_rollcall") && (
+                  <div className="p-3 rounded-xl bg-[#A66A12]/5 border border-[#A66A12]/20 flex items-start gap-2 text-[12px] text-[#A66A12]">
+                    <MapPin className="h-4 w-4 shrink-0 mt-0.5" />
+                    <span>Sự kiện ngoài trường: Ban Tổ chức sẽ điểm danh thủ công theo danh sách đăng ký (không cần quét mã QR).</span>
+                  </div>
+                )}
               </div>
               
               <div className="pt-2 border-t ">
