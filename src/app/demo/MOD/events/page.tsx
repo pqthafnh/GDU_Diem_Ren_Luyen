@@ -290,7 +290,7 @@ export default function MODEventsPage() {
               placeholder="Tìm theo tên sự kiện, đơn vị tổ chức, địa điểm..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-9 sm:h-9.5 pl-9 pr-4 text-[12.5px] sm:text-[13px] bg-surface border border-border rounded-xl focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-ink"
+              className="w-full h-11 sm:h-11.5 pl-10 pr-4 text-[13.5px] sm:text-[14px] bg-surface border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-ink font-medium shadow-xs"
             />
           </div>
 
@@ -298,7 +298,7 @@ export default function MODEventsPage() {
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="h-9 sm:h-9.5 px-3 text-[12.5px] sm:text-[13px] bg-surface border border-border rounded-xl focus:outline-none focus:ring-1 focus:ring-primary text-ink"
+              className="h-11 sm:h-11.5 px-3.5 text-[13.5px] sm:text-[14px] font-medium bg-surface border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-ink shadow-xs"
             >
               <option value="ALL">Tất cả phân loại</option>
               <option value="Ngoại khóa">Ngoại khóa</option>

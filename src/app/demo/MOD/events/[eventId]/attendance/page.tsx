@@ -696,28 +696,28 @@ export default function MODLiveAttendancePage({ params }: { params: { eventId: s
 
         {/* Thanh tìm kiếm & Nút hành động */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted pointer-events-none" />
+          <div className="relative flex-1 max-w-lg">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted pointer-events-none" />
             <input 
               type="text" 
               placeholder="Tìm theo MSSV, Họ tên, SĐT hoặc Lớp..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-9.5 pl-8.5 pr-3 text-[12.5px] sm:text-[13px] bg-canvas border border-border rounded-xl focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-ink"
+              className="w-full h-11 sm:h-12 pl-10.5 pr-4 text-[13.5px] sm:text-[14px] bg-canvas border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-ink font-medium transition-all shadow-xs"
             />
           </div>
 
           {/* Action Button theo Tab */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5 sm:gap-3 w-full md:w-auto">
             {activeTab === "CHECK_IN" ? (
               <Button
                 type="button"
                 variant="primary"
                 disabled={selectedCheckInIds.length === 0}
                 onClick={() => setShowConfirmCheckInModal(true)}
-                className="w-full sm:w-auto h-9.5 sm:h-10 px-4 rounded-xl font-bold text-[13px] shadow-sm flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full md:w-auto h-11 sm:h-12 px-5 rounded-xl font-bold text-[13.5px] sm:text-[14px] shadow-sm flex items-center justify-center gap-2.5 disabled:opacity-50 transition-all"
               >
-                <CheckCircle2 className="h-4 w-4" />
+                <CheckCircle2 className="h-4.5 w-4.5 shrink-0" />
                 <span>Xác nhận Check-in ({selectedCheckInIds.length} SV)</span>
               </Button>
             ) : (
@@ -726,9 +726,9 @@ export default function MODLiveAttendancePage({ params }: { params: { eventId: s
                 variant="primary"
                 disabled={selectedCheckOutIds.length === 0}
                 onClick={handleCheckOutButtonClick}
-                className="w-full sm:w-auto h-9.5 sm:h-10 px-4 rounded-xl font-bold text-[13px] shadow-sm flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full md:w-auto h-11 sm:h-12 px-5 rounded-xl font-bold text-[13.5px] sm:text-[14px] shadow-sm flex items-center justify-center gap-2.5 disabled:opacity-50 transition-all"
               >
-                <CheckCircle2 className="h-4 w-4" />
+                <CheckCircle2 className="h-4.5 w-4.5 shrink-0" />
                 <span>Xác nhận Check-out ({selectedCheckOutIds.length} SV)</span>
               </Button>
             )}
@@ -1152,48 +1152,53 @@ export default function MODLiveAttendancePage({ params }: { params: { eventId: s
       {/* ========================================================================= */}
       {/* MODAL 1: XÁC NHẬN CHECK-IN (Đầu giờ)                                      */}
       {/* ========================================================================= */}
+      {/* ========================================================================= */}
+      {/* MODAL 1: XÁC NHẬN CHECK-IN (Đầu giờ)                                      */}
+      {/* ========================================================================= */}
       {showConfirmCheckInModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="bg-surface rounded-2xl border border-border p-6 shadow-2xl max-w-lg w-full flex flex-col gap-4 animate-in zoom-in-95 duration-150">
-            <div className="flex items-start justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150 overflow-y-auto">
+          <div className="bg-surface rounded-2xl border border-border p-5 sm:p-6 shadow-2xl max-w-lg w-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-2.5rem)] my-auto flex flex-col overflow-hidden animate-in zoom-in-95 duration-150">
+            <div className="flex items-start justify-between shrink-0 pb-3 border-b border-border/80">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-primary text-white flex items-center justify-center shrink-0">
+                <div className="h-10 w-10 rounded-xl bg-primary text-white flex items-center justify-center shrink-0 shadow-sm">
                   <CheckCircle2 className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-[17px] font-bold text-ink">
+                  <h3 className="text-[16.5px] sm:text-[17.5px] font-bold text-ink">
                     Xác nhận Check-in {selectedCheckInIds.length} sinh viên
                   </h3>
-                  <p className="text-[12.5px] text-muted mt-0.5">
+                  <p className="text-[12px] sm:text-[12.5px] text-muted mt-0.5 truncate max-w-xs sm:max-w-sm">
                     Sự kiện: {event.title}
                   </p>
                 </div>
               </div>
-              <button onClick={() => setShowConfirmCheckInModal(false)} className="text-muted hover:text-ink p-1">
+              <button onClick={() => setShowConfirmCheckInModal(false)} className="text-muted hover:text-ink p-1.5 rounded-lg">
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="p-4 rounded-xl bg-canvas border border-border flex flex-col gap-2.5 text-[13px]">
-              <div className="flex justify-between">
-                <span className="text-body">Số lượng sinh viên có mặt:</span>
-                <span className="font-bold text-ink">{selectedCheckInIds.length} sinh viên</span>
+            <div className="flex-1 min-h-0 overflow-y-auto flex flex-col gap-3.5 py-4">
+              <div className="p-4 rounded-xl bg-canvas border border-border flex flex-col gap-2.5 text-[13px]">
+                <div className="flex justify-between items-center">
+                  <span className="text-body font-medium">Số lượng sinh viên có mặt:</span>
+                  <span className="font-bold text-ink text-[14px]">{selectedCheckInIds.length} sinh viên</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-body font-medium">Quy trình tiếp theo:</span>
+                  <span className="font-semibold text-primary">Chuyển vào danh sách chờ Check-out</span>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-body">Quy trình tiếp theo:</span>
-                <span className="font-semibold text-primary">Chuyển vào danh sách chờ Check-out</span>
-              </div>
+
+              <p className="text-[12.5px] sm:text-[13px] text-muted leading-relaxed">
+                Các sinh viên được chọn sẽ chuyển sang trạng thái <strong>"Đã check-in"</strong> và sẵn sàng để điểm danh ra về tại Bước 2 (Check-out).
+              </p>
             </div>
 
-            <p className="text-[12.5px] text-muted leading-relaxed">
-              Các sinh viên được chọn sẽ chuyển sang trạng thái <strong>"Đã check-in"</strong> và sẵn sàng để điểm danh ra về tại Bước 2 (Check-out).
-            </p>
-
-            <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-border/80">
-              <Button variant="outline" onClick={() => setShowConfirmCheckInModal(false)}>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2.5 pt-3 border-t border-border/80 shrink-0">
+              <Button variant="outline" onClick={() => setShowConfirmCheckInModal(false)} className="h-11 px-4 text-[13.5px]">
                 Hủy bỏ
               </Button>
-              <Button variant="primary" onClick={handleConfirmCheckIn} className="font-bold">
+              <Button variant="primary" onClick={handleConfirmCheckIn} className="h-11 px-5 font-bold text-[13.5px] shadow-sm">
                 Xác nhận Check-in
               </Button>
             </div>
@@ -1207,111 +1212,114 @@ export default function MODLiveAttendancePage({ params }: { params: { eventId: s
       {/* Bấm xác nhận để thoát ra khỏi popup đó MOD tự gọi điện thoại kiểm tra     */}
       {/* ========================================================================= */}
       {showMissingCheckOutPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-surface rounded-2xl border-2 border-error/40 p-5 sm:p-6 shadow-2xl max-w-2xl w-full flex flex-col gap-4 animate-in zoom-in-95 duration-150 max-h-[90vh] overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200 overflow-y-auto">
+          <div className="bg-surface rounded-2xl border-2 border-error/50 p-4 sm:p-6 shadow-2xl max-w-2xl w-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-2.5rem)] my-auto flex flex-col overflow-hidden animate-in zoom-in-95 duration-150">
             {/* Header cảnh báo */}
-            <div className="flex items-start justify-between border-b border-border/80 pb-3">
+            <div className="flex items-start justify-between border-b border-border/80 pb-3 shrink-0">
               <div className="flex items-start gap-3">
                 <div className="h-10 w-10 rounded-xl bg-error text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
                   <AlertTriangle className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-[16.5px] sm:text-[18px] font-bold text-ink flex items-center gap-2">
-                    <span>Phát hiện {missingStudents.length} sinh viên vắng mặt lúc Check-out!</span>
+                  <h3 className="text-[16px] sm:text-[18px] font-bold text-ink leading-snug">
+                    Phát hiện {missingStudents.length} sinh viên vắng mặt lúc Check-out!
                   </h3>
-                  <p className="text-[12.5px] sm:text-[13px] text-error font-medium mt-0.5">
+                  <p className="text-[12px] sm:text-[13px] text-error font-medium mt-0.5">
                     Sinh viên đã Check-in đầu giờ nhưng không có mặt điểm danh ra về.
                   </p>
                 </div>
               </div>
               <button 
                 onClick={() => setShowMissingCheckOutPopup(false)}
-                className="text-muted hover:text-ink p-1 rounded-lg"
+                className="text-muted hover:text-ink p-1.5 rounded-lg shrink-0"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            {/* Hướng dẫn nghiệp vụ */}
-            <div className="p-3 bg-error/5 border border-error/20 rounded-xl text-[12.5px] text-body flex items-start gap-2.5">
-              <Info className="h-4 w-4 text-error shrink-0 mt-0.5" />
-              <p className="leading-relaxed">
-                Để đảm bảo an toàn cho hoạt động ngoại khóa, <strong>Cán bộ MOD cần trực tiếp gọi điện thoại theo số bên dưới</strong> để xác minh vị trí và tình trạng của sinh viên. Bấm nút <strong>"Xác nhận & Thoát ra để gọi điện"</strong> để lưu danh sách cần xử lý.
-              </p>
-            </div>
+            {/* Vùng nội dung cuộn */}
+            <div className="flex-1 min-h-0 overflow-y-auto flex flex-col gap-3 py-3 pr-1 overscroll-contain">
+              {/* Hướng dẫn nghiệp vụ */}
+              <div className="p-3 sm:p-3.5 bg-error/5 border border-error/20 rounded-xl text-[12.5px] sm:text-[13px] text-body flex items-start gap-2.5">
+                <Info className="h-4.5 w-4.5 text-error shrink-0 mt-0.5" />
+                <p className="leading-relaxed">
+                  Để đảm bảo an toàn cho hoạt động ngoại khóa, <strong>Cán bộ MOD cần trực tiếp gọi điện thoại theo số bên dưới</strong> để xác minh vị trí và tình trạng của sinh viên. Bấm nút <strong>"Xác nhận & Thoát ra để gọi điện"</strong> để lưu danh sách cần xử lý.
+                </p>
+              </div>
 
-            {/* DANH SÁCH SINH VIÊN VẮNG: ĐẦY ĐỦ HỌ TÊN + NGÀNH + MSSV + SDT */}
-            <div className="overflow-y-auto max-h-[45vh] flex flex-col gap-2.5 pr-1">
+              {/* DANH SÁCH SINH VIÊN VẮNG: ĐẦY ĐỦ HỌ TÊN + NGÀNH + MSSV + SDT */}
               <div className="text-[12px] font-bold text-muted uppercase tracking-wider px-1">
                 Danh sách chi tiết sinh viên vắng Check-out ({missingStudents.length}):
               </div>
 
-              {missingStudents.map((student, idx) => (
-                <div 
-                  key={student.id}
-                  className="p-3.5 bg-canvas rounded-xl border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
-                >
-                  <div className="flex items-start gap-3 min-w-0">
-                    <span className="font-mono text-[12px] font-bold text-muted bg-surface h-6 w-6 rounded-full border border-border flex items-center justify-center shrink-0 mt-0.5">
-                      {idx + 1}
-                    </span>
-                    <div className="min-w-0">
-                      {/* Họ tên */}
-                      <p className="text-[14.5px] font-bold text-ink">
-                        {student.fullName}
-                      </p>
-                      
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] mt-1">
-                        {/* MSSV */}
-                        <span className="text-body">
-                          MSSV: <strong className="font-mono text-ink">{student.studentId}</strong>
-                        </span>
-                        <span className="text-muted">•</span>
-                        {/* Ngành */}
-                        <span className="text-body">
-                          Ngành: <strong className="text-ink">{student.major}</strong>
-                        </span>
-                        <span className="text-muted">•</span>
-                        {/* Lớp */}
-                        <span className="text-muted">Lớp: {student.className}</span>
+              <div className="flex flex-col gap-2.5">
+                {missingStudents.map((student, idx) => (
+                  <div 
+                    key={student.id}
+                    className="p-3.5 bg-canvas rounded-xl border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
+                  >
+                    <div className="flex items-start gap-3 min-w-0">
+                      <span className="font-mono text-[12px] font-bold text-muted bg-surface h-6 w-6 rounded-full border border-border flex items-center justify-center shrink-0 mt-0.5">
+                        {idx + 1}
+                      </span>
+                      <div className="min-w-0">
+                        {/* Họ tên */}
+                        <p className="text-[14.5px] font-bold text-ink">
+                          {student.fullName}
+                        </p>
+                        
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] mt-1">
+                          {/* MSSV */}
+                          <span className="text-body">
+                            MSSV: <strong className="font-mono text-ink">{student.studentId}</strong>
+                          </span>
+                          <span className="text-muted">•</span>
+                          {/* Ngành */}
+                          <span className="text-body">
+                            Ngành: <strong className="text-ink">{student.major}</strong>
+                          </span>
+                          <span className="text-muted">•</span>
+                          {/* Lớp */}
+                          <span className="text-muted">Lớp: {student.className}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* SỐ ĐIỆN THOẠI (SDT) & NÚT GỌI ĐIỆN TRỰC TIẾP */}
-                  <div className="flex items-center gap-2 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border/60">
-                    <div className="flex flex-col sm:items-end">
-                      <span className="text-[11px] text-muted font-medium">Số điện thoại liên hệ:</span>
-                      <span className="font-mono font-bold text-primary text-[14px]">
-                        {student.phoneNumber}
-                      </span>
+                    {/* SỐ ĐIỆN THOẠI (SDT) & NÚT GỌI ĐIỆN TRỰC TIẾP */}
+                    <div className="flex items-center justify-between sm:justify-end gap-2.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border/60">
+                      <div className="flex flex-col sm:items-end">
+                        <span className="text-[11px] text-muted font-medium">Số điện thoại liên hệ:</span>
+                        <span className="font-mono font-bold text-primary text-[14.5px]">
+                          {student.phoneNumber}
+                        </span>
+                      </div>
+
+                      <a 
+                        href={`tel:${student.phoneNumber}`}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary text-white font-semibold text-[12.5px] hover:bg-primary-hover shadow-xs transition-colors"
+                        title="Gọi điện ngay"
+                      >
+                        <Phone className="h-4 w-4" />
+                        <span>Gọi ngay</span>
+                      </a>
                     </div>
-
-                    <a 
-                      href={`tel:${student.phoneNumber}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary text-white font-semibold text-[12px] hover:bg-primary-hover shadow-xs transition-colors"
-                      title="Gọi điện ngay"
-                    >
-                      <Phone className="h-3.5 w-3.5" />
-                      <span>Gọi ngay</span>
-                    </a>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             {/* Footer hành động: BẤM XÁC NHẬN ĐỂ THOÁT RA KHỎI POPUP MOD TỰ GỌI ĐIỆN THOẠI */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-border/80">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-border/80 shrink-0 bg-surface">
               <span className="text-[12px] text-muted text-center sm:text-left">
                 * Sau khi gọi xong, hệ thống sẽ cho phép MOD checkbox lại lần nữa.
               </span>
 
-              <div className="flex items-center gap-2 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => setShowMissingCheckOutPopup(false)}
-                  className="w-full sm:w-auto text-[13px]"
+                  className="w-full sm:w-auto h-11 text-[13px]"
                 >
                   Quay lại kiểm tra
                 </Button>
@@ -1319,7 +1327,7 @@ export default function MODLiveAttendancePage({ params }: { params: { eventId: s
                   type="button"
                   variant="primary"
                   onClick={handleConfirmMissingPopupAndExit}
-                  className="w-full sm:w-auto text-[13px] font-bold bg-[#A66A12] hover:bg-[#8e5a0e] text-white flex items-center justify-center gap-1.5 shadow-sm"
+                  className="w-full sm:w-auto h-11 text-[13px] font-bold bg-[#A66A12] hover:bg-[#8e5a0e] text-white flex items-center justify-center gap-1.5 shadow-sm"
                 >
                   <PhoneCall className="h-4 w-4" />
                   <span>Xác nhận & Thoát ra để gọi điện</span>
@@ -1334,47 +1342,49 @@ export default function MODLiveAttendancePage({ params }: { params: { eventId: s
       {/* MODAL 3: XÁC NHẬN CHECK-OUT KHI TẤT CẢ SINH VIÊN ĐỀU CÓ MẶT               */}
       {/* ========================================================================= */}
       {showSuccessCheckOutModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="bg-surface rounded-2xl border border-border p-6 shadow-2xl max-w-lg w-full flex flex-col gap-4 animate-in zoom-in-95 duration-150">
-            <div className="flex items-start justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150 overflow-y-auto">
+          <div className="bg-surface rounded-2xl border border-border p-5 sm:p-6 shadow-2xl max-w-lg w-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-2.5rem)] my-auto flex flex-col overflow-hidden animate-in zoom-in-95 duration-150">
+            <div className="flex items-start justify-between shrink-0 pb-3 border-b border-border/80">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-success text-white flex items-center justify-center shrink-0">
+                <div className="h-10 w-10 rounded-xl bg-success text-white flex items-center justify-center shrink-0 shadow-sm">
                   <CheckCircle2 className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-[17px] font-bold text-ink">
+                  <h3 className="text-[16.5px] sm:text-[17.5px] font-bold text-ink">
                     Xác nhận hoàn tất Check-out
                   </h3>
-                  <p className="text-[12.5px] text-muted mt-0.5">
+                  <p className="text-[12px] sm:text-[12.5px] text-muted mt-0.5">
                     Tất cả sinh viên có mặt đầy đủ ({selectedCheckOutIds.length} SV)
                   </p>
                 </div>
               </div>
-              <button onClick={() => setShowSuccessCheckOutModal(false)} className="text-muted hover:text-ink p-1">
+              <button onClick={() => setShowSuccessCheckOutModal(false)} className="text-muted hover:text-ink p-1.5 rounded-lg">
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="p-4 rounded-xl bg-canvas border border-border flex flex-col gap-2.5 text-[13px]">
-              <div className="flex justify-between">
-                <span className="text-body font-medium">Số lượng hoàn tất Check-out:</span>
-                <span className="font-bold text-ink">{selectedCheckOutIds.length} sinh viên</span>
+            <div className="flex-1 min-h-0 overflow-y-auto flex flex-col gap-3.5 py-4">
+              <div className="p-4 rounded-xl bg-canvas border border-border flex flex-col gap-2.5 text-[13px]">
+                <div className="flex justify-between items-center">
+                  <span className="text-body font-medium">Số lượng hoàn tất Check-out:</span>
+                  <span className="font-bold text-ink text-[14px]">{selectedCheckOutIds.length} sinh viên</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-body font-medium">Điểm rèn luyện cộng mỗi SV:</span>
+                  <span className="font-bold text-success text-[14px]">+{event.points} điểm</span>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-body font-medium">Điểm rèn luyện cộng mỗi SV:</span>
-                <span className="font-bold text-success">+{event.points} điểm</span>
-              </div>
+
+              <p className="text-[12.5px] sm:text-[13px] text-muted leading-relaxed">
+                Toàn bộ sinh viên được chọn sẽ được chuyển sang trạng thái <strong>"Đã check-out"</strong> và tự động cộng <strong>+{event.points} điểm rèn luyện</strong> vào sổ cái 3 năm.
+              </p>
             </div>
 
-            <p className="text-[12.5px] text-muted leading-relaxed">
-              Toàn bộ sinh viên được chọn sẽ được chuyển sang trạng thái <strong>"Đã check-out"</strong> và tự động cộng <strong>+{event.points} điểm rèn luyện</strong> vào sổ cái 3 năm.
-            </p>
-
-            <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-border/80">
-              <Button variant="outline" onClick={() => setShowSuccessCheckOutModal(false)}>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2.5 pt-3 border-t border-border/80 shrink-0">
+              <Button variant="outline" onClick={() => setShowSuccessCheckOutModal(false)} className="h-11 px-4 text-[13.5px]">
                 Hủy bỏ
               </Button>
-              <Button variant="primary" onClick={handleConfirmAllCheckOut} className="font-bold">
+              <Button variant="primary" onClick={handleConfirmAllCheckOut} className="h-11 px-5 font-bold text-[13.5px] shadow-sm">
                 Xác nhận & Hoàn tất
               </Button>
             </div>
@@ -1386,51 +1396,53 @@ export default function MODLiveAttendancePage({ params }: { params: { eventId: s
       {/* MODAL 4: XÁC NHẬN CHECK-OUT CHO CÁC SV ĐÃ GỌI ĐIỆN THOẠI XÁC MINH         */}
       {/* ========================================================================= */}
       {showConfirmVerifiedModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="bg-surface rounded-2xl border border-border p-6 shadow-2xl max-w-lg w-full flex flex-col gap-4 animate-in zoom-in-95 duration-150">
-            <div className="flex items-start justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150 overflow-y-auto">
+          <div className="bg-surface rounded-2xl border border-border p-5 sm:p-6 shadow-2xl max-w-lg w-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-2.5rem)] my-auto flex flex-col overflow-hidden animate-in zoom-in-95 duration-150">
+            <div className="flex items-start justify-between shrink-0 pb-3 border-b border-border/80">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-primary text-white flex items-center justify-center shrink-0">
+                <div className="h-10 w-10 rounded-xl bg-primary text-white flex items-center justify-center shrink-0 shadow-sm">
                   <UserCheck className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-[17px] font-bold text-ink">
+                  <h3 className="text-[16.5px] sm:text-[17.5px] font-bold text-ink">
                     Duyệt Check-out sau xác minh điện thoại
                   </h3>
-                  <p className="text-[12.5px] text-muted mt-0.5">
+                  <p className="text-[12px] sm:text-[12.5px] text-muted mt-0.5">
                     Số lượng: {selectedVerifiedIds.length} sinh viên
                   </p>
                 </div>
               </div>
-              <button onClick={() => setShowConfirmVerifiedModal(false)} className="text-muted hover:text-ink p-1">
+              <button onClick={() => setShowConfirmVerifiedModal(false)} className="text-muted hover:text-ink p-1.5 rounded-lg">
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="p-4 rounded-xl bg-canvas border border-border flex flex-col gap-2.5 text-[13px]">
-              <div className="flex justify-between">
-                <span className="text-body font-medium">Sinh viên đã gọi điện xác minh:</span>
-                <span className="font-bold text-ink">{selectedVerifiedIds.length} sinh viên</span>
+            <div className="flex-1 min-h-0 overflow-y-auto flex flex-col gap-3.5 py-4">
+              <div className="p-4 rounded-xl bg-canvas border border-border flex flex-col gap-2.5 text-[13px]">
+                <div className="flex justify-between items-center">
+                  <span className="text-body font-medium">Sinh viên đã gọi điện xác minh:</span>
+                  <span className="font-bold text-ink text-[14px]">{selectedVerifiedIds.length} sinh viên</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-body font-medium">Điểm rèn luyện cộng:</span>
+                  <span className="font-bold text-success text-[14px]">+{event.points} điểm rèn luyện</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-body font-medium">Ghi chú lưu vết:</span>
+                  <span className="font-semibold text-primary">Đã xác minh qua điện thoại bởi MOD</span>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-body font-medium">Điểm rèn luyện cộng:</span>
-                <span className="font-bold text-success">+{event.points} điểm rèn luyện</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-body font-medium">Ghi chú lưu vết:</span>
-                <span className="font-semibold text-primary">Đã xác minh qua điện thoại bởi MOD</span>
-              </div>
+
+              <p className="text-[12.5px] sm:text-[13px] text-muted leading-relaxed">
+                Các sinh viên này sẽ được công nhận hoàn tất hoạt động ngoại khóa, chuyển trạng thái sang <strong>"Đã check-out"</strong> và nhận điểm rèn luyện đầy đủ.
+              </p>
             </div>
 
-            <p className="text-[12.5px] text-muted leading-relaxed">
-              Các sinh viên này sẽ được công nhận hoàn tất hoạt động ngoại khóa, chuyển trạng thái sang <strong>"Đã check-out"</strong> và nhận điểm rèn luyện đầy đủ.
-            </p>
-
-            <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-border/80">
-              <Button variant="outline" onClick={() => setShowConfirmVerifiedModal(false)}>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2.5 pt-3 border-t border-border/80 shrink-0">
+              <Button variant="outline" onClick={() => setShowConfirmVerifiedModal(false)} className="h-11 px-4 text-[13.5px]">
                 Hủy bỏ
               </Button>
-              <Button variant="primary" onClick={handleConfirmVerifiedCheckOut} className="font-bold">
+              <Button variant="primary" onClick={handleConfirmVerifiedCheckOut} className="h-11 px-5 font-bold text-[13.5px] shadow-sm">
                 Xác nhận & Cộng điểm
               </Button>
             </div>

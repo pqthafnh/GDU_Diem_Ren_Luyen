@@ -155,19 +155,19 @@ export default function StudentEventsPage() {
                         
                         {/* Content (Middle column) */}
                         <div className="flex-1 min-w-0 pt-1 md:pt-1.5">
-                          <div className="flex items-center gap-2 mb-1">
+                          <div className="flex items-center gap-1.5 mb-1 flex-wrap">
                             {isInteractive && (
-                              <span className="text-[10px] font-bold uppercase tracking-wider text-[#1877F2] bg-[#1877F2]/10 px-2 py-0.5 rounded">
+                              <span className="text-[9.5px] font-bold text-[#1877F2] bg-[#1877F2]/10 px-1.5 py-0.5 rounded shrink-0">
                                 Tương tác Facebook
                               </span>
                             )}
-                            <span className="text-[11px] font-semibold text-accent-active bg-accent-soft px-2 py-0.5 rounded flex items-center gap-1">
-                              <Award className="h-3 w-3 text-accent" />
-                              +{event.points} điểm
+                            <span className="text-[10px] font-bold text-accent-active bg-accent-soft px-1.5 py-0.5 rounded flex items-center gap-1 shrink-0">
+                              <Award className="h-2.5 w-2.5 text-accent shrink-0" />
+                              <span>+{event.points} điểm</span>
                             </span>
                           </div>
 
-                          <h3 className="text-[16px] md:text-[17.5px] font-bold text-ink leading-snug mb-1.5 group-hover:text-primary transition-colors line-clamp-2 pr-2">
+                          <h3 className="text-[14.5px] md:text-[15.5px] font-bold text-ink leading-snug mb-1.5 group-hover:text-primary transition-colors line-clamp-2 pr-2">
                             {event.title}
                           </h3>
                           
@@ -178,7 +178,7 @@ export default function StudentEventsPage() {
                         </div>
                         
                         {/* Thumbnail (Right column) */}
-                        <div className="w-16 h-16 md:w-24 md:h-24 shrink-0 rounded-xl md:rounded-[14px] overflow-hidden relative border border-border bg-canvas ml-1 md:ml-0">
+                        <div className="w-16 h-16 md:w-24 md:h-24 shrink-0 rounded-xl md:rounded-[14px] overflow-hidden relative border border-border bg-canvas ml-1 md:ml-0 self-center my-auto">
                            <Image 
                              src={event.banner} 
                              alt={event.title} 

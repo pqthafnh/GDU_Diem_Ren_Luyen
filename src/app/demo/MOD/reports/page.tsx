@@ -366,7 +366,7 @@ export default function MODCentralReportsPage() {
           <Button 
             onClick={handleExportMasterExcel}
             disabled={isExporting || filteredReportRows.length === 0}
-            className={`w-full sm:w-auto h-9.5 sm:h-10 text-[13px] px-4 font-bold rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 ${
+            className={`w-full sm:w-auto h-11 sm:h-11.5 text-[13.5px] sm:text-[14px] px-5 font-bold rounded-xl shadow-xs transition-all flex items-center justify-center gap-2.5 ${
               exportSuccess ? 'bg-success hover:bg-success text-white' : 'bg-primary hover:bg-primary-hover text-white'
             }`}
           >
@@ -521,7 +521,7 @@ export default function MODCentralReportsPage() {
               placeholder="Tìm nhanh theo MSSV, Họ tên hoặc Lớp..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-9.5 pl-9 pr-4 text-[13px] bg-canvas border border-border rounded-xl focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-ink"
+              className="w-full h-11 sm:h-11.5 pl-10 pr-4 text-[13.5px] sm:text-[14px] bg-canvas border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-ink font-medium transition-all shadow-xs"
             />
           </div>
         </div>
