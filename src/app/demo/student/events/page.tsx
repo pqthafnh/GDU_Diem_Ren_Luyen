@@ -78,9 +78,9 @@ export default function StudentEventsPage() {
           </div>
         </div>
         
-        {/* Refined Segmented Filter Bar */}
+        {/* Refined Segmented Filter Bar - Enlarged as requested */}
         <div className="w-full sm:w-auto overflow-x-auto no-scrollbar pb-1">
-          <div className="inline-flex items-center gap-1 p-1 bg-canvas border border-border/80 rounded-2xl shadow-[0_1px_4px_rgba(0,0,0,0.02)]">
+          <div className="inline-flex items-center gap-1.5 p-1.5 bg-canvas border border-border/80 rounded-2xl shadow-[0_1px_4px_rgba(0,0,0,0.03)]">
             {CATEGORIES.map(cat => {
               const isSelected = selectedCategory === cat
               return (
@@ -88,14 +88,14 @@ export default function StudentEventsPage() {
                   key={cat}
                   type="button"
                   onClick={() => setSelectedCategory(cat)}
-                  className={`h-8.5 px-3.5 sm:px-4 rounded-xl text-[13px] transition-all whitespace-nowrap flex items-center gap-1.5 select-none ${
+                  className={`h-10 sm:h-10.5 px-4 sm:px-5 rounded-xl text-[14px] sm:text-[14.5px] transition-all whitespace-nowrap flex items-center gap-2 select-none ${
                     isSelected 
                       ? "bg-surface text-primary font-bold shadow-sm border border-border/70" 
                       : "text-muted hover:text-ink hover:bg-surface/60 font-medium"
                   }`}
                 >
                   {cat === "Tương tác" && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#1877F2]"></span>
+                    <span className="h-2 w-2 rounded-full bg-[#1877F2]"></span>
                   )}
                   <span>{cat}</span>
                 </button>

@@ -1,4 +1,4 @@
-export type EventCategory = "Hội thảo" | "Workshop" | "Kỹ năng mềm" | "Ngoại khóa" | "Học thuật" | "Tình nguyện" | "Tương tác" | "Thi đấu" | "Khác";
+export type EventCategory = "Tương tác" | "Học thuật" | "Ngoại khóa" | "Thi đấu" | "Khác";
 
 export type EventType = "standard" | "interactive";
 
@@ -39,7 +39,7 @@ export interface Event {
   registeredCount: number;
   status: EventStatus;
   points: number;
-  checkInMethod?: "qr_gps" | "manual_rollcall" | "social_interactive"; // "manual_rollcall" cho sự kiện Ngoại khóa ngoài trường
+  checkInMethod?: "qr_gps" | "manual_rollcall" | "social_interactive"; // "manual_rollcall" cho sự kiện Ngoại khóa ngoài trường hoặc Thi đấu
   cancellationDeadline?: string;
   speaker?: {
     name: string;
@@ -64,7 +64,7 @@ export interface Ticket {
   proofNote?: string;
 }
 
-export type TrainingPointCategory = "Học thuật" | "Kỹ năng mềm" | "Tình nguyện" | "Thể thao - Văn hóa" | "Ngoại khóa" | "Tương tác" | "Khác";
+export type TrainingPointCategory = "Học thuật" | "Ngoại khóa" | "Thi đấu" | "Tương tác" | "Khác";
 
 export interface TrainingPointEntry {
   id: string;
@@ -86,8 +86,25 @@ export interface StudentSummary {
   className: string;
   major: string;
   schoolEmail: string;
+  phoneNumber?: string;
   totalPoints: number;
   classification: "Xuất sắc" | "Giỏi" | "Khá" | "Trung bình" | "Yếu" | "Kém";
+}
+
+export interface EventRegistrationItem {
+  id: string;
+  studentId: string;
+  fullName: string;
+  className: string;
+  major: string;
+  phoneNumber?: string;
+  registeredAt: string;
+  status: "Chưa điểm danh" | "Đã check-in" | "Đã check-out" | "Vắng check-out";
+  checkInTime?: string;
+  checkOutTime?: string;
+  verifiedBy?: string;
+  callStatus?: "Chưa liên hệ" | "Đã gọi xác nhận" | "Không liên lạc được";
+  callNote?: string;
 }
 
 export interface ExcelExportRecord {

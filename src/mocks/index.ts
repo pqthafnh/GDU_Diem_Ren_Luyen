@@ -1,4 +1,4 @@
-import { Event, StudentSummary, Ticket, TrainingPointEntry, ExcelExportRecord } from "@/types";
+import { Event, StudentSummary, Ticket, TrainingPointEntry, ExcelExportRecord, EventRegistrationItem } from "@/types";
 
 export const MOCK_STUDENT: StudentSummary = {
   studentId: "2024001",
@@ -10,6 +10,7 @@ export const MOCK_STUDENT: StudentSummary = {
   className: "2401CNTT01",
   major: "Công nghệ thông tin",
   schoolEmail: "2024001@gdu.edu.vn",
+  phoneNumber: "0908123456",
   totalPoints: 85,
   classification: "Giỏi",
 };
@@ -80,10 +81,10 @@ export const MOCK_EXCEL_RECORDS: ExcelExportRecord[] = [
 export const MOCK_EVENTS: Event[] = [
   {
     id: "evt-01",
-    title: "Hội thảo Kỹ năng phỏng vấn và xây dựng CV",
+    title: "Chuyên đề Kỹ năng phỏng vấn và xây dựng CV",
     banner: "https://placehold.co/800x400/173a67/ffffff?text=Interview+Skills",
-    content: "Tham gia hội thảo để học hỏi kinh nghiệm từ các chuyên gia nhân sự hàng đầu...",
-    category: "Kỹ năng mềm",
+    content: "Tham gia chuyên đề để học hỏi kinh nghiệm từ các chuyên gia nhân sự hàng đầu...",
+    category: "Học thuật",
     organizer: "Phòng Công tác sinh viên",
     startTime: "2026-10-15T08:00:00Z",
     endTime: "2026-10-15T11:00:00Z",
@@ -101,7 +102,7 @@ export const MOCK_EVENTS: Event[] = [
   },
   {
     id: "evt-02",
-    title: "Workshop AI và Ứng dụng thực tiễn",
+    title: "Chuyên đề AI và Ứng dụng thực tiễn",
     banner: "https://placehold.co/800x400/214A7A/ffffff?text=AI+Workshop",
     content: "Khám phá cách AI đang thay đổi cách chúng ta làm việc và học tập.",
     category: "Học thuật",
@@ -122,10 +123,10 @@ export const MOCK_EVENTS: Event[] = [
   },
   {
     id: "evt-03",
-    title: "Ngày hội hiến máu tình nguyện 2026",
+    title: "Ngày hội hiến máu nhân đạo Sinh viên GDU 2026",
     banner: "https://placehold.co/800x400/c23b3b/ffffff?text=Blood+Donation",
     content: "Một giọt máu cho đi, một cuộc đời ở lại. Tham gia ngay ngày hội hiến máu.",
-    category: "Tình nguyện",
+    category: "Ngoại khóa",
     organizer: "Đoàn Thanh niên",
     startTime: "2026-10-25T07:00:00Z",
     endTime: "2026-10-25T11:30:00Z",
@@ -144,8 +145,9 @@ export const MOCK_EVENTS: Event[] = [
     id: "evt-competition-01",
     title: "Giải đấu Thể thao Điện tử Sinh viên GDU E-Sports Championship 2026",
     banner: "https://placehold.co/800x400/173A67/ffffff?text=GDU+Esports+Tournament",
-    content: "Giải đấu Thể thao điện tử thường niên quy mô toàn trường nhằm kết nối và rèn luyện tinh thần đồng đội cho sinh viên Đại học Gia Định.",
+    content: "Giải đấu Thể thao điện tử thường niên quy mô toàn trường. Vì là giải đấu thi đấu trực tiếp, Ban Tổ chức (MOD) sẽ trực tiếp điểm danh thủ công theo danh sách checkbox các đội/sinh viên đăng ký tham gia (không dùng mã QR).",
     category: "Thi đấu",
+    checkInMethod: "manual_rollcall",
     organizer: "Đoàn - Hội Sinh viên GDU",
     startTime: "2026-10-28T08:00:00Z",
     endTime: "2026-10-29T17:30:00Z",
@@ -261,6 +263,70 @@ export const MOCK_EVENTS: Event[] = [
     registeredCount: 0,
     status: "Chờ duyệt",
     points: 3,
+  },
+  {
+    id: "evt-draft-01",
+    title: "Hội thảo Ứng dụng Blockchain & An toàn thông tin số trong Doanh nghiệp",
+    banner: "https://placehold.co/800x400/173A67/ffffff?text=Blockchain+Workshop",
+    content: "Bản nháp kế hoạch hội thảo chuyên đề kỹ thuật số cho sinh viên ngành Công nghệ thông tin. Cần hoàn thiện dự trù trang thiết bị phòng máy trước khi gửi Admin phê duyệt.",
+    category: "Học thuật",
+    organizer: "Khoa Công nghệ thông tin",
+    startTime: "2026-11-05T08:30:00Z",
+    endTime: "2026-11-05T11:30:00Z",
+    location: "Phòng Hội thảo B.402, cơ sở Tân Sơn Nhất",
+    targetAudience: "Sinh viên ngành CNTT, An toàn thông tin",
+    capacity: 150,
+    registeredCount: 0,
+    status: "Bản nháp",
+    points: 10,
+  },
+  {
+    id: "evt-draft-02",
+    title: "Tọa đàm Sinh viên & Khởi nghiệp Đổi mới sáng tạo GDU Startup 2026",
+    banner: "https://placehold.co/800x400/A66A12/ffffff?text=Startup+Talkshow",
+    content: "Tọa đàm truyền cảm hứng khởi nghiệp cho sinh viên năm 2 và năm 3. Hồ sơ đang chờ MOD chỉnh sửa danh sách khách mời doanh nghiệp theo phản hồi của Admin.",
+    category: "Học thuật",
+    organizer: "Trung tâm Hỗ trợ Khởi nghiệp & Hướng nghiệp",
+    startTime: "2026-11-12T13:30:00Z",
+    endTime: "2026-11-12T16:30:00Z",
+    location: "Hội trường lớn, cơ sở Tân Sơn Nhất",
+    targetAudience: "Toàn thể sinh viên GDU",
+    capacity: 200,
+    registeredCount: 0,
+    status: "Yêu cầu chỉnh sửa",
+    points: 10,
+  },
+  {
+    id: "evt-completed-01",
+    title: "Chiến dịch Tình nguyện Mùa hè xanh GDU 2026 (Đã tổng kết)",
+    banner: "https://placehold.co/800x400/21835A/ffffff?text=Green+Summer+2026",
+    content: "Chiến dịch tình nguyện thường niên đã kết thúc xuất sắc. Đã hoàn tất điểm danh và kết chuyển điểm rèn luyện vào sổ cái 3 năm cho 150 chiến sĩ tình nguyện.",
+    category: "Ngoại khóa",
+    organizer: "Ban Chỉ huy Chiến dịch Mùa hè xanh GDU",
+    startTime: "2026-08-05T07:00:00Z",
+    endTime: "2026-08-15T17:00:00Z",
+    location: "Xã đảo Thạnh An, Cần Giờ, TP.HCM",
+    targetAudience: "Chiến sĩ Mùa hè xanh GDU",
+    capacity: 150,
+    registeredCount: 150,
+    status: "Đã kết thúc",
+    points: 50,
+  },
+  {
+    id: "evt-completed-02",
+    title: "Cuộc thi Lập trình GDU Tech Hackathon 2026 (Đã tổng kết)",
+    banner: "https://placehold.co/800x400/10233D/ffffff?text=Hackathon+2026",
+    content: "Giải đấu lập trình 24 giờ sáng tạo giải pháp công nghệ. Đã hoàn tất báo cáo tổng kết, trao giải và cấp chứng nhận điểm rèn luyện cho tất cả thí sinh tham dự.",
+    category: "Học thuật",
+    organizer: "Khoa CNTT & CLB Google Developer Student Club",
+    startTime: "2026-05-18T08:00:00Z",
+    endTime: "2026-05-19T18:00:00Z",
+    location: "Cơ sở Tân Sơn Nhất",
+    targetAudience: "Sinh viên yêu thích lập trình",
+    capacity: 120,
+    registeredCount: 120,
+    status: "Đã kết thúc",
+    points: 25,
   }
 ];
 
@@ -297,17 +363,7 @@ export const MOCK_TICKETS: Ticket[] = [
   }
 ];
 
-export interface EventRegistrationItem {
-  id: string;
-  studentId: string;
-  fullName: string;
-  className: string;
-  major: string;
-  registeredAt: string;
-  status: "Chưa điểm danh" | "Đã check-in";
-  checkInTime?: string;
-  verifiedBy?: string;
-}
+export type { EventRegistrationItem } from "@/types";
 
 export const MOCK_EXTRACURRICULAR_REGISTRATIONS: EventRegistrationItem[] = [
   {
@@ -316,6 +372,7 @@ export const MOCK_EXTRACURRICULAR_REGISTRATIONS: EventRegistrationItem[] = [
     fullName: "Nguyễn Văn An",
     className: "2401CNTT01",
     major: "Công nghệ thông tin",
+    phoneNumber: "0908123456",
     registeredAt: "2026-10-18T09:15:00Z",
     status: "Chưa điểm danh",
   },
@@ -325,6 +382,7 @@ export const MOCK_EXTRACURRICULAR_REGISTRATIONS: EventRegistrationItem[] = [
     fullName: "Trần Thị Bình",
     className: "2401CNTT02",
     major: "Công nghệ thông tin",
+    phoneNumber: "0912345678",
     registeredAt: "2026-10-18T10:30:00Z",
     status: "Chưa điểm danh",
   },
@@ -334,9 +392,10 @@ export const MOCK_EXTRACURRICULAR_REGISTRATIONS: EventRegistrationItem[] = [
     fullName: "Lê Hoàng Cường",
     className: "2301QTKD01",
     major: "Quản trị kinh doanh",
+    phoneNumber: "0987654321",
     registeredAt: "2026-10-19T08:00:00Z",
     status: "Đã check-in",
-    checkInTime: "2026-10-26T07:15:00Z",
+    checkInTime: "07:15",
     verifiedBy: "Cán bộ MOD",
   },
   {
@@ -345,6 +404,7 @@ export const MOCK_EXTRACURRICULAR_REGISTRATIONS: EventRegistrationItem[] = [
     fullName: "Phạm Thúy Duyên",
     className: "2401NNA01",
     major: "Ngôn ngữ Anh",
+    phoneNumber: "0933112233",
     registeredAt: "2026-10-19T14:20:00Z",
     status: "Chưa điểm danh",
   },
@@ -354,6 +414,7 @@ export const MOCK_EXTRACURRICULAR_REGISTRATIONS: EventRegistrationItem[] = [
     fullName: "Hoàng Minh Đức",
     className: "2401CNTT01",
     major: "Công nghệ thông tin",
+    phoneNumber: "0977889900",
     registeredAt: "2026-10-20T08:45:00Z",
     status: "Chưa điểm danh",
   },
@@ -363,6 +424,7 @@ export const MOCK_EXTRACURRICULAR_REGISTRATIONS: EventRegistrationItem[] = [
     fullName: "Võ Ngọc Hương",
     className: "2401TMDH01",
     major: "Thương mại điện tử",
+    phoneNumber: "0944556677",
     registeredAt: "2026-10-20T11:10:00Z",
     status: "Chưa điểm danh",
   },
@@ -372,6 +434,7 @@ export const MOCK_EXTRACURRICULAR_REGISTRATIONS: EventRegistrationItem[] = [
     fullName: "Đỗ Gia Khang",
     className: "2401CNTT03",
     major: "Công nghệ thông tin",
+    phoneNumber: "0966332211",
     registeredAt: "2026-10-21T09:00:00Z",
     status: "Chưa điểm danh",
   },
@@ -381,7 +444,28 @@ export const MOCK_EXTRACURRICULAR_REGISTRATIONS: EventRegistrationItem[] = [
     fullName: "Bùi Trúc Linh",
     className: "2301QTKD02",
     major: "Quản trị kinh doanh",
+    phoneNumber: "0922446688",
     registeredAt: "2026-10-21T15:30:00Z",
+    status: "Chưa điểm danh",
+  },
+  {
+    id: "reg-09",
+    studentId: "2024009",
+    fullName: "Mai Anh Tuấn",
+    className: "2401CNTT02",
+    major: "Công nghệ thông tin",
+    phoneNumber: "0918765432",
+    registeredAt: "2026-10-22T08:15:00Z",
+    status: "Chưa điểm danh",
+  },
+  {
+    id: "reg-10",
+    studentId: "2024010",
+    fullName: "Đặng Thị Ngọc",
+    className: "2301NNA02",
+    major: "Ngôn ngữ Anh",
+    phoneNumber: "0909554433",
+    registeredAt: "2026-10-22T10:45:00Z",
     status: "Chưa điểm danh",
   },
 ];
@@ -390,8 +474,8 @@ export const MOCK_TRAINING_POINTS: TrainingPointEntry[] = [
   {
     id: "tp-01",
     eventId: "evt-past-01",
-    eventTitle: "Mùa hè xanh 2026",
-    category: "Tình nguyện",
+    eventTitle: "Chiến dịch Mùa hè xanh 2026",
+    category: "Ngoại khóa",
     points: 50,
     earnedAt: "2026-08-15T10:00:00Z",
     organizer: "Đoàn Thanh niên",

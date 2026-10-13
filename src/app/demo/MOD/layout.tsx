@@ -4,11 +4,12 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { LayoutDashboard, CalendarDays, Users, LogOut } from "lucide-react"
+import { LayoutDashboard, CalendarDays, FileSpreadsheet, Users, LogOut } from "lucide-react"
 
 const MOD_NAV = [
   { href: "/demo/MOD", label: "Tổng quan", icon: LayoutDashboard },
   { href: "/demo/MOD/events", label: "Quản lý sự kiện", icon: CalendarDays },
+  { href: "/demo/MOD/reports", label: "Báo cáo tổng hợp", icon: FileSpreadsheet },
 ]
 
 export default function MODLayout({ children }: { children: React.ReactNode }) {

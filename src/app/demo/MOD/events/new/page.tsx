@@ -29,7 +29,7 @@ export default function MODNewEventPage() {
   // Form states
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [category, setCategory] = useState("Hội thảo")
+  const [category, setCategory] = useState("Học thuật")
   const [organizer, setOrganizer] = useState("Khoa CNTT")
   const [startTime, setStartTime] = useState("2026-10-20T08:00")
   const [endTime, setEndTime] = useState("2026-10-25T22:00")
@@ -106,24 +106,33 @@ export default function MODNewEventPage() {
           points: 1,
         },
       ])
-    } else if (val === "seminar") {
+    } else if (val === "academic") {
       setEventType("standard")
-      setTitle("Hội thảo Kỹ năng phỏng vấn và Chinh phục Nhà tuyển dụng")
-      setDescription("Học hỏi kỹ năng viết CV chuyên nghiệp và phương pháp trả lời phỏng vấn chuẩn doanh nghiệp.")
-      setCategory("Kỹ năng mềm")
-      setOrganizer("Phòng Công tác sinh viên")
-      setLocation("Phòng A.805, cơ sở Tân Sơn Nhất")
-      setCapacity(100)
-      setPoints(5)
-    } else if (val === "volunteer") {
-      setEventType("standard")
-      setTitle("Chiến dịch Tình nguyện Tiếp sức Mùa thi 2026")
-      setDescription("Hỗ trợ thí sinh và phụ huynh tại các điểm thi tốt nghiệp THPT.")
-      setCategory("Tình nguyện")
-      setOrganizer("Đoàn Thanh niên GDU")
-      setLocation("Cơ sở Tân Sơn Nhất")
-      setCapacity(50)
+      setTitle("Chuyên đề Học thuật: Ứng dụng Trí tuệ nhân tạo GenAI trong Nghiên cứu")
+      setDescription("Cung cấp kiến thức chuyên sâu về công cụ AI tiên tiến dành cho sinh viên các ngành đào tạo.")
+      setCategory("Học thuật")
+      setOrganizer("Khoa Công nghệ thông tin")
+      setLocation("Hội trường cơ sở Tân Sơn Nhất")
+      setCapacity(150)
       setPoints(10)
+    } else if (val === "extracurricular") {
+      setEventType("standard")
+      setTitle("Hoạt động Ngoại khóa Sinh viên: Trải nghiệm Sinh thái Rừng Cần Giờ")
+      setDescription("Hoạt động ngoại khóa dã ngoại ngoài trường. Ban Tổ chức sẽ trực tiếp điểm danh sinh viên bằng danh sách checkbox.")
+      setCategory("Ngoại khóa")
+      setOrganizer("Đoàn Thanh niên & CLB Kỹ năng GDU")
+      setLocation("Rừng ngập mặn Cần Giờ (Ngoài trường)")
+      setCapacity(80)
+      setPoints(15)
+    } else if (val === "competition") {
+      setEventType("standard")
+      setTitle("Giải đấu Thể thao Điện tử Sinh viên GDU Championship")
+      setDescription("Giải đấu thể thao thi đấu trực tiếp. Ban Tổ chức sẽ trực tiếp điểm danh vận động viên bằng danh sách checkbox.")
+      setCategory("Thi đấu")
+      setOrganizer("Đoàn - Hội Sinh viên GDU")
+      setLocation("Hội trường cơ sở Tân Sơn Nhất")
+      setCapacity(120)
+      setPoints(15)
     }
   }
 
@@ -190,8 +199,9 @@ export default function MODNewEventPage() {
           >
             <option value="">-- Dùng cấu hình mẫu --</option>
             <option value="interactive-fb">⭐ Chiến dịch tương tác Facebook (Like/Share/Comment - 3đ)</option>
-            <option value="seminar">Hội thảo tiêu chuẩn (100SV, 5đ)</option>
-            <option value="volunteer">Hoạt động tình nguyện (50SV, 10đ)</option>
+            <option value="academic">Chuyên đề Học thuật tiêu chuẩn (150SV, 10đ)</option>
+            <option value="extracurricular">Hoạt động Ngoại khóa ngoài trường (Điểm danh checkbox, 80SV, 15đ)</option>
+            <option value="competition">Giải đấu Thi đấu thể thao / học thuật (Điểm danh checkbox, 120SV, 15đ)</option>
           </select>
 
           <Button 
@@ -337,10 +347,6 @@ export default function MODNewEventPage() {
                   <option value="Học thuật">Học thuật</option>
                   <option value="Ngoại khóa">Ngoại khóa</option>
                   <option value="Thi đấu">Thi đấu</option>
-                  <option value="Hội thảo">Hội thảo</option>
-                  <option value="Workshop">Workshop</option>
-                  <option value="Kỹ năng mềm">Kỹ năng mềm</option>
-                  <option value="Tình nguyện">Tình nguyện</option>
                   <option value="Khác">Khác</option>
                 </select>
               </div>

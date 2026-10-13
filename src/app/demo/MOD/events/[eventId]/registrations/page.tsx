@@ -48,24 +48,24 @@ export default function MODRegistrationsPage({ params }: { params: { eventId: st
   }
 
   return (
-    <div className="container py-6 flex flex-col gap-5">
-      <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-3">
+    <div className="w-full max-w-6xl mx-auto px-3.5 py-4 sm:px-6 sm:py-6 flex flex-col gap-3.5 sm:gap-5">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border pb-3">
         <div className="flex items-center gap-2">
           <Link href={`/demo/MOD/events/${event.id}`}>
-            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted">
+            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted shrink-0">
               <ChevronLeft className="h-4 w-4" />
             </Button>
           </Link>
-          <div>
-            <h1 className="text-xl font-bold text-ink">Quản lý vé & Đăng ký</h1>
-            <p className="text-[13px] text-body mt-0.5">{event.title}</p>
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-xl font-bold text-ink">Quản lý vé & Đăng ký</h1>
+            <p className="text-[12px] sm:text-[13px] text-body mt-0.5 truncate">{event.title}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <Button 
             onClick={handleExportExcel}
             variant="outline" 
-            className="h-9 text-[13px] px-3 font-semibold border-border hover:bg-canvas rounded-xl"
+            className="w-full sm:w-auto h-8.5 sm:h-9 text-[12px] sm:text-[13px] px-3 font-semibold border-border hover:bg-canvas rounded-xl"
           >
             {exportSuccess ? (
               <>
@@ -82,17 +82,17 @@ export default function MODRegistrationsPage({ params }: { params: { eventId: st
         </div>
       </header>
 
-      <div className="flex flex-col md:flex-row gap-3">
+      <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted" />
           <input 
             type="text" 
             placeholder="Tìm theo MSSV, tên..." 
-            className="w-full h-9 pl-9 pr-4 text-[13px] bg-surface border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
+            className="w-full h-8.5 sm:h-9 pl-9 pr-4 text-[12px] sm:text-[13px] bg-surface border border-border rounded-lg sm:rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
           />
         </div>
         <div className="flex gap-2">
-          <select className="h-9 px-3 text-[13px] bg-surface border border-border rounded-md focus:outline-none focus:ring-1 focus:border-primary text-ink">
+          <select className="h-8.5 sm:h-9 px-3 text-[12px] sm:text-[13px] bg-surface border border-border rounded-lg sm:rounded-md focus:outline-none focus:ring-1 focus:border-primary text-ink">
             <option>Tất cả trạng thái</option>
             <option>Vé chính thức</option>
             <option>Danh sách chờ</option>
@@ -100,7 +100,33 @@ export default function MODRegistrationsPage({ params }: { params: { eventId: st
         </div>
       </div>
 
-      <div className="bg-surface border border-border rounded-lg overflow-hidden shadow-sm">
+      {/* Mobile Card List View */}
+      <div className="flex flex-col gap-2.5 sm:hidden">
+        {registrations.map((ticket, idx) => (
+          <div key={ticket.id} className="bg-surface border border-border rounded-xl p-3 shadow-sm flex flex-col gap-2">
+            <div className="flex items-start justify-between gap-2">
+              <div>
+                <div className="font-semibold text-[13px] text-ink">Nguyễn Văn {String.fromCharCode(65 + idx)}</div>
+                <div className="text-[11px] text-muted font-mono mt-0.5">MSSV: 202400{idx + 1} • CNTT_K18</div>
+              </div>
+              <StatusBadge 
+                status={ticket.status} 
+                variant={ticket.status === "Vé chính thức" ? "success" : "warning"} 
+                className="text-[10px] px-1.5 py-0.5 shrink-0" 
+              />
+            </div>
+            <div className="flex items-center justify-between text-[11px] text-muted border-t border-border/60 pt-2">
+              <span>{new Date().toLocaleDateString("vi-VN")}</span>
+              <Button variant="ghost" size="sm" className="h-7 text-[11px] px-2 text-error hover:bg-error/10">
+                <Trash2 className="h-3 w-3 mr-1" /> Hủy vé
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop Table View */}
+      <div className="hidden sm:block bg-surface border border-border rounded-xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-[13px] text-left border-collapse">
             <thead>

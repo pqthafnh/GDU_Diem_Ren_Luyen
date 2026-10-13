@@ -148,10 +148,10 @@ export default function EventDetailPage({ params }: { params: { eventId: string 
                   <span className="font-medium text-body text-[13px] text-right truncate max-w-[120px]" title={event.targetAudience}>{event.targetAudience}</span>
                 </div>
 
-                {(event.category === "Ngoại khóa" || event.checkInMethod === "manual_rollcall") && (
+                {(event.category === "Ngoại khóa" || event.category === "Thi đấu" || event.checkInMethod === "manual_rollcall") && (
                   <div className="p-3 rounded-xl bg-[#A66A12]/5 border border-[#A66A12]/20 flex items-start gap-2 text-[12px] text-[#A66A12]">
                     <MapPin className="h-4 w-4 shrink-0 mt-0.5" />
-                    <span>Sự kiện ngoài trường: Ban Tổ chức sẽ điểm danh thủ công theo danh sách đăng ký (không cần quét mã QR).</span>
+                    <span>{event.category === "Thi đấu" ? "Sự kiện Thi đấu: Ban Tổ chức sẽ điểm danh thủ công theo danh sách đăng ký (không cần quét mã QR)." : "Sự kiện ngoài trường: Ban Tổ chức sẽ điểm danh thủ công theo danh sách đăng ký (không cần quét mã QR)."}</span>
                   </div>
                 )}
               </div>

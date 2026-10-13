@@ -13,30 +13,32 @@ export default function AdminReviewDetailPage({ params }: { params: { eventId: s
   
   if (!event) notFound()
 
+  const isManualRollcall = event.category === "Ngoại khóa" || event.category === "Thi đấu" || event.checkInMethod === "manual_rollcall"
+
   return (
-    <div className="container py-6 flex flex-col gap-5 max-w-4xl mx-auto">
-      <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-3">
+    <div className="w-full max-w-4xl mx-auto px-3.5 py-4 sm:px-6 sm:py-6 flex flex-col gap-3.5 sm:gap-5">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border pb-3">
         <div className="flex items-center gap-2">
           <Link href="/demo/admin/reviews">
-            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted">
+            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted shrink-0">
               <ChevronLeft className="h-4 w-4" />
             </Button>
           </Link>
-          <div>
-            <h1 className="text-xl font-bold text-ink">Xét duyệt sự kiện</h1>
-            <p className="text-[13px] text-body mt-0.5">Kiểm tra thông tin trước khi phát hành lên hệ thống.</p>
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-xl font-bold text-ink">Xét duyệt sự kiện</h1>
+            <p className="text-[12px] sm:text-[13px] text-body mt-0.5 truncate">Kiểm tra thông tin trước khi phát hành lên hệ thống.</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="danger" className="h-9 text-[13px] px-3"><X className="h-3.5 w-3.5 mr-1.5" /> Từ chối</Button>
-          <Button variant="outline" className="h-9 text-[13px] px-3"><MessageSquareWarning className="h-3.5 w-3.5 mr-1.5" /> Yêu cầu sửa</Button>
-          <Button variant="primary" className="h-9 text-[13px] px-3"><Check className="h-3.5 w-3.5 mr-1.5" /> Phê duyệt</Button>
+        <div className="grid grid-cols-3 gap-1.5 sm:flex sm:items-center sm:gap-2 w-full sm:w-auto">
+          <Button variant="danger" className="h-8 sm:h-9 text-[11px] sm:text-[13px] px-2 sm:px-3"><X className="h-3.5 w-3.5 mr-1" /> Từ chối</Button>
+          <Button variant="outline" className="h-8 sm:h-9 text-[11px] sm:text-[13px] px-2 sm:px-3"><MessageSquareWarning className="h-3.5 w-3.5 mr-1" /> Sửa</Button>
+          <Button variant="primary" className="h-8 sm:h-9 text-[11px] sm:text-[13px] px-2 sm:px-3"><Check className="h-3.5 w-3.5 mr-1" /> Duyệt</Button>
         </div>
       </header>
 
-      <div className="grid gap-5 md:grid-cols-3">
-        <div className="md:col-span-2 flex flex-col gap-5">
-          <div className="bg-surface border border-border rounded-lg p-5 flex flex-col gap-4 shadow-sm">
+      <div className="grid gap-3.5 sm:gap-5 grid-cols-1 md:grid-cols-3">
+        <div className="md:col-span-2 flex flex-col gap-3.5 sm:gap-5">
+          <div className="bg-surface border border-border rounded-xl p-3.5 sm:p-5 flex flex-col gap-3 sm:gap-4 shadow-sm">
             <h2 className="text-[14px] font-semibold text-ink uppercase tracking-wide border-b border-border pb-2">Chi tiết thông tin</h2>
             
             <div className="flex flex-col gap-4 text-[13px]">
@@ -110,22 +112,22 @@ export default function AdminReviewDetailPage({ params }: { params: { eventId: s
             </div>
           </div>
           
-          <div className="bg-surface border border-border rounded-lg p-5 flex flex-col gap-4 shadow-sm">
-            <h2 className="text-[14px] font-semibold text-ink uppercase tracking-wide border-b border-border pb-2">Phản hồi xét duyệt</h2>
+          <div className="bg-surface border border-border rounded-xl p-3.5 sm:p-5 flex flex-col gap-3 sm:gap-4 shadow-sm">
+            <h2 className="text-[13px] sm:text-[14px] font-semibold text-ink uppercase tracking-wide border-b border-border pb-2">Phản hồi xét duyệt</h2>
             <textarea 
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
-              className="w-full h-24 p-3 text-[13px] bg-canvas border border-border rounded-md focus:outline-none focus:ring-1 focus:border-primary resize-none" 
+              className="w-full h-20 sm:h-24 p-2.5 sm:p-3 text-[12px] sm:text-[13px] bg-canvas border border-border rounded-lg sm:rounded-md focus:outline-none focus:ring-1 focus:border-primary resize-none" 
               placeholder="Nhập lý do từ chối hoặc yêu cầu chỉnh sửa (tùy chọn khi phê duyệt)..." 
             />
           </div>
         </div>
 
-        <div className="flex flex-col gap-5">
-          <div className="bg-surface border border-border rounded-lg p-5 flex flex-col gap-4 shadow-sm">
-            <h2 className="text-[14px] font-semibold text-ink uppercase tracking-wide border-b border-border pb-2">Cấu hình hệ thống</h2>
+        <div className="flex flex-col gap-3.5 sm:gap-5">
+          <div className="bg-surface border border-border rounded-xl p-3.5 sm:p-5 flex flex-col gap-3 sm:gap-4 shadow-sm">
+            <h2 className="text-[13px] sm:text-[14px] font-semibold text-ink uppercase tracking-wide border-b border-border pb-2">Cấu hình hệ thống</h2>
             
-            <div className="flex flex-col gap-3 text-[13px]">
+            <div className="flex flex-col gap-2.5 sm:gap-3 text-[12px] sm:text-[13px]">
               <div className="flex justify-between items-center py-1 border-b border-dashed border-border">
                 <span className="text-muted">Điểm rèn luyện</span>
                 <span className="font-bold text-primary">+{event.points} điểm</span>
@@ -137,17 +139,23 @@ export default function AdminReviewDetailPage({ params }: { params: { eventId: s
                 </span>
               </div>
               <div className="flex justify-between items-center py-1 border-b border-dashed border-border">
+                <span className="text-muted">Phương thức điểm danh</span>
+                <span className="font-medium text-ink">
+                  {event.eventType === "interactive" ? "Xác nhận tương tác MXH" : isManualRollcall ? "Thủ công (Checkbox danh sách)" : "Quét QR & GPS"}
+                </span>
+              </div>
+              <div className="flex justify-between items-center py-1 border-b border-dashed border-border">
                 <span className="text-muted">Kiểm tra GPS</span>
-                <span className={`font-medium ${event.eventType === "interactive" ? "text-muted" : "text-success"}`}>
-                  {event.eventType === "interactive" ? "Không áp dụng (Online)" : "Bật (100m)"}
+                <span className={`font-medium ${event.eventType === "interactive" || isManualRollcall ? "text-muted" : "text-success"}`}>
+                  {event.eventType === "interactive" ? "Không áp dụng (Online)" : isManualRollcall ? "Không áp dụng (Thủ công)" : "Bật (100m)"}
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="bg-surface border border-border rounded-lg p-5 flex flex-col gap-3 shadow-sm">
-            <h2 className="text-[14px] font-semibold text-ink uppercase tracking-wide border-b border-border pb-2">Lịch sử</h2>
-            <div className="flex flex-col gap-2 text-[12px]">
+          <div className="bg-surface border border-border rounded-xl p-3.5 sm:p-5 flex flex-col gap-2.5 sm:gap-3 shadow-sm">
+            <h2 className="text-[13px] sm:text-[14px] font-semibold text-ink uppercase tracking-wide border-b border-border pb-2">Lịch sử</h2>
+            <div className="flex flex-col gap-2 text-[11px] sm:text-[12px]">
               <div className="flex gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                 <div>
