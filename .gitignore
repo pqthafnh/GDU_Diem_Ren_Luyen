@@ -1,7 +1,73 @@
+# ============================================
+# Frontend environment
+# ============================================
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# Backend environment
+backend/.env
+backend/.env.local
+backend/.env.*.local
+
+# Root environment files, if accidentally created
 .env
-.envlocal
-node_modules
-.next
-tsconfig.tsbuildinfo
-gitlog.txt
-BACKEND_API_SPECIFICATION.md
+.env.local
+.env.*.local
+
+# Allow example environment files
+!frontend/.env.example
+!backend/.env.example
+!.env.example
+
+# ============================================
+# Frontend generated files
+# ============================================
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/dist/
+frontend/coverage/
+frontend/.vercel/
+
+# ============================================
+# Backend generated files
+# ============================================
+backend/.venv/
+backend/__pycache__/
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.ruff_cache/
+backend/.coverage
+backend/htmlcov/
+
+# Python caches
+**/__pycache__/
+*.py[cod]
+
+# ============================================
+# Local development and editor files
+# ============================================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ============================================
+# Temporary and generated files
+# ============================================
+*.tmp
+*.log
+*.xlsx
+*.db
+*.sqlite
+*.sqlite3
+
+# Test and runtime artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Operating system files
+desktop.ini
+$RECYCLE.BIN/
