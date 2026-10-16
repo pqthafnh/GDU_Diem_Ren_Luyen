@@ -10,6 +10,7 @@ const ADMIN_NAV = [
   { href: "/demo/admin/reviews", label: "Chờ duyệt", icon: CheckSquare },
   { href: "/demo/admin/events", label: "Tất cả sự kiện", icon: Database },
   { href: "/demo/admin/students", label: "Sinh viên", icon: Users },
+  { href: "/demo/admin/staff", label: "Admin / MOD", icon: Users },
   { href: "/demo/admin/history", label: "Lịch sử xử lý", icon: ListOrdered },
 ]
 

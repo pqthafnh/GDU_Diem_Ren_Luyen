@@ -18,6 +18,18 @@
 - Removed development account quick-fill controls, seeded credential values, and test OTP
   controls from the frontend login screen. Staff and student credentials must now be entered
   from the real account source.
+- Added ADMIN-only account management for ADMIN and MOD users:
+  - `GET /api/admin/staff`;
+  - `POST /api/admin/staff`;
+  - `POST /api/admin/staff/import`;
+  - `DELETE /api/admin/staff/{staffId}`.
+- Added frontend route `/demo/admin/staff`; staff Excel files require
+  `fullName`, `email`, `initialPassword`, `role`, `gender`, `birthDate`, and `phoneNumber`.
+  Staff imports are transactional and self-deletion is rejected.
+- Staff feature verification: Ruff format/check passed, mypy passed for 54 source files,
+  backend unit tests passed (24), backend integration test passed (1), and frontend lint/build
+  passed. OpenAPI exposes `/api/admin/staff`, `/api/admin/staff/import`, and
+  `/api/admin/staff/{staff_id}`.
 
 Updated: 2026-10-15
 

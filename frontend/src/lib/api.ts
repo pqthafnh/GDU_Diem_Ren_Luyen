@@ -49,6 +49,17 @@ export type AdminStudent = {
   createdAt: string
 }
 
+export type AdminStaff = {
+  id: string
+  fullName: string
+  email: string
+  role: "ADMIN" | "MOD"
+  gender: string
+  birthDate: string
+  phoneNumber: string | null
+  createdAt: string
+}
+
 type ApiError = { error?: { message?: string }; detail?: string }
 
 function clearSession() {
@@ -196,6 +207,50 @@ export async function deleteAdminStudent(studentId: string) {
 }
 export async function deleteAdminStudentYear(enrollmentYear: number) {
   return request<{ deletedCount: number }>(`/admin/students/year/${enrollmentYear}`, {
+    method: "DELETE",
+  })
+}
+export async function listAdminStaff(search?: string, role?: "ADMIN" | "MOD") {
+  const params = new URLSearchParams()
+  if (search) params.set("search", search)
+  if (role) params.set("role", role)
+  return request<{ staff: AdminStaff[]; total: number; page: number; limit: number }>(
+    `/admin/staff?${params.toString()}`,
+  )
+}
+export async function createAdminStaff(staff: {
+  fullName: string
+  email: string
+  initialPassword: string
+  role: "ADMIN" | "MOD"
+  gender: string
+  birthDate: string
+  phoneNumber?: string
+}) {
+  return request<AdminStaff>("/admin/staff", {
+    method: "POST",
+    body: JSON.stringify(staff),
+  })
+}
+export async function importAdminStaff(file: File) {
+  const token = typeof window === "undefined" ? null : localStorage.getItem("gdu_access_token")
+  const body = new FormData()
+  body.append("file", file)
+  const response = await fetch(`${API_URL}/admin/staff/import`, {
+    method: "POST",
+    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    body,
+  })
+  const payload = (await response.json().catch(() => ({}))) as AdminStaff[] | ApiError
+  if (response.status === 401 && typeof window !== "undefined") clearSession()
+  if (!response.ok) {
+    const error = payload as ApiError
+    throw new Error(error.error?.message || error.detail || "Không thể nhập tài khoản cán bộ.")
+  }
+  return payload as AdminStaff[]
+}
+export async function deleteAdminStaff(staffId: string) {
+  return request<{ deletedCount: number }>(`/admin/staff/${encodeURIComponent(staffId)}`, {
     method: "DELETE",
   })
 }

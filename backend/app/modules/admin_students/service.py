@@ -9,6 +9,9 @@ from psycopg import AsyncConnection
 
 from app.modules.admin_students.schemas import (
     DeleteResult,
+    StaffCreate,
+    StaffDirectoryResponse,
+    StaffResponse,
     StudentCreate,
     StudentDirectoryResponse,
     StudentResponse,
@@ -158,6 +161,120 @@ class AdminStudentService:
                 await cursor.execute(
                     "DELETE FROM users WHERE role = 'STUDENT' AND enrollment_year = %s",
                     (enrollment_year,),
+                )
+                deleted = cursor.rowcount
+        return DeleteResult(deletedCount=deleted)
+
+    async def list_staff(
+        self,
+        connection: AsyncConnection,
+        search: str | None,
+        role: str | None,
+        page: int,
+        limit: int,
+    ) -> StaffDirectoryResponse:
+        """List ADMIN and MOD accounts with optional role/search filters."""
+        conditions = ["role IN ('ADMIN', 'MOD')"]
+        values: list[object] = []
+        if search:
+            conditions.append("(full_name ILIKE %s OR email ILIKE %s)")
+            term = f"%{search.strip()}%"
+            values.extend([term, term])
+        if role:
+            conditions.append("role = %s")
+            values.append(role)
+        where = " AND ".join(conditions)
+        offset = (page - 1) * limit
+        async with connection.cursor() as cursor:
+            await cursor.execute(f"SELECT COUNT(*) FROM users WHERE {where}", values)
+            count_row = await cursor.fetchone()
+            if count_row is None:
+                raise RuntimeError("Staff count query returned no row")
+            total = int(count_row[0])
+            await cursor.execute(
+                f"""SELECT id, full_name, email, role, gender, birth_date,
+                           phone_number, created_at
+                    FROM users WHERE {where}
+                    ORDER BY role, full_name, email LIMIT %s OFFSET %s""",
+                [*values, limit, offset],
+            )
+            rows = await cursor.fetchall()
+        return StaffDirectoryResponse(
+            staff=[
+                StaffResponse(
+                    id=row[0],
+                    fullName=row[1],
+                    email=row[2],
+                    role=row[3],
+                    gender=row[4],
+                    birthDate=row[5],
+                    phoneNumber=row[6],
+                    createdAt=row[7].isoformat(),
+                )
+                for row in rows
+            ],
+            total=total,
+            page=page,
+            limit=limit,
+        )
+
+    async def create_staff(self, connection: AsyncConnection, staff: StaffCreate) -> StaffResponse:
+        """Create one ADMIN or MOD account with first-login activation required."""
+        last_name, first_name = _split_name(staff.full_name)
+        async with connection.cursor() as cursor:
+            await cursor.execute(
+                """INSERT INTO users (
+                       last_name, first_name, full_name, gender, birth_date, phone_number,
+                       email, password_hash, is_password_changed, role
+                   ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, FALSE, %s)
+                   RETURNING id, full_name, email, role, gender, birth_date,
+                             phone_number, created_at""",
+                (
+                    last_name,
+                    first_name,
+                    staff.full_name,
+                    staff.gender,
+                    staff.birth_date,
+                    staff.phone_number,
+                    str(staff.email),
+                    hash_password(staff.initial_password),
+                    staff.role,
+                ),
+            )
+            row = await cursor.fetchone()
+        if row is None:
+            raise RuntimeError("Staff insert returned no row")
+        return StaffResponse(
+            id=row[0],
+            fullName=row[1],
+            email=row[2],
+            role=row[3],
+            gender=row[4],
+            birthDate=row[5],
+            phoneNumber=row[6],
+            createdAt=row[7].isoformat(),
+        )
+
+    async def create_staff_batch(
+        self, connection: AsyncConnection, staff: list[StaffCreate]
+    ) -> list[StaffResponse]:
+        """Insert an all-or-nothing ADMIN/MOD batch."""
+        if not staff:
+            raise ValueError("The import file contains no staff accounts")
+        async with connection.transaction():
+            return [await self.create_staff(connection, item) for item in staff]
+
+    async def delete_staff(
+        self, connection: AsyncConnection, staff_uuid: UUID, actor_uuid: UUID
+    ) -> DeleteResult:
+        """Delete one ADMIN/MOD account, but never allow self-deletion."""
+        if staff_uuid == actor_uuid:
+            raise ValueError("You cannot delete your own account")
+        async with connection.transaction():
+            async with connection.cursor() as cursor:
+                await cursor.execute(
+                    "DELETE FROM users WHERE id = %s AND role IN ('ADMIN', 'MOD')",
+                    (staff_uuid,),
                 )
                 deleted = cursor.rowcount
         return DeleteResult(deletedCount=deleted)
