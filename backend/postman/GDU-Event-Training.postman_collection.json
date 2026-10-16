@@ -1,0 +1,37 @@
+{
+  "info": {
+    "name": "GDU Event & Training API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "eventId", "value": ""},
+    {"key": "accessToken", "value": ""}
+  ],
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"email\":\"student@gdu.edu.vn\",\"password\":\"password\"}"},
+        "url": {"raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"]}
+      }
+    },
+    {
+      "name": "List published events",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{accessToken}}"}],
+        "url": {"raw": "{{baseUrl}}/student/events", "host": ["{{baseUrl}}"], "path": ["student", "events"]}
+      }
+    },
+    {
+      "name": "Register for event",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Authorization", "value": "Bearer {{accessToken}}"}],
+        "url": {"raw": "{{baseUrl}}/student/events/{{eventId}}/register", "host": ["{{baseUrl}}"], "path": ["student", "events", "{{eventId}}", "register"]}
+      }
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+ALTER TABLE training_points_ledger
+    DROP CONSTRAINT IF EXISTS training_points_ledger_student_id_event_id_criteria_categor_key;
