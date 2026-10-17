@@ -34,6 +34,9 @@ class Settings(BaseSettings):
     max_request_body_bytes: int = Field(default=2_000_000, ge=1024)
     auth_rate_limit_requests: int = Field(default=30, ge=1)
     auth_rate_limit_window_seconds: int = Field(default=60, ge=1)
+    email_provider: str = "resend"
+    resend_api_key: str | None = None
+    email_from: str | None = None
     smtp_host: str | None = None
     smtp_port: int = Field(default=587, ge=1, le=65535)
     smtp_secure: bool = False
@@ -64,6 +67,11 @@ class Settings(BaseSettings):
     def cors_origin_list(self) -> list[str]:
         """Return comma-separated CORS origins as a normalized list."""
         return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
+
+    @property
+    def sender_email(self) -> str | None:
+        """Return the effective outbound email address for transactional messages."""
+        return self.email_from or self.smtp_from
 
 
 @lru_cache

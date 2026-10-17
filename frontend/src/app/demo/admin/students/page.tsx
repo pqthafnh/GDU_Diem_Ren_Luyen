@@ -13,6 +13,8 @@ import {
   AlertCircle,
   Calendar,
   CheckCircle2,
+  Eye,
+  EyeOff,
   FileSpreadsheet,
   GraduationCap,
   PlusCircle,
@@ -55,6 +57,7 @@ export default function AdminStudentsPage() {
   const [form, setForm] = useState<StudentForm>(EMPTY_FORM)
   const [search, setSearch] = useState("")
   const [selectedYear, setSelectedYear] = useState("")
+  const [showInitialPassword, setShowInitialPassword] = useState(false)
   const [loading, setLoading] = useState(true)
   const [pending, setPending] = useState(false)
   const [error, setError] = useState("")
@@ -342,17 +345,28 @@ export default function AdminStudentsPage() {
               <label htmlFor="initialPassword" className="text-xs sm:text-sm font-medium text-ink">
                 Mật khẩu ban đầu <span className="text-red-500">*</span>
               </label>
-              <input
-                id="initialPassword"
-                name="initialPassword"
-                type="password"
-                minLength={8}
-                required
-                value={form.initialPassword}
-                onChange={updateField}
-                placeholder="Tối thiểu 8 ký tự"
-                className="w-full min-w-0 rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-              />
+              <div className="relative">
+                <input
+                  id="initialPassword"
+                  name="initialPassword"
+                  type={showInitialPassword ? "text" : "password"}
+                  minLength={8}
+                  required
+                  value={form.initialPassword}
+                  onChange={updateField}
+                  placeholder="Tối thiểu 8 ký tự"
+                  className="w-full min-w-0 rounded-xl border border-border bg-surface px-3.5 py-2.5 pr-11 text-sm text-ink placeholder:text-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowInitialPassword(!showInitialPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-ink focus:outline-none p-1"
+                  tabIndex={-1}
+                  aria-label={showInitialPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+                >
+                  {showInitialPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
             </div>
           </div>
 

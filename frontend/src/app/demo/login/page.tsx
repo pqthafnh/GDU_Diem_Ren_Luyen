@@ -5,7 +5,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { changeFirstPassword, login, saveSession, verifyOtp } from "@/lib/api"
-import { ArrowRight, KeyRound, Mail, CheckCircle2, ShieldAlert, ArrowLeft, Lock, GraduationCap, Building2 } from "lucide-react"
+import { ArrowRight, KeyRound, Mail, CheckCircle2, ShieldAlert, ArrowLeft, Lock, GraduationCap, Building2, Eye, EyeOff } from "lucide-react"
 
 type LoginStep = "LOGIN" | "CHANGE_PASSWORD_FIRST_TIME" | "VERIFY_EMAIL" | "SUCCESS"
 
@@ -18,15 +18,19 @@ export default function LoginPage() {
   
   const [studentId, setStudentId] = useState("")
   const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
   const [loginError, setLoginError] = useState("")
 
   const [staffEmail, setStaffEmail] = useState("")
   const [staffPassword, setStaffPassword] = useState("")
+  const [showStaffPassword, setShowStaffPassword] = useState(false)
   const [staffError, setStaffError] = useState("")
   
   // First time change password state
   const [newPassword, setNewPassword] = useState("")
+  const [showNewPassword, setShowNewPassword] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [passwordError, setPasswordError] = useState("")
   
   // OTP state
@@ -288,13 +292,24 @@ export default function LoginPage() {
                           Mẫu: <strong className="text-primary font-mono">GDU@TENddmm</strong>
                         </span>
                       </div>
-                      <input 
-                        type="password" 
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="••••••••" 
-                        className="flex h-11 w-full rounded-xl border border-border bg-canvas px-4 text-[14.5px] placeholder:text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-ink"
-                      />
+                      <div className="relative">
+                        <input 
+                          type={showPassword ? "text" : "password"} 
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          placeholder="••••••••" 
+                          className="flex h-11 w-full rounded-xl border border-border bg-canvas px-4 pr-11 text-[14.5px] placeholder:text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-ink"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-ink focus:outline-none p-1"
+                          tabIndex={-1}
+                          aria-label={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+                        >
+                          {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </button>
+                      </div>
                     </div>
 
                     {/* Hướng dẫn mật khẩu mặc định */}
@@ -349,13 +364,24 @@ export default function LoginPage() {
                       <label className="text-[12.5px] font-semibold text-ink uppercase tracking-wide">
                         Mật khẩu <span className="text-error">*</span>
                       </label>
-                      <input 
-                        type="password" 
-                        value={staffPassword}
-                        onChange={(e) => setStaffPassword(e.target.value)}
-                        placeholder="••••••••" 
-                        className="flex h-11 w-full rounded-xl border border-border bg-canvas px-4 text-[14.5px] placeholder:text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-ink"
-                      />
+                      <div className="relative">
+                        <input 
+                          type={showStaffPassword ? "text" : "password"} 
+                          value={staffPassword}
+                          onChange={(e) => setStaffPassword(e.target.value)}
+                          placeholder="••••••••" 
+                          className="flex h-11 w-full rounded-xl border border-border bg-canvas px-4 pr-11 text-[14.5px] placeholder:text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-ink"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowStaffPassword(!showStaffPassword)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-ink focus:outline-none p-1"
+                          tabIndex={-1}
+                          aria-label={showStaffPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+                        >
+                          {showStaffPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </button>
+                      </div>
                     </div>
 
                     <Button type="submit" className="h-11 w-full font-bold text-[14.5px] group bg-primary hover:bg-primary-hover mt-1 rounded-xl">
@@ -404,27 +430,49 @@ export default function LoginPage() {
                   <label className="text-[13px] font-semibold text-ink uppercase tracking-wide">
                     Mật khẩu mới <span className="text-error">*</span>
                   </label>
-                  <input 
-                    type="password" 
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    placeholder="Tối thiểu 6 ký tự..." 
-                    className="flex h-12 w-full rounded-xl border border-border bg-canvas px-4 text-[15px] placeholder:text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-ink"
-                    autoFocus
-                  />
+                  <div className="relative">
+                    <input 
+                      type={showNewPassword ? "text" : "password"} 
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      placeholder="Tối thiểu 6 ký tự..." 
+                      className="flex h-12 w-full rounded-xl border border-border bg-canvas px-4 pr-11 text-[15px] placeholder:text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-ink"
+                      autoFocus
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowNewPassword(!showNewPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-ink focus:outline-none p-1"
+                      tabIndex={-1}
+                      aria-label={showNewPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+                    >
+                      {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[13px] font-semibold text-ink uppercase tracking-wide">
                     Xác nhận mật khẩu mới <span className="text-error">*</span>
                   </label>
-                  <input 
-                    type="password" 
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="Nhập lại mật khẩu mới..." 
-                    className="flex h-12 w-full rounded-xl border border-border bg-canvas px-4 text-[15px] placeholder:text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-ink"
-                  />
+                  <div className="relative">
+                    <input 
+                      type={showConfirmPassword ? "text" : "password"} 
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder="Nhập lại mật khẩu mới..." 
+                      className="flex h-12 w-full rounded-xl border border-border bg-canvas px-4 pr-11 text-[15px] placeholder:text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-ink"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-ink focus:outline-none p-1"
+                      tabIndex={-1}
+                      aria-label={showConfirmPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+                    >
+                      {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
                 </div>
 
                 <Button type="submit" className="h-12 w-full font-bold text-[15px] bg-primary hover:bg-primary-hover rounded-xl mt-2">

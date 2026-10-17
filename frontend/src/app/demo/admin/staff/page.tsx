@@ -8,6 +8,7 @@ import {
   importAdminStaff,
   listAdminStaff,
 } from "@/lib/api"
+import { Eye, EyeOff } from "lucide-react"
 
 type StaffForm = {
   fullName: string
@@ -32,6 +33,7 @@ const EMPTY_FORM: StaffForm = {
 export default function AdminStaffPage() {
   const [staff, setStaff] = useState<AdminStaff[]>([])
   const [form, setForm] = useState<StaffForm>(EMPTY_FORM)
+  const [showInitialPassword, setShowInitialPassword] = useState(false)
   const [search, setSearch] = useState("")
   const [role, setRole] = useState<"" | "ADMIN" | "MOD">("")
   const [loading, setLoading] = useState(true)
@@ -118,7 +120,30 @@ export default function AdminStaffPage() {
           <div className="mt-4 grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2">
             <label className="grid min-w-0 gap-1 text-sm">Họ và tên<input name="fullName" required value={form.fullName} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2" /></label>
             <label className="grid min-w-0 gap-1 text-sm">Email<input name="email" type="email" required value={form.email} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2" /></label>
-            <label className="grid min-w-0 gap-1 text-sm">Mật khẩu ban đầu<input name="initialPassword" type="password" minLength={8} required value={form.initialPassword} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2" /></label>
+            <div className="grid min-w-0 gap-1 text-sm">
+              <label htmlFor="staffInitialPassword">Mật khẩu ban đầu</label>
+              <div className="relative">
+                <input
+                  id="staffInitialPassword"
+                  name="initialPassword"
+                  type={showInitialPassword ? "text" : "password"}
+                  minLength={8}
+                  required
+                  value={form.initialPassword}
+                  onChange={update}
+                  className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2 pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowInitialPassword(!showInitialPassword)}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted hover:text-ink focus:outline-none p-1"
+                  tabIndex={-1}
+                  aria-label={showInitialPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+                >
+                  {showInitialPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+            </div>
             <label className="grid min-w-0 gap-1 text-sm">Vai trò<select name="role" value={form.role} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2"><option value="MOD">MOD</option><option value="ADMIN">ADMIN</option></select></label>
             <label className="grid min-w-0 gap-1 text-sm">Giới tính<select name="gender" value={form.gender} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2"><option>Nam</option><option>Nữ</option><option>Khác</option></select></label>
             <label className="grid min-w-0 gap-1 text-sm">Ngày sinh<input name="birthDate" type="date" required value={form.birthDate} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2" /></label>

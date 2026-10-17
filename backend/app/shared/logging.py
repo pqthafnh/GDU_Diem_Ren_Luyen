@@ -16,6 +16,8 @@ SENSITIVE_KEYS = {
     "authorization",
     "database_url",
     "smtp_password",
+    "resend_api_key",
+    "api_key",
 }
 
 
