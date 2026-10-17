@@ -112,16 +112,17 @@ export default function AdminStaffPage() {
       <p className="mt-2 text-muted">Tạo tài khoản cán bộ mới hoặc nhập hàng loạt bằng Excel.</p>
       {error && <p className="mt-4 rounded-xl bg-red-50 p-3 text-red-700">{error}</p>}
       {message && <p className="mt-4 rounded-xl bg-green-50 p-3 text-green-700">{message}</p>}
-      <section className="mt-6 grid gap-6 lg:grid-cols-2">
-        <form onSubmit={(event) => void create(event)} className="rounded-2xl border border-border bg-surface p-5">
+      <section className="mt-6 grid min-w-0 gap-6 lg:grid-cols-2">
+        <form onSubmit={(event) => void create(event)} className="min-w-0 rounded-2xl border border-border bg-surface p-5">
           <h2 className="text-lg font-semibold">Thêm tài khoản</h2>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            <label className="grid gap-1 text-sm">Họ và tên<input name="fullName" required value={form.fullName} onChange={update} className="rounded-lg border border-border px-3 py-2" /></label>
-            <label className="grid gap-1 text-sm">Email<input name="email" type="email" required value={form.email} onChange={update} className="rounded-lg border border-border px-3 py-2" /></label>
-            <label className="grid gap-1 text-sm">Mật khẩu ban đầu<input name="initialPassword" type="password" minLength={8} required value={form.initialPassword} onChange={update} className="rounded-lg border border-border px-3 py-2" /></label>
-            <label className="grid gap-1 text-sm">Vai trò<select name="role" value={form.role} onChange={update} className="rounded-lg border border-border px-3 py-2"><option value="MOD">MOD</option><option value="ADMIN">ADMIN</option></select></label>
-            <label className="grid gap-1 text-sm">Ngày sinh<input name="birthDate" type="date" required value={form.birthDate} onChange={update} className="rounded-lg border border-border px-3 py-2" /></label>
-            <label className="grid gap-1 text-sm">Số điện thoại<input name="phoneNumber" value={form.phoneNumber} onChange={update} className="rounded-lg border border-border px-3 py-2" /></label>
+          <div className="mt-4 grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2">
+            <label className="grid min-w-0 gap-1 text-sm">Họ và tên<input name="fullName" required value={form.fullName} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2" /></label>
+            <label className="grid min-w-0 gap-1 text-sm">Email<input name="email" type="email" required value={form.email} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2" /></label>
+            <label className="grid min-w-0 gap-1 text-sm">Mật khẩu ban đầu<input name="initialPassword" type="password" minLength={8} required value={form.initialPassword} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2" /></label>
+            <label className="grid min-w-0 gap-1 text-sm">Vai trò<select name="role" value={form.role} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2"><option value="MOD">MOD</option><option value="ADMIN">ADMIN</option></select></label>
+            <label className="grid min-w-0 gap-1 text-sm">Giới tính<select name="gender" value={form.gender} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2"><option>Nam</option><option>Nữ</option><option>Khác</option></select></label>
+            <label className="grid min-w-0 gap-1 text-sm">Ngày sinh<input name="birthDate" type="date" required value={form.birthDate} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2" /></label>
+            <label className="grid min-w-0 gap-1 text-sm">Số điện thoại<input name="phoneNumber" value={form.phoneNumber} onChange={update} className="box-border min-w-0 w-full rounded-lg border border-border px-3 py-2" /></label>
           </div>
           <button disabled={pending} className="mt-4 rounded-xl bg-primary px-4 py-2 font-semibold text-white disabled:opacity-50">Thêm tài khoản</button>
         </form>
@@ -133,7 +134,7 @@ export default function AdminStaffPage() {
         </section>
       </section>
       <section className="mt-6 rounded-2xl border border-border bg-surface p-5">
-        <div className="flex flex-wrap gap-2"><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Tìm tên hoặc email" className="rounded-lg border border-border px-3 py-2" /><select value={role} onChange={(event) => setRole(event.target.value as "" | "ADMIN" | "MOD")} className="rounded-lg border border-border px-3 py-2"><option value="">Tất cả vai trò</option><option value="ADMIN">ADMIN</option><option value="MOD">MOD</option></select><button type="button" onClick={() => void load()} className="rounded-lg border border-primary px-4 py-2 text-primary">Tìm kiếm</button></div>
+        <div className="flex min-w-0 flex-col gap-2 sm:flex-row"><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Tìm tên hoặc email" className="box-border min-w-0 flex-1 rounded-lg border border-border px-3 py-2" /><select value={role} onChange={(event) => setRole(event.target.value as "" | "ADMIN" | "MOD")} className="box-border min-w-0 rounded-lg border border-border px-3 py-2"><option value="">Tất cả vai trò</option><option value="ADMIN">ADMIN</option><option value="MOD">MOD</option></select><button type="button" onClick={() => void load()} className="rounded-lg border border-primary px-4 py-2 text-primary">Tìm kiếm</button></div>
         {loading ? <p className="mt-6">Đang tải...</p> : staff.length === 0 ? <p className="mt-6 text-muted">Chưa có tài khoản.</p> : <div className="mt-5 overflow-x-auto"><table className="w-full text-left text-sm"><thead><tr className="border-b border-border"><th className="p-2">Họ tên</th><th className="p-2">Email</th><th className="p-2">Vai trò</th><th className="p-2"></th></tr></thead><tbody>{staff.map((account) => <tr key={account.id} className="border-b border-border/60"><td className="p-2">{account.fullName}</td><td className="p-2">{account.email}</td><td className="p-2">{account.role}</td><td className="p-2 text-right"><button type="button" onClick={() => void remove(account)} disabled={pending} className="text-red-600">Xóa</button></td></tr>)}</tbody></table></div>}
       </section>
     </main>

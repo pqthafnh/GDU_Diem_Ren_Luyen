@@ -117,10 +117,13 @@ export async function login(identity: { studentId?: string; email?: string }, pa
 }
 
 export async function changeFirstPassword(studentId: string, newPassword: string, confirmPassword: string) {
-  return request<{ success: boolean; testOtp?: string }>("/auth/first-login/change-password", {
-    method: "POST",
-    body: JSON.stringify({ studentId, newPassword, confirmPassword }),
-  })
+  return request<{ success: boolean; message?: string; schoolEmail?: string; testOtp?: string }>(
+    "/auth/first-login/change-password",
+    {
+      method: "POST",
+      body: JSON.stringify({ studentId, newPassword, confirmPassword }),
+    }
+  )
 }
 
 export async function verifyOtp(studentId: string, otp: string) {

@@ -32,6 +32,7 @@ export default function LoginPage() {
   // OTP state
   const [otp, setOtp] = useState("")
   const [otpError, setOtpError] = useState("")
+  const [targetEmail, setTargetEmail] = useState("")
 
   // Kiểm tra mật khẩu ban đầu chưa thay đổi theo cấu trúc GDU@ + TEN + ddmm
   const isDefaultPassword = (pass: string) => {
@@ -61,8 +62,8 @@ export default function LoginPage() {
         saveSession(result.accessToken, result.user)
         router.push(result.user?.role === "STUDENT" ? "/demo/student" : result.user?.role === "ADMIN" ? "/demo/admin" : "/demo/MOD")
       }
-    } catch (error) {
-      setLoginError(error instanceof Error ? error.message : "Đăng nhập thất bại.")
+    } catch {
+      setLoginError("Mã số sinh viên (MSSV) hoặc mật khẩu không chính xác. Vui lòng kiểm tra lại.")
     }
   }
 
@@ -89,8 +90,8 @@ export default function LoginPage() {
         saveSession(result.accessToken, result.user)
         router.push(result.user?.role === "ADMIN" ? "/demo/admin" : "/demo/MOD")
       }
-    } catch (error) {
-      setStaffError(error instanceof Error ? error.message : "Đăng nhập thất bại.")
+    } catch {
+      setStaffError("Email hoặc mật khẩu không chính xác. Vui lòng kiểm tra lại.")
     }
   }
 
@@ -115,7 +116,10 @@ export default function LoginPage() {
     }
 
     try {
-      await changeFirstPassword(studentId.trim(), newPassword, confirmPassword)
+      const result = await changeFirstPassword(studentId.trim(), newPassword, confirmPassword)
+      if (result.schoolEmail) {
+        setTargetEmail(result.schoolEmail)
+      }
       setStep("VERIFY_EMAIL")
     } catch (error) {
       setPasswordError(error instanceof Error ? error.message : "Không thể đổi mật khẩu.")
@@ -451,13 +455,13 @@ export default function LoginPage() {
               <div className="p-4 rounded-xl bg-primary-soft border border-primary/20 flex flex-col gap-2">
                 <div className="flex items-center gap-2 text-primary font-bold text-[14px]">
                   <Mail className="h-4 w-4" />
-                  Mã xác nhận đã gửi đến:
+                  Mã xác nhận đã gửi đến email trường:
                 </div>
-                <div className="font-mono font-bold text-ink bg-surface px-3 py-1.5 rounded-lg border border-border text-[14px] break-all">
-                  Địa chỉ email trường đã đăng ký
+                <div className="font-mono font-bold text-ink bg-surface px-3 py-2 rounded-lg border border-border text-[14px] break-all">
+                  {targetEmail || "Email sinh viên liên kết trong hệ thống"}
                 </div>
                 <p className="text-[12px] text-muted mt-0.5">
-                  Vui lòng mở hòm thư điện tử sinh viên của bạn để lấy mã xác thực 6 chữ số.
+                  Vui lòng mở hòm thư điện tử sinh viên của bạn để lấy mã xác thực 6 chữ số kích hoạt tài khoản.
                 </p>
               </div>
 

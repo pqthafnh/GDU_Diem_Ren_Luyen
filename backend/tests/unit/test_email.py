@@ -99,3 +99,87 @@ def test_otp_template_contains_no_password() -> None:
     assert "5 phút" in body
     assert "Không chia sẻ" in body
     assert "password" not in body.lower()
+
+
+@pytest.mark.asyncio
+async def test_smtp_auth_error_logs_diagnostics_without_sensitive_data(
+    monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Authentication errors log decoded response details while redacting secrets and recipient."""
+    otp = "654321"
+    password = "super-secret-smtp-password"
+    recipient = "student@example.test"
+    settings = _settings(smtp_password=password)
+
+    class FailingAuthSmtp:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            raise smtplib.SMTPAuthenticationError(535, b"5.7.8 Authentication failed")
+
+    monkeypatch.setattr("app.modules.auth.email.smtplib.SMTP", FailingAuthSmtp)
+
+    with caplog.at_level("ERROR", logger="gdu_event_training"):
+        with pytest.raises(EmailDeliveryError, match="delivery failed"):
+            await SmtpOtpEmailSender(settings).send_otp(recipient, otp, 5)
+
+    assert "SMTPAuthenticationError" in caplog.text
+    assert "535" in caplog.text
+    assert "Authentication failed" in caplog.text
+    assert "s***@example.test" in caplog.text
+    assert recipient not in caplog.text
+    assert otp not in caplog.text
+    assert password not in caplog.text
+
+
+@pytest.mark.asyncio
+async def test_smtp_timeout_logs_exception_class_without_sensitive_data(
+    monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Timeout errors log the TimeoutError class name while redacting secrets."""
+    otp = "987654"
+    password = "secret-timeout-password"
+    recipient = "user@school.edu.vn"
+    settings = _settings(smtp_password=password)
+
+    class TimeoutSmtp:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            raise TimeoutError("timed out connecting to host")
+
+    monkeypatch.setattr("app.modules.auth.email.smtplib.SMTP", TimeoutSmtp)
+
+    with caplog.at_level("ERROR", logger="gdu_event_training"):
+        with pytest.raises(EmailDeliveryError, match="delivery failed"):
+            await SmtpOtpEmailSender(settings).send_otp(recipient, otp, 5)
+
+    assert "TimeoutError" in caplog.text
+    assert "u***@school.edu.vn" in caplog.text
+    assert recipient not in caplog.text
+    assert otp not in caplog.text
+    assert password not in caplog.text
+
+
+@pytest.mark.asyncio
+async def test_smtp_error_message_containing_secrets_is_sanitized(
+    monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Raw exceptions embedding secrets or recipient emails are sanitized before logging."""
+    otp = "112233"
+    password = "leaked-secret-password"
+    recipient = "victim@school.edu.vn"
+    settings = _settings(smtp_password=password)
+
+    class LeakSmtp:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            raise smtplib.SMTPException(f"Error with pass {password} and otp {otp} for {recipient}")
+
+    monkeypatch.setattr("app.modules.auth.email.smtplib.SMTP", LeakSmtp)
+
+    with caplog.at_level("ERROR", logger="gdu_event_training"):
+        with pytest.raises(EmailDeliveryError, match="delivery failed"):
+            await SmtpOtpEmailSender(settings).send_otp(recipient, otp, 5)
+
+    assert otp not in caplog.text
+    assert password not in caplog.text
+    assert recipient not in caplog.text
+    assert "[REDACTED_OTP]" in caplog.text
+    assert "[REDACTED_PASSWORD]" in caplog.text
+    assert "v***@school.edu.vn" in caplog.text
