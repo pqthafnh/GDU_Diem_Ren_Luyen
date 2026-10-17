@@ -22,6 +22,13 @@ DATABASE_URL = os.environ.get(
 )
 
 
+class TestOtpEmailSender:
+    """Capture test-mode delivery without contacting an external SMTP server."""
+
+    async def send_otp(self, recipient: str, otp: str, ttl_minutes: int) -> None:
+        """Accept test delivery while keeping the OTP available only to the test."""
+
+
 @pytest_asyncio.fixture(scope="session")
 async def test_settings() -> AsyncIterator[Settings]:
     """Provide settings targeting the real PostgreSQL test database."""
@@ -135,6 +142,7 @@ async def standard_event(database: Database, seeded_users: dict[str, UUID]) -> U
 async def client(test_settings: Settings) -> AsyncIterator[httpx.AsyncClient]:
     """Run the FastAPI lifespan against the PostgreSQL test database."""
     app = create_app()
+    app.state.email_sender = TestOtpEmailSender()
     async with app.router.lifespan_context(app):
         transport = httpx.ASGITransport(app=app)
         async with httpx.AsyncClient(transport=transport, base_url="http://test") as value:

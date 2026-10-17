@@ -34,6 +34,13 @@ class Settings(BaseSettings):
     max_request_body_bytes: int = Field(default=2_000_000, ge=1024)
     auth_rate_limit_requests: int = Field(default=30, ge=1)
     auth_rate_limit_window_seconds: int = Field(default=60, ge=1)
+    smtp_host: str | None = None
+    smtp_port: int = Field(default=587, ge=1, le=65535)
+    smtp_secure: bool = False
+    smtp_user: str | None = None
+    smtp_password: str | None = None
+    smtp_from: str | None = None
+    smtp_timeout_seconds: float = Field(default=10.0, gt=0)
 
     @model_validator(mode="after")
     def validate_production_secrets(self) -> "Settings":

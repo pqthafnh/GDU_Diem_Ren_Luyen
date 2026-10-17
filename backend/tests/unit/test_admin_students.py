@@ -1,5 +1,6 @@
 """Unit tests for administrator student import validation."""
 
+from datetime import date
 from io import BytesIO
 
 import pytest
@@ -16,7 +17,7 @@ def test_student_create_trims_identity_fields() -> None:
         fullName=" Nguyễn Văn An ",
         email="an@gdu.edu.vn",
         initialPassword="Initial@123",
-        birthDate="2007-01-01",
+        birthDate=date(2007, 1, 1),
         enrollmentYear=2025,
     )
     assert student.student_id == "2025001"

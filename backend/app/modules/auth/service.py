@@ -6,6 +6,7 @@ from uuid import UUID
 from psycopg import AsyncConnection
 
 from app.config.settings import Settings
+from app.modules.auth.email import OtpEmailSender, SmtpOtpEmailSender
 from app.modules.auth.profile import ProfileResponse, SettingsUpdate
 from app.modules.auth.schemas import (
     ChangePasswordRequest,
@@ -27,8 +28,9 @@ from app.shared.security import (
 class AuthService:
     """Authenticates users using a repository-independent SQL callback."""
 
-    def __init__(self, settings: Settings) -> None:
+    def __init__(self, settings: Settings, email_sender: OtpEmailSender | None = None) -> None:
         self.settings = settings
+        self.email_sender = email_sender or SmtpOtpEmailSender(settings)
 
     async def login(self, connection: AsyncConnection, request: LoginRequest) -> LoginResponse:
         """Authenticate an account and issue JWT unless first-login change is required.
@@ -89,7 +91,7 @@ class AuthService:
     async def change_first_password(
         self, connection: AsyncConnection, request: ChangePasswordRequest
     ) -> tuple[str, str | None]:
-        """Store a pending password and send a five-minute OTP through the configured adapter."""
+        """Store a pending password and deliver its OTP before committing the transaction."""
         if request.new_password != request.confirm_password:
             raise ValueError("Passwords do not match")
         if request.new_password.upper().startswith("GDU@"):
@@ -97,19 +99,21 @@ class AuthService:
         otp = generate_otp()
         pending_hash = hash_password(request.new_password)
         otp_hash = hash_otp(otp, self.settings.otp_secret)
-        async with connection.cursor() as cursor:
-            await cursor.execute(
-                """UPDATE users
-                   SET pending_password_hash = %s, otp_hash = %s,
-                       otp_expires_at = CURRENT_TIMESTAMP + (%s * INTERVAL '1 minute'),
-                       otp_attempts = 0, updated_at = CURRENT_TIMESTAMP
-                   WHERE student_id = %s AND role = 'STUDENT'
-                   RETURNING email""",
-                (pending_hash, otp_hash, self.settings.otp_ttl_minutes, request.student_id),
-            )
-            row = await cursor.fetchone()
-        if row is None:
-            raise ValueError("Student account not found")
+        async with connection.transaction():
+            async with connection.cursor() as cursor:
+                await cursor.execute(
+                    """UPDATE users
+                       SET pending_password_hash = %s, otp_hash = %s,
+                           otp_expires_at = CURRENT_TIMESTAMP + (%s * INTERVAL '1 minute'),
+                           otp_attempts = 0, updated_at = CURRENT_TIMESTAMP
+                       WHERE student_id = %s AND role = 'STUDENT'
+                       RETURNING email""",
+                    (pending_hash, otp_hash, self.settings.otp_ttl_minutes, request.student_id),
+                )
+                row = await cursor.fetchone()
+            if row is None:
+                raise ValueError("Student account not found")
+            await self.email_sender.send_otp(str(row[0]), otp, self.settings.otp_ttl_minutes)
         return str(row[0]), otp if self.settings.expose_test_otp else None
 
     async def verify_first_otp(

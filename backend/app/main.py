@@ -15,6 +15,7 @@ from app.config.settings import get_settings
 from app.database.pool import Database
 from app.modules.admin_students.router import router as admin_students_router
 from app.modules.attendance.router import router as attendance_router
+from app.modules.auth.email import SmtpOtpEmailSender
 from app.modules.auth.router import router as auth_router
 from app.modules.events.router import router as events_router
 from app.modules.interactive_submissions.router import router as interactive_router
@@ -58,6 +59,7 @@ def create_app() -> FastAPI:
     app = FastAPI(title=settings.app_name, version="0.1.0", lifespan=lifespan)
     app.state.logger = StructuredLogger()
     app.state.rate_limit_storage = InMemoryRateLimitStorage()
+    app.state.email_sender = SmtpOtpEmailSender(settings)
     app.add_exception_handler(ApplicationError, application_error_handler)
     app.add_exception_handler(RequestValidationError, validation_error_handler)
     app.add_exception_handler(HTTPException, http_error_handler)

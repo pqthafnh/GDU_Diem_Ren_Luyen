@@ -5,6 +5,7 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 
 from app.config.settings import get_settings
+from app.modules.auth.email import EmailDeliveryError
 from app.modules.auth.profile import ProfileResponse
 from app.modules.auth.schemas import (
     ChangePasswordRequest,
@@ -34,10 +35,9 @@ async def change_password(request: Request, body: ChangePasswordRequest) -> dict
     """Create a pending first-login password and deliver its OTP."""
     try:
         async with request.app.state.database.connection() as connection:
-            async with connection.transaction():
-                email, test_otp = await AuthService(get_settings()).change_first_password(
-                    connection, body
-                )
+            email, test_otp = await AuthService(
+                get_settings(), request.app.state.email_sender
+            ).change_first_password(connection, body)
         response: dict[str, object] = {
             "success": True,
             "message": "A verification OTP was sent to the school email.",
@@ -48,6 +48,11 @@ async def change_password(request: Request, body: ChangePasswordRequest) -> dict
         return response
     except ValueError as error:
         raise HTTPException(status_code=400, detail=str(error)) from error
+    except EmailDeliveryError as error:
+        raise HTTPException(
+            status_code=503,
+            detail={"code": "OTP_EMAIL_DELIVERY_FAILED", "message": str(error), "details": []},
+        ) from error
 
 
 @router.post("/first-login/verify-otp", response_model=LoginResponse)

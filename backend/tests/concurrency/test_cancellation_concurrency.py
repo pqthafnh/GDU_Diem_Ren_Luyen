@@ -106,7 +106,9 @@ async def test_concurrent_cancellations_preserve_waitlist_invariants(
             "SELECT id FROM tickets WHERE event_id = %s AND status = 'CANCELLED'",
             (event_id,),
         )
-        cancelled_id = (await cursor.fetchone())[0]
+        row = await cursor.fetchone()
+        assert row is not None
+        cancelled_id = row[0]
 
     async with database.connection() as connection:
         with pytest.raises(ValueError):

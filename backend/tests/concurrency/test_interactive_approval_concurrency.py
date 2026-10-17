@@ -63,7 +63,7 @@ async def test_concurrent_interactive_approvals_finalize_once(
                 event_id,
                 submission_id,
                 seeded_users["MOD"],
-                VerifySubmissionRequest(status="APPROVED", points_awarded=1),
+                VerifySubmissionRequest(status="APPROVED", pointsAwarded=1),
             )
 
     results = await asyncio.gather(*(approve() for _ in range(10)), return_exceptions=True)
